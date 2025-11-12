@@ -13,5 +13,25 @@
 .externalNativeBuild
 .cxx
 local.properties
+
 # Ignore Kotlin compiler/IDE error logs
 .kotlin/
+hs_err_pid*.log
+
+# IntelliJ IDEA configuration files
+.idea/
+*.idea
+AndroidProjectSystem.xml
+compiler.xml
+copilot.data.migration.agent.xml
+copilot.data.migration.ask.xml
+copilot.data.migration.ask2agent.xml
+copilot.data.migration.edit.xml
+deploymentTargetSelector.xml
+gradle.xml
+markdown.xml
+migrations.xml
+misc.xml
+Project_Default.xml
+runConfigurations.xml
+vcs.xml
