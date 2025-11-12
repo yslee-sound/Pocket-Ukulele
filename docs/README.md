@@ -59,6 +59,11 @@ docs/
 │   ├── app-version-with-build-type.md
 │   └── string-numbering.md
 │
+├── 앱 아이콘 가이드 (3개) 🎨
+│   ├── launcher-icon-replacement-guide.md (전체 가이드)
+│   ├── launcher-icon-quick-reference.md (빠른 참조)
+│   └── launcher-icon-pocketukulele-guide.md (프로젝트 특화)
+│
 ├── archive/ (완료된 작업 문서)
 └── sql/ (SQL 스크립트)
 ```
@@ -98,6 +103,12 @@ docs/
 
 ### 🔧 기타 가이드
 
+#### 앱 아이콘 (Launcher Icon) 교체 🎨
+- **[launcher-icon-replacement-guide.md](launcher-icon-replacement-guide.md)** - 전체 가이드 (상세)
+- **[launcher-icon-quick-reference.md](launcher-icon-quick-reference.md)** - 빠른 참조 (5분 완료)
+- **[launcher-icon-pocketukulele-guide.md](launcher-icon-pocketukulele-guide.md)** - 프로젝트 특화 실습
+
+#### 데이터베이스 & 기타
 - **[chords-db-architecture.md](chords-db-architecture.md)** - 코드 DB 아키텍처
 - **[NEW-APP-ID-GUIDE.md](NEW-APP-ID-GUIDE.md)** - 앱 ID 변경 가이드
 - **[app-version-with-build-type.md](app-version-with-build-type.md)** - 앱 버전 관리
@@ -118,6 +129,13 @@ docs/
 ```
 1. release/RELEASE-TEST-CHECKLIST.md (전체 가이드)
 2. Phase 1~5 순서대로 테스트
+```
+
+### 앱 아이콘 교체 🎨
+```
+1. launcher-icon-quick-reference.md (5분 빠른 실행)
+2. launcher-icon-pocketukulele-guide.md (프로젝트 특화 실습)
+3. launcher-icon-replacement-guide.md (상세 가이드 - 필요시)
 ```
 
 ### Update Policy 관리
