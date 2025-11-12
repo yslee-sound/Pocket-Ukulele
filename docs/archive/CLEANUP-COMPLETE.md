@@ -107,14 +107,14 @@ update-dialog-integration.md
 
 ### Windows 탐색기에서
 ```
-1. G:\Workspace\PocketChord\docs 폴더 열기
+1. G:\Workspace\PocketUkulele\docs 폴더 열기
 2. 위의 "삭제 가능한 문서" 목록 확인
 3. 해당 파일들 선택 → 삭제
 ```
 
 ### PowerShell에서
 ```powershell
-cd G:\Workspace\PocketChord\docs
+cd G:\Workspace\PocketUkulele\docs
 
 # Phase 완료 문서
 Remove-Item phase1-complete.md -ErrorAction SilentlyContinue

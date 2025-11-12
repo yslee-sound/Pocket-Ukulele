@@ -1,7 +1,7 @@
 # 앱 오프닝 광고 구현 가이드
 
 ## 개요
-PocketChord 앱에 **앱 오프닝 광고(App Open Ad)**를 추가했습니다. 이는 사용자가 앱을 실행하거나 백그라운드에서 돌아올 때 표시되는 전면광고입니다.
+PocketUkulele 앱에 **앱 오프닝 광고(App Open Ad)**를 추가했습니다. 이는 사용자가 앱을 실행하거나 백그라운드에서 돌아올 때 표시되는 전면광고입니다.
 
 ---
 
@@ -19,7 +19,7 @@ PocketChord 앱에 **앱 오프닝 광고(App Open Ad)**를 추가했습니다. 
 - ✅ 광고 만료 시간: 4시간
 - ✅ Activity 생명주기 자동 추적
 
-#### `PocketChordApplication.kt`
+#### `PocketUkuleleApplication.kt`
 Application 클래스로 앱 전역 초기화를 담당합니다:
 
 **기능:**
@@ -32,7 +32,7 @@ Application 클래스로 앱 전역 초기화를 담당합니다:
 #### `AndroidManifest.xml`
 ```xml
 <application
-    android:name=".PocketChordApplication"  <!-- 추가됨 -->
+    android:name=".PocketUkuleleApplication"  <!-- 추가됨 -->
     ...>
 ```
 
@@ -136,7 +136,7 @@ private const val AD_UNIT_ID = "ca-app-pub-XXXXXXXXXXXXXXXX/1234567890"
 ### Application 레벨에서 자동 관리
 
 ```kotlin
-class PocketChordApplication : Application() {
+class PocketUkuleleApplication : Application() {
     private lateinit var appOpenAdManager: AppOpenAdManager
     
     override fun onCreate() {
@@ -207,7 +207,7 @@ adb logcat | findstr "AppOpenAdManager"
 
 ## 광고 우선순위
 
-PocketChord 앱의 광고 우선순위:
+PocketUkulele 앱의 광고 우선순위:
 
 1. **앱 오프닝 광고** (최우선) - 백그라운드 복귀 시
 2. **전면광고** - 화면 전환 시 (60초 간격, 3회 전환)
@@ -330,7 +330,7 @@ fun showAdIfAvailable(activity: Activity, onAdDismissed: () -> Unit = {}) {
 ## 요약
 
 ✅ **AppOpenAdManager**: 자동 광고 관리  
-✅ **PocketChordApplication**: 전역 초기화  
+✅ **PocketUkuleleApplication**: 전역 초기화  
 ✅ **첫 실행 제외**: 사용자 경험 고려  
 ✅ **백그라운드 복귀**: 자동 감지 및 표시  
 ✅ **4시간 만료**: 적절한 빈도 유지  

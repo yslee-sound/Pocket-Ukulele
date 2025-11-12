@@ -64,9 +64,9 @@
 **간단 예시**:
 ```sql
 -- 60초 테스트 시작
-override update_policy set reshow_interval_seconds = 60 where app_id='com.sweetapps.pocketchord.debug';
+override update_policy set reshow_interval_seconds = 60 where app_id='com.sweetapps.PocketUkulele.debug';
 -- 해제 (24시간 복귀)
-override update_policy set reshow_interval_seconds = NULL where app_id='com.sweetapps.pocketchord.debug';
+override update_policy set reshow_interval_seconds = NULL where app_id='com.sweetapps.PocketUkulele.debug';
 ```
 (실 사용 시 override 제거: UPDATE로 실행)
 
@@ -95,7 +95,7 @@ ADD COLUMN IF NOT EXISTS max_later_count INT DEFAULT 3 NOT NULL;
 SELECT app_id, target_version_code, is_force_update,
        reshow_interval_hours, reshow_interval_minutes, reshow_interval_seconds, max_later_count
 FROM update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 
 ### 3.3 우선순위 표
@@ -108,11 +108,11 @@ WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
 
 **30초 설정**:
 ```sql
-UPDATE update_policy SET reshow_interval_seconds = 30 WHERE app_id='com.sweetapps.pocketchord.debug';
+UPDATE update_policy SET reshow_interval_seconds = 30 WHERE app_id='com.sweetapps.PocketUkulele.debug';
 ```
 **해제**:
 ```sql
-UPDATE update_policy SET reshow_interval_seconds = NULL WHERE app_id='com.sweetapps.pocketchord.debug';
+UPDATE update_policy SET reshow_interval_seconds = NULL WHERE app_id='com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 3.4 초기값 설정
@@ -123,35 +123,35 @@ UPDATE update_policy
 SET reshow_interval_hours = 24,
     max_later_count = 3,
     is_force_update = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 디버그 (60초):
 ```sql
 DO $$
 DECLARE v_exists BOOLEAN;
 BEGIN
-  SELECT EXISTS(SELECT 1 FROM update_policy WHERE app_id='com.sweetapps.pocketchord.debug') INTO v_exists;
+  SELECT EXISTS(SELECT 1 FROM update_policy WHERE app_id='com.sweetapps.PocketUkulele.debug') INTO v_exists;
   IF v_exists THEN
     UPDATE update_policy SET is_active=true,target_version_code=10,is_force_update=false,
       reshow_interval_seconds=60,max_later_count=3,release_notes='• [DEBUG] 테스트 업데이트',download_url='https://play.google.com/'
-    WHERE app_id='com.sweetapps.pocketchord.debug';
+    WHERE app_id='com.sweetapps.PocketUkulele.debug';
   ELSE
     INSERT INTO update_policy(app_id,is_active,target_version_code,is_force_update,reshow_interval_seconds,max_later_count,release_notes,download_url)
-    VALUES('com.sweetapps.pocketchord.debug',true,10,false,60,3,'• [DEBUG] 테스트 업데이트','https://play.google.com/');
+    VALUES('com.sweetapps.PocketUkulele.debug',true,10,false,60,3,'• [DEBUG] 테스트 업데이트','https://play.google.com/');
   END IF;
 END $$;
 
 SELECT app_id,target_version_code,is_force_update,is_active,
        reshow_interval_hours,reshow_interval_minutes,reshow_interval_seconds,max_later_count
 FROM update_policy
-WHERE app_id='com.sweetapps.pocketchord.debug';
+WHERE app_id='com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 3.5 기대 결과 (디버그)
 
 | app_id | target_version_code | is_force_update | is_active | hours | minutes | seconds | max_later_count |
 |--------|---------------------|-----------------|-----------|-------|---------|---------|-----------------|
-| com.sweetapps.pocketchord.debug | 10 | false | true | 24 | NULL | 60 | 3 |
+| com.sweetapps.PocketUkulele.debug | 10 | false | true | 24 | NULL | 60 | 3 |
 
 (모든 interval NULL 불가 → 최소 24시간 안전 보장)
 

@@ -101,7 +101,7 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '긴급 점검 안내',
   download_url = 'https://example.com'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상**: 긴급 공지 팝업 표시
 
@@ -112,7 +112,7 @@ UPDATE app_policy SET
   active_popup_type = 'force_update',
   min_supported_version = 100,
   download_url = 'market://...'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상**: 강제 업데이트 팝업 표시 (현재 버전 < 100)
 
@@ -123,7 +123,7 @@ UPDATE app_policy SET
   active_popup_type = 'optional_update',
   latest_version_code = 100,
   download_url = 'market://...'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상**: 선택적 업데이트 팝업 표시 (현재 버전 < 100)
 
@@ -133,7 +133,7 @@ UPDATE app_policy SET
   is_active = TRUE,
   active_popup_type = 'notice',
   content = '새로운 기능이 추가되었습니다'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상**: 일반 공지 팝업 표시
 
@@ -142,7 +142,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 UPDATE app_policy SET
   is_active = FALSE,
   active_popup_type = 'none'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상**: 팝업 표시 안 됨
 
@@ -152,13 +152,13 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 
 ### 정책 조회 성공
 ```
-D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.pocketchord.debug active=true type=force_update minSupported=5 latest=null
+D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.PocketUkulele.debug active=true type=force_update minSupported=5 latest=null
 D/HomeScreen: Decision: FORCE UPDATE popup (minSupported=5)
 ```
 
 ### 정책 없음
 ```
-W/HomeScreen: No active policy row for app_id='com.sweetapps.pocketchord.debug'. Check: (1) app_policy.app_id 값, (2) is_active=true, (3) RLS policy allowing read, (4) anon key valid.
+W/HomeScreen: No active policy row for app_id='com.sweetapps.PocketUkulele.debug'. Check: (1) app_policy.app_id 값, (2) is_active=true, (3) RLS policy allowing read, (4) anon key valid.
 ```
 
 ### 팝업 타입별

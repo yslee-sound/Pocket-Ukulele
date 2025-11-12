@@ -115,7 +115,7 @@ LaunchedEffect(Unit) {
    ```sql
    UPDATE app_policy 
    SET ad_banner_enabled = false 
-   WHERE app_id = 'com.sweetapps.pocketchord';
+   WHERE app_id = 'com.sweetapps.PocketUkulele';
    ```
 3. **앱을 끄지 않고 5분 대기**
 4. Logcat 확인:
@@ -130,7 +130,7 @@ LaunchedEffect(Unit) {
    ```sql
    UPDATE app_policy 
    SET ad_banner_enabled = true 
-   WHERE app_id = 'com.sweetapps.pocketchord';
+   WHERE app_id = 'com.sweetapps.PocketUkulele';
    ```
 2. 5분 대기
 3. 배너가 자동으로 나타나는지 확인 ✅

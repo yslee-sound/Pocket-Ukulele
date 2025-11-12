@@ -95,8 +95,8 @@ UPDATE update_policy
 SET target_version_code = 6,
     is_force_update = false,
     release_notes = '• 새로운 기능 추가\n• 버그 수정',
-    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord'
-WHERE app_id = 'com.sweetapps.pocketchord';
+    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele'
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 예시 2: 강제 업데이트
@@ -105,8 +105,8 @@ UPDATE update_policy
 SET target_version_code = 7,
     is_force_update = true,
     release_notes = '• 중요 보안 패치\n• 필수 업데이트',
-    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord'
-WHERE app_id = 'com.sweetapps.pocketchord';
+    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele'
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 예시 3: download_url 기본값 사용
@@ -115,7 +115,7 @@ UPDATE update_policy
 SET target_version_code = 8,
     release_notes = '• 성능 개선'
     -- download_url 생략 가능 (기본값 사용)
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---

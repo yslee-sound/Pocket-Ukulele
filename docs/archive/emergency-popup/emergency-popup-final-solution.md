@@ -25,7 +25,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다. 잠시 후 다시 시도해주세요.',
@@ -51,14 +51,14 @@ SELECT
     content,
     created_at
 FROM app_policy
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**:
 ```
 | id | app_id                              | is_active | active_popup_type | content          |
 |----|-------------------------------------|-----------|-------------------|------------------|
-| 1  | com.sweetapps.pocketchord.debug     | TRUE      | emergency         | 🚨 긴급 점검...  |
+| 1  | com.sweetapps.PocketUkulele.debug     | TRUE      | emergency         | 🚨 긴급 점검...  |
 ```
 
 ---
@@ -67,8 +67,8 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 
 ### 1. 앱 재시작
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 2. 로그 확인
@@ -81,7 +81,7 @@ adb logcat -d -s AppPolicyRepo:* HomeScreen:* | findstr /C:"Policy found" /C:"EM
 D/AppPolicyRepo: Query returned 1 rows
 D/AppPolicyRepo: ✅ Policy found:
 D/AppPolicyRepo:   - id: 1
-D/AppPolicyRepo:   - app_id: com.sweetapps.pocketchord.debug
+D/AppPolicyRepo:   - app_id: com.sweetapps.PocketUkulele.debug
 D/AppPolicyRepo:   - is_active: true
 D/AppPolicyRepo:   - active_popup_type: emergency
 D/HomeScreen: ===== Policy Loaded Successfully =====
@@ -128,17 +128,17 @@ USING (is_active = TRUE);
 -- 현재 데이터베이스의 app_id 확인
 SELECT app_id, length(app_id) as len FROM app_policy;
 
--- 예상: com.sweetapps.pocketchord.debug (35자)
+-- 예상: com.sweetapps.PocketUkulele.debug (35자)
 ```
 
-앱에서 기대하는 값: `com.sweetapps.pocketchord.debug`  
+앱에서 기대하는 값: `com.sweetapps.PocketUkulele.debug`  
 데이터베이스의 실제 값: (위 쿼리 결과 확인)
 
 만약 다르면:
 ```sql
 -- app_id 수정
 UPDATE app_policy 
-SET app_id = 'com.sweetapps.pocketchord.debug'
+SET app_id = 'com.sweetapps.PocketUkulele.debug'
 WHERE id = 1;  -- 또는 적절한 id
 ```
 
@@ -146,17 +146,17 @@ WHERE id = 1;  -- 또는 적절한 id
 
 **확인**:
 ```cmd
-adb logcat -d -s PocketChordApp:* | findstr "Supabase"
+adb logcat -d -s PocketUkuleleApp:* | findstr "Supabase"
 ```
 
 **예상**:
 ```
-I/PocketChordApp: Supabase configured: url set
+I/PocketUkuleleApp: Supabase configured: url set
 ```
 
 **문제 발생 시**:
 ```
-W/PocketChordApp: Supabase 미설정
+W/PocketUkuleleApp: Supabase 미설정
 ```
 
 **해결**: `local.properties` 파일 확인

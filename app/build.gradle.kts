@@ -10,15 +10,15 @@ plugins {
 apply(plugin = "kotlin-kapt")
 
 android {
-    namespace = "com.sweetapps.pocketchord"
+    namespace = "com.sweetapps.pocketukulele"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.sweetapps.pocketchord"
+        applicationId = "com.sweetapps.pocketukulele"
         minSdk = 26
         targetSdk = 36
-        versionCode = 3  // 버그 수정: C#-Db 루트 매핑 문제 해결
-        versionName = "1.0.3"  // 버그 수정 버전
+        versionCode = 1  // 버그 수정: C#-Db 루트 매핑 문제 해결
+        versionName = "1.0.0"  // 버그 수정 버전
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
@@ -77,7 +77,7 @@ android {
             buildConfigField(
                 "String",
                 "SUPABASE_APP_ID",
-                "\"com.sweetapps.pocketchord.debug\""
+                "\"com.sweetapps.PocketUkulele.debug\""
             )
 
             // 빌드 타입 정보
@@ -98,7 +98,7 @@ android {
             buildConfigField(
                 "String",
                 "SUPABASE_APP_ID",
-                "\"com.sweetapps.pocketchord\""
+                "\"com.sweetapps.PocketUkulele\""
             )
 
             // 빌드 타입 정보

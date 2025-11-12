@@ -1,4 +1,4 @@
-# 🚀 PocketChord 팝업 시스템 가이드
+# 🚀 PocketUkulele 팝업 시스템 가이드
 
 **버전**: v2.6.0  
 **최종 업데이트**: 2025-11-09 09:00 KST  
@@ -132,9 +132,9 @@ UPDATE emergency_policy
 SET is_active = true,
     is_dismissible = true,
     content = '⚠️ 이 앱은 더 이상 지원되지 않습니다.',
-    redirect_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord.v2',
+    redirect_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele.v2',
     button_text = '새 앱 다운로드'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 단순 공지 (redirect_url 없음)
 UPDATE emergency_policy 
@@ -143,7 +143,7 @@ SET is_active = true,
     content = '✅ 시스템 점검이 완료되었습니다.',
     redirect_url = NULL,
     button_text = '확인'  -- 기본값
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -178,8 +178,8 @@ SET is_active = true,
     target_version_code = 4,  -- 현재 3보다 높게
     is_force_update = true,
     release_notes = '• 중요 보안 패치\n• 필수 기능 추가',
-    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord'
-WHERE app_id = 'com.sweetapps.pocketchord';
+    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele'
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 선택적 업데이트 (기본값 사용)
 UPDATE update_policy 
@@ -188,12 +188,12 @@ SET is_active = true,
     is_force_update = false,
     release_notes = '• 다크 모드 추가\n• 성능 개선'
     -- download_url 생략 (기본값 사용)
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 업데이트 비활성화 (현재 버전과 같게)
 UPDATE update_policy 
 SET target_version_code = 3  -- 현재 버전과 같게 → 팝업 안 뜸
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **💡 중요**:
@@ -240,7 +240,7 @@ CREATE TABLE notice_policy (
 -- 오타 수정 (버전 유지 → 재표시 안 됨)
 UPDATE notice_policy 
 SET content = '수정된 내용'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- notice_version은 그대로!
 
 -- 새 공지 (버전 증가 → 모두에게 재표시)
@@ -248,7 +248,7 @@ UPDATE notice_policy
 SET title = '2월 이벤트',
     content = '새 이벤트!',
     notice_version = 2  -- 증가!
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---

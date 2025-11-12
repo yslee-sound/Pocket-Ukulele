@@ -70,7 +70,7 @@ LaunchedEffect(Unit) {
     val prefs = context.getSharedPreferences("announcement_prefs", MODE_PRIVATE)
     
     try {
-        val repository = AnnouncementRepository(supabase, "com.sweetapps.pocketchord")
+        val repository = AnnouncementRepository(supabase, "com.sweetapps.PocketUkulele")
         
         repository.getLatestAnnouncement()
             .onSuccess { result ->
@@ -201,10 +201,10 @@ Button(onClick = {
 ### ADB로 SharedPreferences 확인
 ```bash
 # SharedPreferences 내용 확인
-adb shell run-as com.sweetapps.pocketchord cat shared_prefs/announcement_prefs.xml
+adb shell run-as com.sweetapps.PocketUkulele cat shared_prefs/announcement_prefs.xml
 
 # SharedPreferences 삭제
-adb shell run-as com.sweetapps.pocketchord rm shared_prefs/announcement_prefs.xml
+adb shell run-as com.sweetapps.PocketUkulele rm shared_prefs/announcement_prefs.xml
 ```
 
 ---

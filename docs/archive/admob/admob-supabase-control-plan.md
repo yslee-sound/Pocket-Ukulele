@@ -717,14 +717,14 @@ SET
   ad_app_open_enabled = false,
   ad_interstitial_enabled = false,
   ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 특정 광고만 비활성화 (예: 앱 오픈 광고)
 ```sql
 UPDATE app_policy
 SET ad_app_open_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 광고 전체 활성화
@@ -734,7 +734,7 @@ SET
   ad_app_open_enabled = true,
   ad_interstitial_enabled = true,
   ad_banner_enabled = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -773,7 +773,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 
 ---
 
-### 💰 PocketChord에서 캐싱
+### 💰 PocketUkulele에서 캐싱
 
 **상황: Supabase에서 광고 정책 가져오기**
 

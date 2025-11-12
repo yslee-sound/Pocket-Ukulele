@@ -20,7 +20,7 @@
 ```
 앱 오프닝 광고 표시 시작
     ↓
-PocketChordApplication.isShowingAppOpenAd = true
+PocketUkuleleApplication.isShowingAppOpenAd = true
     ↓
 MainActivity가 StateFlow 관찰
     ↓
@@ -28,7 +28,7 @@ MainActivity가 StateFlow 관찰
     ↓
 앱 오프닝 광고 닫힘
     ↓
-PocketChordApplication.isShowingAppOpenAd = false
+PocketUkuleleApplication.isShowingAppOpenAd = false
     ↓
 배너 광고 다시 표시
 ```
@@ -37,12 +37,12 @@ PocketChordApplication.isShowingAppOpenAd = false
 
 ## 🔧 구현 세부사항
 
-### 1. PocketChordApplication
+### 1. PocketUkuleleApplication
 
 **StateFlow로 광고 표시 상태 공유**
 
 ```kotlin
-class PocketChordApplication : Application() {
+class PocketUkuleleApplication : Application() {
     // 앱 오프닝 광고 표시 상태
     private val _isShowingAppOpenAd = MutableStateFlow(false)
     val isShowingAppOpenAd: StateFlow<Boolean> = _isShowingAppOpenAd.asStateFlow()
@@ -69,17 +69,17 @@ private fun showAdNow(activity: Activity, onAdDismissed: () -> Unit) {
     appOpenAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
         override fun onAdShowedFullScreenContent() {
             // 광고가 표시될 때
-            (application as? PocketChordApplication)?.setAppOpenAdShowing(true)
+            (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(true)
         }
 
         override fun onAdDismissedFullScreenContent() {
             // 광고가 닫힐 때
-            (application as? PocketChordApplication)?.setAppOpenAdShowing(false)
+            (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(false)
         }
 
         override fun onAdFailedToShowFullScreenContent(adError: AdError) {
             // 광고 표시 실패 시에도
-            (application as? PocketChordApplication)?.setAppOpenAdShowing(false)
+            (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(false)
         }
     }
 }
@@ -98,11 +98,11 @@ private fun showAdNow(activity: Activity, onAdDismissed: () -> Unit) {
 
 ```kotlin
 setContent {
-    PocketChordTheme {
+    PocketUkuleleTheme {
         // ...existing code...
         
         // 앱 오프닝 광고 표시 상태 관찰
-        val app = context.applicationContext as PocketChordApplication
+        val app = context.applicationContext as PocketUkuleleApplication
         val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
         
         // ...existing code...
@@ -243,7 +243,7 @@ val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 ### 안전한 캐스팅
 
 ```kotlin
-(application as? PocketChordApplication)?.setAppOpenAdShowing(true)
+(application as? PocketUkuleleApplication)?.setAppOpenAdShowing(true)
 ```
 
 **이유:**
@@ -255,7 +255,7 @@ val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 
 ## 📊 수정된 파일 요약
 
-### 1. PocketChordApplication.kt
+### 1. PocketUkuleleApplication.kt
 ```diff
 + import kotlinx.coroutines.flow.MutableStateFlow
 + import kotlinx.coroutines.flow.StateFlow
@@ -271,24 +271,24 @@ val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 
 ### 2. AppOpenAdManager.kt
 ```diff
-+ import com.sweetapps.pocketchord.PocketChordApplication
++ import com.sweetapps.PocketUkulele.PocketUkuleleApplication
 
   override fun onAdShowedFullScreenContent() {
-+     (application as? PocketChordApplication)?.setAppOpenAdShowing(true)
++     (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(true)
   }
   
   override fun onAdDismissedFullScreenContent() {
-+     (application as? PocketChordApplication)?.setAppOpenAdShowing(false)
++     (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(false)
   }
   
   override fun onAdFailedToShowFullScreenContent(adError: AdError) {
-+     (application as? PocketChordApplication)?.setAppOpenAdShowing(false)
++     (application as? PocketUkuleleApplication)?.setAppOpenAdShowing(false)
   }
 ```
 
 ### 3. MainActivity.kt
 ```diff
-+ val app = context.applicationContext as PocketChordApplication
++ val app = context.applicationContext as PocketUkuleleApplication
 + val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 
 - if (isBannerEnabled && !isSplash) {
@@ -308,7 +308,7 @@ val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 ```kotlin
 // InterstitialAdManager에서도
 override fun onAdShowedFullScreenContent() {
-    (context.applicationContext as? PocketChordApplication)
+    (context.applicationContext as? PocketUkuleleApplication)
         ?.setShowingInterstitialAd(true)
 }
 ```
@@ -316,7 +316,7 @@ override fun onAdShowedFullScreenContent() {
 ### 2. 여러 광고 타입 관리
 
 ```kotlin
-class PocketChordApplication : Application() {
+class PocketUkuleleApplication : Application() {
     private val _isShowingAnyFullScreenAd = MutableStateFlow(false)
     val isShowingAnyFullScreenAd: StateFlow<Boolean> = _isShowingAnyFullScreenAd.asStateFlow()
     
@@ -370,7 +370,7 @@ interstitialAdManager: setFullScreenAdShowing(true/false)
 
 ## ✅ 체크리스트
 
-- [x] PocketChordApplication에 StateFlow 추가
+- [x] PocketUkuleleApplication에 StateFlow 추가
 - [x] AppOpenAdManager에서 상태 업데이트
 - [x] MainActivity에서 StateFlow 관찰
 - [x] 배너 표시 조건에 추가

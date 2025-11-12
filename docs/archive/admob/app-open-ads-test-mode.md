@@ -293,7 +293,7 @@ onStart() {
 // 개발 도구에 버튼 추가
 Button(onClick = {
     // 현재 Activity에서 강제로 광고 표시
-    (application as PocketChordApplication)
+    (application as PocketUkuleleApplication)
         .showAppOpenAdNow(currentActivity)
 }) {
     Text("광고 강제 표시")

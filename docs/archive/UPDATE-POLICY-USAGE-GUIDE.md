@@ -56,7 +56,7 @@ SET target_version_code = 11,  -- 다음 버전!
     is_force_update = false,
     message = '새로운 기능이 추가되었습니다',
     release_notes = '• 다크 모드 추가\n• 성능 개선'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 3: Play Store 출시
@@ -90,7 +90,7 @@ SET target_version_code = 11,
     is_force_update = true,  -- ⭐ 강제!
     message = '필수 보안 업데이트가 있습니다',
     release_notes = '• 중요 보안 패치\n• 필수 업데이트'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 3: Play Store 출시
@@ -139,14 +139,14 @@ dismissed = 11, target = 10 → true이지만... 10 < 11 → 표시 안 됨 ❌
 ```sql
 UPDATE update_policy 
 SET target_version_code = 12
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 버전 13 출시
 ```sql
 UPDATE update_policy 
 SET target_version_code = 13  -- 계속 증가!
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **결과**: 
@@ -162,7 +162,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 버전 12 설정 후 다시 11로 되돌림
 UPDATE update_policy 
 SET target_version_code = 11  -- ❌ 낮춤!
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **문제**:

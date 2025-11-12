@@ -1,6 +1,6 @@
 # 릴리즈 빌드 가이드
 
-PocketChord 앱의 릴리즈 빌드를 생성하는 방법을 안내합니다.
+PocketUkulele 앱의 릴리즈 빌드를 생성하는 방법을 안내합니다.
 
 ---
 
@@ -20,7 +20,7 @@ defaultConfig {
 ```kotlin
 debug {
     buildConfigField("String", "SUPABASE_APP_ID", 
-        "\"com.sweetapps.pocketchord.debug\"")
+        "\"com.sweetapps.PocketUkulele.debug\"")
     applicationIdSuffix = ".debug"
     versionNameSuffix = "-DEBUG"
 }
@@ -30,7 +30,7 @@ debug {
 ```kotlin
 release {
     buildConfigField("String", "SUPABASE_APP_ID", 
-        "\"com.sweetapps.pocketchord\"")
+        "\"com.sweetapps.PocketUkulele\"")
     isMinifyEnabled = true
     isShrinkResources = true
     proguardFiles(...)
@@ -80,9 +80,9 @@ release {
    - `Build` → `Generate Signed Bundle / APK`
    - `Create new...` 클릭
    - 정보 입력:
-     - **Key store path**: `G:\Workspace\PocketChord\keystore\pocketchord-release.jks`
+     - **Key store path**: `G:\Workspace\PocketUkulele\keystore\PocketUkulele-release.jks`
      - **Password**: 안전한 비밀번호 (기록 필수!)
-     - **Alias**: `pocketchord`
+     - **Alias**: `PocketUkulele`
      - **Validity**: `25년`
      - **Certificate 정보** 입력
 
@@ -92,7 +92,7 @@ release {
    mkdir keystore
    
    # 키스토어 생성
-   keytool -genkey -v -keystore keystore/pocketchord-release.jks -alias pocketchord -keyalg RSA -keysize 2048 -validity 9125
+   keytool -genkey -v -keystore keystore/PocketUkulele-release.jks -alias PocketUkulele -keyalg RSA -keysize 2048 -validity 9125
    ```
 
 ### ⚠️ 중요: 키스토어 보안
@@ -114,9 +114,9 @@ android {
     // 1. signingConfigs 블록 주석 해제
     signingConfigs {
         create("release") {
-            storeFile = file("keystore/pocketchord-release.jks")
+            storeFile = file("keystore/PocketUkulele-release.jks")
             storePassword = "YOUR_KEYSTORE_PASSWORD"  // ← 실제 비밀번호로 변경
-            keyAlias = "pocketchord"
+            keyAlias = "PocketUkulele"
             keyPassword = "YOUR_KEY_PASSWORD"  // ← 실제 비밀번호로 변경
         }
     }
@@ -137,9 +137,9 @@ android {
 
 1. **local.properties에 추가** (Git 제외됨)
    ```properties
-   RELEASE_STORE_FILE=keystore/pocketchord-release.jks
+   RELEASE_STORE_FILE=keystore/PocketUkulele-release.jks
    RELEASE_STORE_PASSWORD=your_password_here
-   RELEASE_KEY_ALIAS=pocketchord
+   RELEASE_KEY_ALIAS=PocketUkulele
    RELEASE_KEY_PASSWORD=your_password_here
    ```
 
@@ -196,7 +196,7 @@ app/build/outputs/bundle/release/
 ### 빌드 전
 - [ ] `versionCode` 증가 (이전 버전보다 높게)
 - [ ] `versionName` 업데이트 (예: "1.0.0" → "1.0.1")
-- [ ] Supabase app_id가 `"com.sweetapps.pocketchord"`인지 확인
+- [ ] Supabase app_id가 `"com.sweetapps.PocketUkulele"`인지 확인
 - [ ] 테스트 코드 제거 (MainActivity의 `testSupabaseConnection()` 등)
 - [ ] ProGuard 규칙 확인
 
@@ -253,7 +253,7 @@ adb install -r app/build/outputs/apk/release/app-release.apk
    ```
    D/BuildConfig: DEBUG = false
    D/BuildConfig: BUILD_TYPE = release
-   D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.pocketchord
+   D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.PocketUkulele
    ```
 
 ---
@@ -273,7 +273,7 @@ adb install -r app/build/outputs/apk/release/app-release.apk
    - https://play.google.com/console
 
 2. **새 앱 만들기** (첫 출시)
-   - 앱 이름: PocketChord
+   - 앱 이름: PocketUkulele
    - 기본 언어: 한국어
    - 앱 유형: 앱
    - 무료/유료: 무료
@@ -314,7 +314,7 @@ adb install -r app/build/outputs/apk/release/app-release.apk
 }
 
 # Keep Serializable classes
--keep,includedescriptorclasses class com.sweetapps.pocketchord.data.supabase.model.** { *; }
+-keep,includedescriptorclasses class com.sweetapps.PocketUkulele.data.supabase.model.** { *; }
 
 # Google Ads
 -keep class com.google.android.gms.ads.** { *; }
@@ -422,7 +422,7 @@ release {
 
 **해결**: 키스토어 경로 확인
 ```kotlin
-storeFile = file("keystore/pocketchord-release.jks")
+storeFile = file("keystore/PocketUkulele-release.jks")
 // 절대 경로 확인
 println(storeFile.absolutePath)
 ```

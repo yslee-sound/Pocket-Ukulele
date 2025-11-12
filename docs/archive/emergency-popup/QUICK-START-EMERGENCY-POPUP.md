@@ -37,7 +37,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다. 잠시 후 다시 시도해주세요.',
@@ -69,13 +69,13 @@ INSERT 0 1
 ```sql
 -- 정책이 제대로 생성되었는지 확인
 SELECT * FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**:
 ```
 id | app_id                           | is_active | active_popup_type | content
-1  | com.sweetapps.pocketchord.debug | true      | emergency         | 🚨 긴급 점검...
+1  | com.sweetapps.PocketUkulele.debug | true      | emergency         | 🚨 긴급 점검...
 ```
 
 이 결과가 보이면 **성공!** ✅
@@ -87,8 +87,8 @@ id | app_id                           | is_active | active_popup_type | content
 SQL 실행 후 즉시:
 
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 또는 **앱을 수동으로 재시작**하세요.

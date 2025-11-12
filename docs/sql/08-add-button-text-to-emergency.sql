@@ -36,6 +36,6 @@ WHERE table_name = 'emergency_policy'
 -- 사용 예시:
 -- UPDATE emergency_policy
 -- SET button_text = '확인'
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- ============================================
 

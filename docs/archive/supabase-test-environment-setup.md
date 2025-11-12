@@ -32,7 +32,7 @@ android {
             buildConfigField(
                 "String", 
                 "SUPABASE_APP_ID", 
-                "\"com.sweetapps.pocketchord.debug\""
+                "\"com.sweetapps.PocketUkulele.debug\""
             )
         }
         
@@ -48,7 +48,7 @@ android {
             buildConfigField(
                 "String", 
                 "SUPABASE_APP_ID", 
-                "\"com.sweetapps.pocketchord\""
+                "\"com.sweetapps.PocketUkulele\""
             )
         }
     }
@@ -65,7 +65,7 @@ android {
 **위치**: `app/src/main/java/.../data/supabase/repository/AnnouncementRepository.kt`
 
 ```kotlin
-import com.sweetapps.pocketchord.BuildConfig  // import 추가
+import com.sweetapps.PocketUkulele.BuildConfig  // import 추가
 
 class AnnouncementRepository(
     private val client: SupabaseClient,
@@ -94,7 +94,7 @@ val repository = AnnouncementRepository(
 -- 디버그 빌드용 (개발자만 보임)
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     '🧪 디버그 모드',
     '이것은 디버그 빌드에서만 보이는 공지입니다.
 
@@ -105,8 +105,8 @@ VALUES (
 -- 릴리즈 빌드용 (실제 사용자가 봄)
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord',
-    '🎉 PocketChord에 오신 것을 환영합니다!',
+    'com.sweetapps.PocketUkulele',
+    '🎉 PocketUkulele에 오신 것을 환영합니다!',
     '언제 어디서나 기타 코드를 학습하세요.
 
 • 300개 이상의 코드
@@ -134,7 +134,7 @@ Run > Run 'app' (Shift + F10)
 
 **예상 결과**:
 - 공지사항: "🧪 디버그 모드" 표시 ✅
-- Logcat: `appId=com.sweetapps.pocketchord.debug`
+- Logcat: `appId=com.sweetapps.PocketUkulele.debug`
 
 ### 릴리즈 빌드 테스트
 
@@ -148,8 +148,8 @@ Run > Run 'app'
 ```
 
 **예상 결과**:
-- 공지사항: "🎉 PocketChord에 오신 것을 환영합니다!" 표시 ✅
-- Logcat: `appId=com.sweetapps.pocketchord`
+- 공지사항: "🎉 PocketUkulele에 오신 것을 환영합니다!" 표시 ✅
+- Logcat: `appId=com.sweetapps.PocketUkulele`
 
 ---
 
@@ -157,8 +157,8 @@ Run > Run 'app'
 
 | 빌드 타입 | app_id | 표시되는 공지 | 사용자 |
 |-----------|--------|---------------|---------|
-| **Debug** | `com.sweetapps.pocketchord.debug` | 🧪 디버그 모드 | 개발자 |
-| **Release** | `com.sweetapps.pocketchord` | 🎉 환영합니다! | 실제 사용자 |
+| **Debug** | `com.sweetapps.PocketUkulele.debug` | 🧪 디버그 모드 | 개발자 |
+| **Release** | `com.sweetapps.PocketUkulele` | 🎉 환영합니다! | 실제 사용자 |
 
 ---
 
@@ -175,14 +175,14 @@ Log.d("BuildConfig", "BUILD_TYPE = ${BuildConfig.BUILD_TYPE}")
 
 **디버그 빌드 출력**:
 ```
-D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.pocketchord.debug
+D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.PocketUkulele.debug
 D/BuildConfig: DEBUG = true
 D/BuildConfig: BUILD_TYPE = debug
 ```
 
 **릴리즈 빌드 출력**:
 ```
-D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.pocketchord
+D/BuildConfig: SUPABASE_APP_ID = com.sweetapps.PocketUkulele
 D/BuildConfig: DEBUG = false
 D/BuildConfig: BUILD_TYPE = release
 ```
@@ -197,7 +197,7 @@ D/BuildConfig: BUILD_TYPE = release
 ```sql
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     '🧪 [테스트] 버전 2.0 출시',
     '[초안] 새 버전이 출시되었습니다.
 
@@ -226,7 +226,7 @@ SET
 • 완전히 새로운 기능 2
 
 지금 바로 업데이트하세요!'
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
   AND is_active = true;
 ```
 
@@ -235,12 +235,12 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug'
 -- 테스트 공지 비활성화
 UPDATE announcements 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 실제 공지 등록
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord',  -- 실제 app_id
+    'com.sweetapps.PocketUkulele',  -- 실제 app_id
     '🎉 버전 2.0 출시 안내',
     '훨씬 나아진 새 버전!
 
@@ -266,7 +266,7 @@ VALUES (
 -- 먼저 디버그로 테스트
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     '⚠️ [테스트] 긴급 점검',
     '테스트: 긴급 점검 안내문',
     true
@@ -278,7 +278,7 @@ VALUES (
 -- 실제 공지 등록
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord',
+    'com.sweetapps.PocketUkulele',
     '⚠️ 긴급 점검 안내',
     '현재 일부 기능에 문제가 발생했습니다...',
     true
@@ -305,7 +305,7 @@ android {
             buildConfigField(
                 "String", 
                 "SUPABASE_APP_ID", 
-                "\"com.sweetapps.pocketchord.staging\""
+                "\"com.sweetapps.PocketUkulele.staging\""
             )
         }
         
@@ -319,7 +319,7 @@ android {
 -- Staging 환경용
 INSERT INTO announcements (app_id, title, content, is_active)
 VALUES (
-    'com.sweetapps.pocketchord.staging',
+    'com.sweetapps.PocketUkulele.staging',
     '🔧 스테이징 환경',
     'QA 테스트용 공지입니다.',
     true
@@ -336,7 +336,7 @@ VALUES (
 ```kotlin
 val repository = AnnouncementRepository(
     supabase,
-    "com.sweetapps.pocketchord"  // 하드코딩
+    "com.sweetapps.PocketUkulele"  // 하드코딩
 )
 ```
 
@@ -353,7 +353,7 @@ val repository = AnnouncementRepository(
 ```sql
 -- 정기적으로 오래된 테스트 데이터 삭제
 DELETE FROM announcements 
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
   AND created_at < NOW() - INTERVAL '30 days';
 ```
 
@@ -415,7 +415,7 @@ Build > Rebuild Project
 -- app_id별 데이터 확인
 SELECT app_id, COUNT(*) as count, MAX(is_active) as has_active
 FROM announcements
-WHERE app_id LIKE 'com.sweetapps.pocketchord%'
+WHERE app_id LIKE 'com.sweetapps.PocketUkulele%'
 GROUP BY app_id;
 ```
 
@@ -423,8 +423,8 @@ GROUP BY app_id;
 ```
 app_id                                  | count | has_active
 ----------------------------------------|-------|------------
-com.sweetapps.pocketchord               |   5   |   true
-com.sweetapps.pocketchord.debug         |   3   |   true
+com.sweetapps.PocketUkulele               |   5   |   true
+com.sweetapps.PocketUkulele.debug         |   3   |   true
 ```
 
 ---

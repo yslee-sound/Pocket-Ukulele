@@ -70,7 +70,7 @@ ADD COLUMN IF NOT EXISTS max_later_count INT DEFAULT 3 NOT NULL;
 SELECT app_id, target_version_code, is_force_update, 
        reshow_interval_hours, reshow_interval_minutes, reshow_interval_seconds, max_later_count
 FROM update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 
 **필드 우선순위 및 운영 환경 설정** (가장 작은 단위가 최우선):
@@ -87,7 +87,7 @@ UPDATE update_policy
 SET reshow_interval_hours = 24,
     max_later_count = 3,
     is_force_update = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 초기값 설정 (디버그 - 테스트 단축)
@@ -99,7 +99,7 @@ DECLARE
     v_exists BOOLEAN;
 BEGIN
     -- 행 존재 여부 확인
-    SELECT EXISTS (SELECT 1 FROM update_policy WHERE app_id = 'com.sweetapps.pocketchord.debug') INTO v_exists;
+    SELECT EXISTS (SELECT 1 FROM update_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug') INTO v_exists;
     
     IF v_exists THEN
         -- 행이 있으면 UPDATE
@@ -113,7 +113,7 @@ BEGIN
             max_later_count = 3,
             release_notes = '• [DEBUG] 테스트 업데이트',
             download_url = 'https://play.google.com/'
-        WHERE app_id = 'com.sweetapps.pocketchord.debug';
+        WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
         
         RAISE NOTICE '✅ DEBUG 행 업데이트 완료';
     ELSE
@@ -123,7 +123,7 @@ BEGIN
             reshow_interval_hours, reshow_interval_minutes, reshow_interval_seconds,
             max_later_count, release_notes, download_url
         ) VALUES (
-            'com.sweetapps.pocketchord.debug', true, 10, false,
+            'com.sweetapps.PocketUkulele.debug', true, 10, false,
             1, NULL, 60, 3,
             '• [DEBUG] 테스트 업데이트', 'https://play.google.com/'
         );
@@ -136,14 +136,14 @@ DO $$;
 SELECT app_id, target_version_code, is_force_update, is_active,
        reshow_interval_hours, reshow_interval_minutes, reshow_interval_seconds, max_later_count
 FROM update_policy
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
-**기대 결과**: 이 단계는 디버그 버전만 설정하므로 릴리즈 행(`com.sweetapps.pocketchord`)은 표시되지 않는 것이 정상입니다.
+**기대 결과**: 이 단계는 디버그 버전만 설정하므로 릴리즈 행(`com.sweetapps.PocketUkulele`)은 표시되지 않는 것이 정상입니다.
 
 | app_id | target_version_code | is_force_update | is_active | reshow_interval_hours | reshow_interval_minutes | reshow_interval_seconds | max_later_count |
 |--------|---------------------|-----------------|-----------|----------------------|------------------------|------------------------|-----------------|
-| com.sweetapps.pocketchord.debug | 10 | false | true | 1 | NULL | 60 | 3 |
+| com.sweetapps.PocketUkulele.debug | 10 | false | true | 1 | NULL | 60 | 3 |
 
 ---
 ## 4. 시나리오별 테스트
@@ -187,7 +187,7 @@ ORDER BY column_name;
 SELECT app_id, is_active, target_version_code, is_force_update, 
        reshow_interval_hours, reshow_interval_minutes, reshow_interval_seconds, max_later_count
 FROM update_policy 
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug')
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug')
 ORDER BY app_id;
 ```
 
@@ -195,8 +195,8 @@ ORDER BY app_id;
 
 | app_id | is_active | target_version_code | is_force_update | reshow_interval_hours | reshow_interval_minutes | reshow_interval_seconds | max_later_count |
 |--------|-----------|---------------------|-----------------|----------------------|------------------------|------------------------|-----------------|
-| com.sweetapps.pocketchord | true | 10 | false | 24 | NULL | NULL | 3 |
-| com.sweetapps.pocketchord.debug | true | 10 | false | 1 | NULL | 60 | 3 |
+| com.sweetapps.PocketUkulele | true | 10 | false | 24 | NULL | NULL | 3 |
+| com.sweetapps.PocketUkulele.debug | true | 10 | false | 1 | NULL | 60 | 3 |
 
 **⚠️ 새 필드가 NULL이거나 조회 안 될 경우**:
 - 원인: ALTER TABLE은 되었지만 UPDATE가 안 됨
@@ -224,14 +224,14 @@ ORDER BY app_id;
 -- 디버그 설정 빠른 확인
 SELECT app_id, target_version_code, is_force_update, is_active
 FROM update_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **기대 결과**:
 
 | app_id | target_version_code | is_force_update | is_active |
 |--------|---------------------|-----------------|-----------|
-| com.sweetapps.pocketchord.debug | 10 | false | true |
+| com.sweetapps.PocketUkulele.debug | 10 | false | true |
 
 **⚠️ 만약 결과가 다르면**: S1 단계로 돌아가서 초기값 설정 SQL을 다시 실행하세요.
 
@@ -514,7 +514,7 @@ UpdateLater: 🧹 Clearing old update tracking data (version updated)  ← ✅ �
 
 **실행**:
 ```cmd
-adb -s emulator-5554 shell run-as com.sweetapps.pocketchord.debug cat shared_prefs/update_preferences.xml
+adb -s emulator-5554 shell run-as com.sweetapps.PocketUkulele.debug cat shared_prefs/update_preferences.xml
 ```
 
 **기대 결과**:
@@ -559,7 +559,7 @@ UPDATE update_policy
 SET reshow_interval_hours = 48,
     reshow_interval_minutes = NULL,  -- 운영: 항상 NULL
     reshow_interval_seconds = NULL   -- 운영: 항상 NULL
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **SQL 스크립트 - 디버그 버전** 🔧:
@@ -569,7 +569,7 @@ UPDATE update_policy
 SET reshow_interval_hours = 1,      -- 미사용 (초 단위 우선)
     reshow_interval_minutes = NULL,  -- 미사용 (초 단위 우선)
     reshow_interval_seconds = 120    -- 120초 (2분)
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **테스트** (디버그 기준): 
@@ -585,7 +585,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 -- 릴리즈: 최대 1회로 변경 (기본 3회 → 1회)
 UPDATE update_policy
 SET max_later_count = 1
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **SQL 스크립트 - 디버그 버전** 🔧:

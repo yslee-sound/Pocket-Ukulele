@@ -1,6 +1,6 @@
 # Supabase 정책 팝업 + 광고정책 이식 가이드 (2025-11-11)
 
-이 문서는 PocketChord 앱에 구현된 "3가지 Supabase 팝업(응급 / 업데이트 / 공지) + 광고정책(AdPolicy) + 광고 매니저(AppOpen/Interstitial)" 를 다른 앱에 **파일을 그대로 복사 → 같은 상대 경로 배치 → 단계별 연결** 방식으로 안전하게 이식하기 위한 전체 절차를 제공합니다.
+이 문서는 PocketUkulele 앱에 구현된 "3가지 Supabase 팝업(응급 / 업데이트 / 공지) + 광고정책(AdPolicy) + 광고 매니저(AppOpen/Interstitial)" 를 다른 앱에 **파일을 그대로 복사 → 같은 상대 경로 배치 → 단계별 연결** 방식으로 안전하게 이식하기 위한 전체 절차를 제공합니다.
 
 ---
 ## 0. 전체 개요
@@ -45,40 +45,40 @@
 복사 대상은 아래 경로(상대) 기준입니다. 대상 앱 구조에 맞춰 동일/유사 위치로 배치하세요.
 
 ### 2.1 Application & 진입 화면
-- `app/src/main/java/com/sweetapps/pocketchord/PocketChordApplication.kt`
-- (팝업 호출 예시) `app/src/main/java/com/sweetapps/pocketchord/ui/screens/HomeScreen.kt` (오케스트레이션 블록만 추출 가능)
+- `app/src/main/java/com/sweetapps/PocketUkulele/PocketUkuleleApplication.kt`
+- (팝업 호출 예시) `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/HomeScreen.kt` (오케스트레이션 블록만 추출 가능)
 
 ### 2.2 Supabase 모델
 ```
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/UpdatePolicy.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/EmergencyPolicy.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/NoticePolicy.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AdPolicy.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/UpdateInfo.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/Announcement.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/UpdatePolicy.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/EmergencyPolicy.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/NoticePolicy.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AdPolicy.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/UpdateInfo.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/Announcement.kt
 ```
 (필요 시 `PopupDecision.kt` 참고용)
 
 ### 2.3 Repositories
 ```
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/UpdatePolicyRepository.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/EmergencyPolicyRepository.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/NoticePolicyRepository.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AdPolicyRepository.kt
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AnnouncementRepository.kt (선택)
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/UpdatePolicyRepository.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/EmergencyPolicyRepository.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/NoticePolicyRepository.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AdPolicyRepository.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AnnouncementRepository.kt (선택)
 ```
 
 ### 2.4 광고 매니저
 ```
-app/src/main/java/com/sweetapps/pocketchord/ads/AppOpenAdManager.kt
-app/src/main/java/com/sweetapps/pocketchord/ads/InterstitialAdManager.kt
+app/src/main/java/com/sweetapps/PocketUkulele/ads/AppOpenAdManager.kt
+app/src/main/java/com/sweetapps/PocketUkulele/ads/InterstitialAdManager.kt
 ```
 
 ### 2.5 팝업 UI
 ```
-app/src/main/java/com/sweetapps/pocketchord/ui/dialogs/OptionalUpdateDialog.kt
-app/src/main/java/com/sweetapps/pocketchord/ui/dialogs/EmergencyRedirectDialog.kt
-app/src/main/java/com/sweetapps/pocketchord/ui/dialogs/NoticeDialog.kt  (AnnouncementDialog 포함)
+app/src/main/java/com/sweetapps/PocketUkulele/ui/dialogs/OptionalUpdateDialog.kt
+app/src/main/java/com/sweetapps/PocketUkulele/ui/dialogs/EmergencyRedirectDialog.kt
+app/src/main/java/com/sweetapps/PocketUkulele/ui/dialogs/NoticeDialog.kt  (AnnouncementDialog 포함)
 ```
 
 ### 2.6 리소스 (drawable)
@@ -89,7 +89,7 @@ app/src/main/res/drawable/emergency_notice.xml
 필요 시 이름 충돌 방지를 위해 `policy_update_sample.xml` 등으로 변경하고 코드 수정.
 
 ### 2.7 Manifest 설정
-- `<application android:name=".PocketChordApplication" ...>` 부분
+- `<application android:name=".PocketUkuleleApplication" ...>` 부분
 - AdMob APP ID meta-data
 
 에이전트 입력 템플릿 (복사 진행 상황 기록):
@@ -418,11 +418,11 @@ INSERT INTO notice_policy(app_id, content, notice_version, is_active) VALUES ('c
 ---
 ## 14. Windows (cmd) 예시 명령 (대상 앱 루트 = D:\TargetApp )
 ```
-REM 예: PocketChord에서 모델 디렉터리 복사
-xcopy /E /I /Y "G:\Workspace\PocketChord\app\src\main\java\com\sweetapps\pocketchord\data\supabase\model" "D:\TargetApp\app\src\main\java\com\example\targetapp\data\supabase\model"
+REM 예: PocketUkulele에서 모델 디렉터리 복사
+xcopy /E /I /Y "G:\Workspace\PocketUkulele\app\src\main\java\com\sweetapps\PocketUkulele\data\supabase\model" "D:\TargetApp\app\src\main\java\com\example\targetapp\data\supabase\model"
 
 REM 개별 파일 복사 예시
-copy "G:\Workspace\PocketChord\app\src\main\java\com\sweetapps\pocketchord\ads\AppOpenAdManager.kt" "D:\TargetApp\app\src\main\java\com\example\targetapp\ads\AppOpenAdManager.kt"
+copy "G:\Workspace\PocketUkulele\app\src\main\java\com\sweetapps\PocketUkulele\ads\AppOpenAdManager.kt" "D:\TargetApp\app\src\main\java\com\example\targetapp\ads\AppOpenAdManager.kt"
 ```
 (패키지명 변경 시 파일 상단 package 라인 수정 필요)
 

@@ -1,4 +1,4 @@
-# 🗄️ PocketChord Supabase 가이드
+# 🗄️ PocketUkulele Supabase 가이드
 
 **업데이트**: 2025-11-08  
 **목적**: Supabase 설정 및 사용 가이드
@@ -17,7 +17,7 @@
 
 ## Supabase 개요
 
-PocketChord는 Supabase를 사용하여:
+PocketUkulele는 Supabase를 사용하여:
 - ✅ 앱 정책 관리 (`app_policy`)
 - ✅ 광고 제어 (`ad_policy`)
 - ✅ 공지사항 관리 (`announcements`)
@@ -58,9 +58,9 @@ SET
   is_active = true,
   active_popup_type = 'force_update',
   content = '필수 업데이트가 있습니다.',
-  download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',
+  download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',
   min_supported_version = 10
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -95,7 +95,7 @@ CREATE TABLE ad_policy (
 -- 배너 광고만 끄기
 UPDATE ad_policy 
 SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **참고**: `ad-policy-table-creation.sql` 참조
@@ -134,7 +134,7 @@ CREATE TABLE announcements (
 1. https://supabase.com 접속
 2. **New Project** 클릭
 3. 프로젝트 정보 입력:
-   - Name: PocketChord
+   - Name: PocketUkulele
    - Database Password: (안전하게 보관)
    - Region: Northeast Asia (Seoul)
 
@@ -183,7 +183,7 @@ android {
     defaultConfig {
         buildConfigField("String", "SUPABASE_URL", "\"https://your-project.supabase.co\"")
         buildConfigField("String", "SUPABASE_ANON_KEY", "\"your-anon-key\"")
-        buildConfigField("String", "SUPABASE_APP_ID", "\"com.sweetapps.pocketchord\"")
+        buildConfigField("String", "SUPABASE_APP_ID", "\"com.sweetapps.PocketUkulele\"")
     }
 }
 ```
@@ -205,7 +205,7 @@ supabase.anon.key=your-anon-key
 ```kotlin
 // SupabaseDebugTest.kt
 suspend fun testConnection(context: Context) {
-    val app = context.applicationContext as PocketChordApplication
+    val app = context.applicationContext as PocketUkuleleApplication
     
     try {
         val response = app.supabase
@@ -313,7 +313,7 @@ SET
   is_active = true,
   active_popup_type = 'emergency',
   content = '긴급 공지 내용'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 3. 강제 업데이트
@@ -325,7 +325,7 @@ SET
   content = '필수 업데이트가 있습니다.',
   download_url = 'https://play.google.com/store/...',
   min_supported_version = 10
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 일상 운영
@@ -333,10 +333,10 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 #### 정책 확인
 ```sql
 -- 앱 정책
-SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 광고 정책
-SELECT * FROM ad_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM ad_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 로그 확인

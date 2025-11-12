@@ -19,7 +19,7 @@ INSERT INTO public.update_policy (
     message,
     release_notes
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     999,    -- 높은 버전 (테스트용)
     false,
@@ -46,11 +46,11 @@ INSERT INTO public.emergency_policy (
     new_app_id,
     is_dismissible
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     '🚨 [DEBUG] 긴급 테스트 메시지입니다.\n이것은 디버그용 팝업입니다.',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord.debug',
-    'com.sweetapps.pocketchord.debug.v2',
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele.debug',
+    'com.sweetapps.PocketUkulele.debug.v2',
     true    -- X 버튼 허용
 );
 ```
@@ -75,7 +75,7 @@ INSERT INTO public.notice_policy (
     image_url,
     action_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     '[DEBUG] 디버그 테스트 공지 📋',
     '[DEBUG] 이것은 테스트용 공지사항입니다.\n버전 관리 테스트를 위한 샘플 데이터입니다.',
@@ -120,7 +120,7 @@ UPDATE update_policy
 SET is_active = true,
     target_version_code = 999,  -- 현재 버전보다 높게
     is_force_update = false     -- 선택적 업데이트 테스트
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**: Debug 빌드 실행 시 선택적 업데이트 팝업 표시
@@ -132,7 +132,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 UPDATE emergency_policy 
 SET is_active = true,
     is_dismissible = true  -- X 버튼 있음
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**: Debug 빌드 실행 시 긴급 팝업 표시 (최우선)
@@ -144,7 +144,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 UPDATE notice_policy 
 SET is_active = true,
     notice_version = 10  -- 높은 버전으로 설정
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**: Debug 빌드 실행 시 공지 팝업 표시
@@ -171,24 +171,24 @@ update_policy (2개 행)
 ┌────┬──────────────────────────────────┬───────────┬─────────────────────┐
 │ id │ app_id                           │ is_active │ target_version_code │
 ├────┼──────────────────────────────────┼───────────┼─────────────────────┤
-│ 1  │ com.sweetapps.pocketchord        │ true      │ 1                   │
-│ 2  │ com.sweetapps.pocketchord.debug  │ false     │ 999                 │
+│ 1  │ com.sweetapps.PocketUkulele        │ true      │ 1                   │
+│ 2  │ com.sweetapps.PocketUkulele.debug  │ false     │ 999                 │
 └────┴──────────────────────────────────┴───────────┴─────────────────────┘
 
 emergency_policy (2개 행)
 ┌────┬──────────────────────────────────┬───────────┬────────────────┐
 │ id │ app_id                           │ is_active │ is_dismissible │
 ├────┼──────────────────────────────────┼───────────┼────────────────┤
-│ 1  │ com.sweetapps.pocketchord        │ false     │ true           │
-│ 2  │ com.sweetapps.pocketchord.debug  │ false     │ true           │
+│ 1  │ com.sweetapps.PocketUkulele        │ false     │ true           │
+│ 2  │ com.sweetapps.PocketUkulele.debug  │ false     │ true           │
 └────┴──────────────────────────────────┴───────────┴────────────────┘
 
 notice_policy (2개 행)
 ┌────┬──────────────────────────────────┬───────────┬────────────────┐
 │ id │ app_id                           │ is_active │ notice_version │
 ├────┼──────────────────────────────────┼───────────┼────────────────┤
-│ 1  │ com.sweetapps.pocketchord        │ true      │ 1              │
-│ 2  │ com.sweetapps.pocketchord.debug  │ false     │ 1              │
+│ 1  │ com.sweetapps.PocketUkulele        │ true      │ 1              │
+│ 2  │ com.sweetapps.PocketUkulele.debug  │ false     │ 1              │
 └────┴──────────────────────────────────┴───────────┴────────────────┘
 ```
 
@@ -216,14 +216,14 @@ notice_policy (2개 행)
 -- 버전 1 테스트
 UPDATE notice_policy 
 SET is_active = true, notice_version = 1
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 앱 실행 → 공지 확인 → X 클릭
 
 -- 버전 2로 증가
 UPDATE notice_policy 
 SET notice_version = 2, content = '[DEBUG] 버전 2 테스트'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 앱 재실행 → 공지 다시 표시됨 확인 ✅
 ```
@@ -236,14 +236,14 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 -- X 버튼 있는 경우
 UPDATE emergency_policy 
 SET is_active = true, is_dismissible = true
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 앱 실행 → X 버튼 확인 → 클릭 가능 ✅
 
 -- X 버튼 없는 경우
 UPDATE emergency_policy 
 SET is_dismissible = false
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 앱 재실행 → X 버튼 없음 확인 ✅
 ```

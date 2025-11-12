@@ -187,11 +187,11 @@ val newBannerEnabled = when {
 ```sql
 -- 모든 광고 즉시 차단
 UPDATE ad_policy SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 모든 광고 다시 활성화
 UPDATE ad_policy SET is_active = true 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **장점**:
@@ -204,11 +204,11 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 ```sql
 -- 배너만 끄기
 UPDATE ad_policy SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 전면 광고만 끄기
 UPDATE ad_policy SET ad_interstitial_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **장점**:

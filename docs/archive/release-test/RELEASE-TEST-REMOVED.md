@@ -33,7 +33,7 @@
 create("releaseTest") {
     initWith(getByName("debug"))
     buildConfigField("String", "SUPABASE_APP_ID", 
-        "\"com.sweetapps.pocketchord.releasetest\"")
+        "\"com.sweetapps.PocketUkulele.releasetest\"")
     signingConfig = signingConfigs.getByName("debug")
     isMinifyEnabled = false
     isShrinkResources = false

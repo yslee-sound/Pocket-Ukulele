@@ -1,6 +1,6 @@
 # Supabase App Policy (선택지 B) — 스키마 & RLS 가이드
 
-본 문서는 PocketChord가 단일 정책 테이블(app_policy)만 읽어 팝업 1개를 결정하도록 하는 운영 방식(선택지 B)의 SQL 스키마, RLS 정책, 운영 절차를 제공합니다.
+본 문서는 PocketUkulele가 단일 정책 테이블(app_policy)만 읽어 팝업 1개를 결정하도록 하는 운영 방식(선택지 B)의 SQL 스키마, RLS 정책, 운영 절차를 제공합니다.
 
 목표
 - is_active = true만 노출, 단 하나의 정책 레코드로 팝업 결정
@@ -18,11 +18,11 @@ app_id 값은 “해당 정책이 어느 앱(또는 앱 변형/환경)에 적용
 
 | 상황 | 추천 app_id 형태 | 예시 |
 |------|-----------------|------|
-| 단일 Android 앱만 운영 | 패키지명 그대로 | `com.sweetapps.pocketchord` |
-| Android / iOS 분리 관리 | 플랫폼 접미/접두 | `pocketchord-android`, `pocketchord-ios` |
-| 운영/스테이징 분리 | 환경 접미 | `pocketchord-android-prod`, `pocketchord-android-stg` |
+| 단일 Android 앱만 운영 | 패키지명 그대로 | `com.sweetapps.PocketUkulele` |
+| Android / iOS 분리 관리 | 플랫폼 접미/접두 | `PocketUkulele-android`, `PocketUkulele-ios` |
+| 운영/스테이징 분리 | 환경 접미 | `PocketUkulele-android-prod`, `PocketUkulele-android-stg` |
 | 여러 브랜드/화이트라벨 | 브랜드 키 + 플랫폼 | `brandA-android`, `brandB-android` |
-| 채널(내수/글로벌) 구분 | 채널 코드 포함 | `pocketchord-kr`, `pocketchord-global` |
+| 채널(내수/글로벌) 구분 | 채널 코드 포함 | `PocketUkulele-kr`, `PocketUkulele-global` |
 
 설계 팁
 - 앱 코드에서는 BuildConfig.SUPABASE_APP_ID 값을 서버 app_policy.app_id와 정확히 일치시키기만 하면 됩니다.
@@ -141,7 +141,7 @@ INSERT INTO public.app_policy (
   notice_title,
   notice_content
 ) VALUES (
-  'pocketchord-android-prod',  -- 예시: 논리적 식별자
+  'PocketUkulele-android-prod',  -- 예시: 논리적 식별자
   TRUE,
   NULL,                -- 강제 없음: 필요 시 빌드보다 큰 값
   NULL,                -- 선택적 업데이트 없음
@@ -242,8 +242,8 @@ download_url          TEXT NULL           -- 마켓/링크 이동
 ```sql
 UPDATE public.app_policy
 SET min_supported_version = 3,       -- 2보다 크면 앱이 강제 업데이트 팝업 노출
-    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+    download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 표시 후 다시 해제하려면:
 ```sql
@@ -335,7 +335,7 @@ val policy = supabase.postgrest
 1) app_id 불일치/디버그-릴리즈 혼동: 디버그 기본값은 `com.sweetapps.pocketchord.debug`, 릴리즈는 `com.sweetapps.pocketchord`.
 2) 숨은 공백/오타: `SELECT app_id, length(app_id) FROM app_policy;`로 확인 후 `UPDATE ... SET app_id = trim(app_id)`로 정리.
 3) RLS 정책 부재: `read active policy (USING is_active = TRUE)` 존재 확인.
-4) 프로젝트 URL/키 오기: 앱 로그(PocketChordApp: Supabase URL (debug)=...)로 현재 프로젝트 확인.
+4) 프로젝트 URL/키 오기: 앱 로그(PocketUkuleleApp: Supabase URL (debug)=...)로 현재 프로젝트 확인.
 5) REST로 실제 조회 확인(anon 키):
 ```bash
 curl -s "https://<PROJECT>.supabase.co/rest/v1/app_policy?app_id=eq.com.sweetapps.pocketchord.debug&is_active=eq.true&select=app_id,emergency_is_active,emergency_title,emergency_content" \

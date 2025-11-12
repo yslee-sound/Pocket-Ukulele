@@ -74,7 +74,7 @@ androidx.fragment:fragment:1.0.0 -> 1.8.9 (*)
 ### 앱 설치 및 실행
 ```bash
 .\gradlew.bat installDebug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 **결과**: 

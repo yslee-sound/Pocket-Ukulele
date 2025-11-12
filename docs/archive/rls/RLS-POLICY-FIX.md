@@ -3,7 +3,7 @@
 ## 현재 상황
 
 ✅ **데이터 확인됨**:
-- `app_id: com.sweetapps.pocketchord.debug`
+- `app_id: com.sweetapps.PocketUkulele.debug`
 - `is_active: TRUE`
 - `active_popup_type: emergency`
 
@@ -82,8 +82,8 @@ ALTER TABLE app_policy DISABLE ROW LEVEL SECURITY;
 ## 📱 앱 재시작 및 확인
 
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 adb logcat -d -s AppPolicyRepo:* | findstr "Query returned"
 ```
 

@@ -2,7 +2,7 @@
 
 ## ✅ 구현 완료
 
-PocketChord 앱에 **전면광고(Interstitial Ad)**가 성공적으로 통합되었습니다!
+PocketUkulele 앱에 **전면광고(Interstitial Ad)**가 성공적으로 통합되었습니다!
 
 ---
 
@@ -294,7 +294,7 @@ gradlew assembleRelease
 
 ## ✨ 요약
 
-**전면광고가 PocketChord에 성공적으로 통합되었습니다!**
+**전면광고가 PocketUkulele에 성공적으로 통합되었습니다!**
 
 - ✅ 스마트한 빈도 제어
 - ✅ 사용자 친화적 시점 선택

@@ -2,7 +2,7 @@
 
 ## ✅ 구현 완료
 
-PocketChord 앱에 **앱 오프닝 광고(App Open Ad)**가 성공적으로 추가되었습니다!
+PocketUkulele 앱에 **앱 오프닝 광고(App Open Ad)**가 성공적으로 추가되었습니다!
 
 ---
 
@@ -18,7 +18,7 @@ PocketChord 앱에 **앱 오프닝 광고(App Open Ad)**가 성공적으로 추�
 - ✅ 4시간 광고 만료 시간
 - ✅ Activity 생명주기 자동 추적
 
-### 2. `PocketChordApplication.kt`
+### 2. `PocketUkuleleApplication.kt`
 Application 클래스로 앱 전역 초기화
 
 **기능:**
@@ -33,7 +33,7 @@ Application 클래스로 앱 전역 초기화
 ### `AndroidManifest.xml`
 ```xml
 <application
-    android:name=".PocketChordApplication"  <!-- 추가 -->
+    android:name=".PocketUkuleleApplication"  <!-- 추가 -->
     ...>
 ```
 
@@ -93,7 +93,7 @@ Application 클래스로 앱 전역 초기화
 
 ## 📊 전체 광고 시스템
 
-PocketChord는 이제 **3가지 광고**를 운영합니다:
+PocketUkulele는 이제 **3가지 광고**를 운영합니다:
 
 ### 1. 📱 **앱 오프닝 광고** (NEW!)
 - **시점**: 백그라운드 복귀 시
@@ -148,7 +148,7 @@ private const val AD_UNIT_ID = "ca-app-pub-XXXXXXXXXXXXXXXX/1234567890"
 ### 시나리오 1: 첫 실행 테스트
 ```bash
 # 1. 앱 완전 삭제
-adb uninstall com.sweetapps.pocketchord
+adb uninstall com.sweetapps.PocketUkulele
 
 # 2. 앱 재설치
 adb install app/build/outputs/apk/debug/app-debug.apk
@@ -163,7 +163,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 1. 앱 실행 (메인 화면까지 진행)
 2. 홈 버튼으로 백그라운드 이동
 3. 5초 대기
-4. 최근 앱 목록에서 PocketChord 터치
+4. 최근 앱 목록에서 PocketUkulele 터치
 5. ✅ 확인: 앱 오프닝 광고 표시
 6. ✅ 확인: 광고 닫으면 마지막 화면으로 복귀
 ```
@@ -322,7 +322,7 @@ adb logcat | findstr "AppOpenAdManager"
 | 항목 | 상태 |
 |------|------|
 | AppOpenAdManager 클래스 | ✅ |
-| PocketChordApplication 클래스 | ✅ |
+| PocketUkuleleApplication 클래스 | ✅ |
 | AndroidManifest 등록 | ✅ |
 | lifecycle-process 의존성 | ✅ |
 | 첫 실행 제외 로직 | ✅ |
@@ -332,7 +332,7 @@ adb logcat | findstr "AppOpenAdManager"
 ### 광고 시스템 전체
 
 ```
-PocketChord 광고 시스템
+PocketUkulele 광고 시스템
 ├─ 📱 앱 오프닝 광고 (NEW!)
 │  └─ 백그라운드 복귀 시
 ├─ 🎬 전면광고

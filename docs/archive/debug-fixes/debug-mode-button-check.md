@@ -186,7 +186,7 @@ Release 빌드에서는 디버그 모드 버튼이 표시되지 않습니다.
 - ✅ Release 빌드에서 버튼 숨김 확인
 
 **수정된 파일**:
-- `app/src/main/java/com/sweetapps/pocketchord/ui/screens/SettingsScreen.kt` (라인 122-131)
+- `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/SettingsScreen.kt` (라인 122-131)
 
 ## ✅ 적용된 코드
 

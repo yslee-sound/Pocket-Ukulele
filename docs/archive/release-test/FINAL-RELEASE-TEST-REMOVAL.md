@@ -13,7 +13,7 @@
 
 **이전** (복잡):
 ```
-📦 PocketChord
+📦 PocketUkulele
 ├─ debug         (개발용)
 ├─ releaseTest   (❌ 제거됨)
 └─ release       (배포용)
@@ -21,7 +21,7 @@
 
 **현재** (단순):
 ```
-📦 PocketChord
+📦 PocketUkulele
 ├─ debug         (개발용)
 └─ release       (배포용)
 ```
@@ -35,14 +35,14 @@
 buildTypes {
     debug {
         buildConfigField("String", "SUPABASE_APP_ID", 
-            "\"com.sweetapps.pocketchord.debug\"")
+            "\"com.sweetapps.PocketUkulele.debug\"")
         applicationIdSuffix = ".debug"
         versionNameSuffix = "-DEBUG"
     }
 
     release {
         buildConfigField("String", "SUPABASE_APP_ID", 
-            "\"com.sweetapps.pocketchord\"")
+            "\"com.sweetapps.PocketUkulele\"")
         signingConfig = signingConfigs.getByName("release")
         isMinifyEnabled = true
         isShrinkResources = true

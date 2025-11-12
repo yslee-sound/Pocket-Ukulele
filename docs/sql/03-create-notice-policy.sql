@@ -59,10 +59,10 @@ INSERT INTO public.notice_policy (
     content,
     notice_version
 ) VALUES (
-    'com.sweetapps.pocketchord',
+    'com.sweetapps.PocketUkulele',
     true,
     '환영합니다! 🎉',
-    'PocketChord를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
+    'PocketUkulele를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
     1  -- 버전 1
 );
 
@@ -76,7 +76,7 @@ INSERT INTO public.notice_policy (
     image_url,
     action_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     '[DEBUG] 디버그 테스트 공지 📋',
     '[DEBUG] 이것은 테스트용 공지사항입니다.\n버전 관리 테스트를 위한 샘플 데이터입니다.',

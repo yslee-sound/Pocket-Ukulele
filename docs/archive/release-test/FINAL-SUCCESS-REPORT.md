@@ -81,7 +81,7 @@
 ## 📱 최종 로그
 
 ```
-D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.pocketchord.debug active=true type=emergency
+D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.PocketUkulele.debug active=true type=emergency
 D/HomeScreen: Policy active_popup_type: emergency
 D/HomeScreen: Decision: EMERGENCY popup will show
 D/HomeScreen: ===== Popup Display Check =====
@@ -118,14 +118,14 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
   download_url = 'https://example.com/status'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 앱 재시작
 
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 결과
@@ -137,14 +137,14 @@ adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.
 ## 📝 변경된 파일 목록
 
 ### 수정된 파일
-1. `app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AppPolicy.kt`
-2. `app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AppPolicyRepository.kt` ⭐ (핵심 수정)
-3. `app/src/main/java/com/sweetapps/pocketchord/ui/screens/HomeScreen.kt`
-4. `app/src/main/java/com/sweetapps/pocketchord/ui/dialog/AppPolicyDialogs.kt` ⭐ (UI 개선)
+1. `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AppPolicy.kt`
+2. `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AppPolicyRepository.kt` ⭐ (핵심 수정)
+3. `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/HomeScreen.kt`
+4. `app/src/main/java/com/sweetapps/PocketUkulele/ui/dialog/AppPolicyDialogs.kt` ⭐ (UI 개선)
 5. `app/proguard-rules.pro`
 
 ### 새로 생성된 파일
-1. `app/src/main/java/com/sweetapps/pocketchord/debug/SupabaseDebugTest.kt`
+1. `app/src/main/java/com/sweetapps/PocketUkulele/debug/SupabaseDebugTest.kt`
 2. 문서 10개 (docs/ 폴더)
 
 ---

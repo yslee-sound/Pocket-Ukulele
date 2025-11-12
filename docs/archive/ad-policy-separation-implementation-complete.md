@@ -39,7 +39,7 @@ docs/ad-policy-table-creation.sql
 
 ### 2. Kotlin 모델
 ```
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AdPolicy.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AdPolicy.kt
 ```
 - 광고 정책 데이터 클래스
 - Kotlinx Serialization 지원
@@ -47,7 +47,7 @@ app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AdPolicy.kt
 
 ### 3. Repository
 ```
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AdPolicyRepository.kt
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AdPolicyRepository.kt
 ```
 - 광고 정책 조회 로직
 - 5분 캐싱 지원
@@ -66,7 +66,7 @@ app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AdPolicyRep
 **핵심 코드:**
 ```kotlin
 private val adPolicyRepository: AdPolicyRepository by lazy {
-    val app = context.applicationContext as PocketChordApplication
+    val app = context.applicationContext as PocketUkuleleApplication
     AdPolicyRepository(app.supabase)
 }
 
@@ -86,7 +86,7 @@ private suspend fun isInterstitialEnabledFromPolicy(): Boolean {
 **핵심 코드:**
 ```kotlin
 private val adPolicyRepository: AdPolicyRepository by lazy {
-    AdPolicyRepository((application as PocketChordApplication).supabase)
+    AdPolicyRepository((application as PocketUkuleleApplication).supabase)
 }
 
 private suspend fun isAppOpenEnabledFromPolicy(): Boolean {
@@ -133,13 +133,13 @@ LaunchedEffect(Unit) {
 **확인:**
 ```sql
 SELECT * FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **예상 결과:**
 ```
 app_id                         | is_active | ad_app_open_enabled | ad_interstitial_enabled | ad_banner_enabled
-com.sweetapps.pocketchord      | true      | true                | true                    | true
+com.sweetapps.PocketUkulele      | true      | true                | true                    | true
 ```
 
 ### Step 2: 앱 빌드 및 테스트
@@ -163,7 +163,7 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 ```sql
 UPDATE ad_policy 
 SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **확인:**
@@ -177,7 +177,7 @@ SET
   ad_app_open_enabled = false,
   ad_interstitial_enabled = false,
   ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **확인:**
@@ -190,12 +190,12 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 팝업 끄기
 UPDATE app_policy 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 광고 켜기
 UPDATE ad_policy 
 SET is_active = true 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **확인:**
@@ -223,7 +223,7 @@ gradlew assembleRelease
 -- 팝업 정책
 SELECT app_id, is_active, active_popup_type, content 
 FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 광고 정책
 SELECT 
@@ -235,21 +235,21 @@ SELECT
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 2. 팝업만 끄기 (광고는 유지)
 ```sql
 UPDATE app_policy 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 3. 광고만 끄기 (팝업은 유지)
 ```sql
 UPDATE ad_policy 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 4. 특정 광고만 제어
@@ -257,17 +257,17 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 배너만 끄기
 UPDATE ad_policy 
 SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 전면 광고만 끄기
 UPDATE ad_policy 
 SET ad_interstitial_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 앱 오픈 광고만 끄기
 UPDATE ad_policy 
 SET ad_app_open_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 5. 빈도 제한 조정
@@ -277,14 +277,14 @@ UPDATE ad_policy
 SET 
   ad_interstitial_max_per_hour = 2,
   ad_interstitial_max_per_day = 15
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 더 적극적으로 (광고 더 표시)
 UPDATE ad_policy 
 SET 
   ad_interstitial_max_per_hour = 5,
   ad_interstitial_max_per_day = 30
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 6. 명절/이벤트 대응 (모두 끄기)
@@ -387,7 +387,7 @@ data class AppPolicy(
 ```
 D/AdPolicyRepo: ===== Ad Policy Fetch Started =====
 D/AdPolicyRepo: 🔄 Supabase에서 광고 정책 새로 가져오기
-D/AdPolicyRepo: Target app_id: com.sweetapps.pocketchord
+D/AdPolicyRepo: Target app_id: com.sweetapps.PocketUkulele
 D/AdPolicyRepo: Total rows fetched: 1
 D/AdPolicyRepo: ✅ 광고 정책 발견!
 D/AdPolicyRepo:   - App Open Ad: true

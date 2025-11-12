@@ -36,13 +36,13 @@ content     | '더 안정적이고 개선된 환경을 위해 최신 버전으�
 ```sql
 -- 기존 데이터 삭제
 DELETE FROM public.app_policy 
-WHERE app_id IN ('com.sweetapps.pocketchord.debug', 'com.sweetapps.pocketchord');
+WHERE app_id IN ('com.sweetapps.PocketUkulele.debug', 'com.sweetapps.PocketUkulele');
 
 -- 새로 삽입 (content는 기본값 자동 적용)
 INSERT INTO public.app_policy (app_id, active_popup_type)
 VALUES
-  ('com.sweetapps.pocketchord.debug', NULL),
-  ('com.sweetapps.pocketchord', NULL);
+  ('com.sweetapps.PocketUkulele.debug', NULL),
+  ('com.sweetapps.PocketUkulele', NULL);
 ```
 
 ## 참고

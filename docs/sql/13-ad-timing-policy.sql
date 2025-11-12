@@ -16,7 +16,7 @@ SET ad_allowed_start_hour = 0,
     ad_app_open_delay_seconds = 5,
     ad_interstitial_min_interval_seconds = 120,
     ad_suppression_until = NULL
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 디버그 기본값(테스트용)
 UPDATE public.ad_policy
@@ -25,9 +25,9 @@ SET ad_allowed_start_hour = 0,
     ad_app_open_delay_seconds = 2,
     ad_interstitial_min_interval_seconds = 30,
     ad_suppression_until = NULL
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 확인
 SELECT app_id, ad_allowed_start_hour, ad_allowed_end_hour, ad_app_open_delay_seconds, ad_interstitial_min_interval_seconds, ad_suppression_until
 FROM public.ad_policy
-WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');

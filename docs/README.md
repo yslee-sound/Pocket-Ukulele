@@ -1,6 +1,6 @@
-# 📚 PocketChord 문서 가이드
+# 📚 PocketUkulele 문서 가이드
 
-**프로젝트**: PocketChord  
+**프로젝트**: PocketUkulele  
 **최종 업데이트**: 2025-11-10  
 **문서 상태**: ✅ 대규모 정리 완료
 

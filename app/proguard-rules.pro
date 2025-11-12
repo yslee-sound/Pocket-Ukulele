@@ -33,17 +33,17 @@
 -keepclasseswithmembers class kotlinx.serialization.json.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
--keep,includedescriptorclasses class com.sweetapps.pocketchord.**$$serializer { *; }
--keepclassmembers class com.sweetapps.pocketchord.** {
+-keep,includedescriptorclasses class com.sweetapps.pocketukulele.**$$serializer { *; }
+-keepclassmembers class com.sweetapps.pocketukulele.** {
     *** Companion;
 }
--keepclasseswithmembers class com.sweetapps.pocketchord.** {
+-keepclasseswithmembers class com.sweetapps.pocketukulele.** {
     kotlinx.serialization.KSerializer serializer(...);
 }
 
 # Supabase 데이터 모델 클래스 보호
--keep class com.sweetapps.pocketchord.data.supabase.model.** { *; }
--keepclassmembers class com.sweetapps.pocketchord.data.supabase.model.** {
+-keep class com.sweetapps.pocketukulele.data.supabase.model.** { *; }
+-keepclassmembers class com.sweetapps.pocketukulele.data.supabase.model.** {
     <fields>;
     <init>(...);
 }

@@ -26,7 +26,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
@@ -91,7 +91,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
@@ -104,7 +104,7 @@ INSERT INTO app_policy (
     is_active,
     active_popup_type
 ) VALUES (
-    'com.sweetapps.pocketchord',
+    'com.sweetapps.PocketUkulele',
     FALSE,
     'none'
 );
@@ -118,7 +118,7 @@ INSERT INTO app_policy (
 2. 왼쪽에서 **"app_policy"** 테이블 선택
 3. **"Insert row"** 버튼 클릭
 4. 값 입력:
-   - `app_id`: `com.sweetapps.pocketchord.debug`
+   - `app_id`: `com.sweetapps.PocketUkulele.debug`
    - `is_active`: `TRUE` (체크박스 선택)
    - `active_popup_type`: `emergency`
    - `content`: `🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.`
@@ -132,19 +132,19 @@ INSERT INTO app_policy (
 ### 1. SQL로 확인
 ```sql
 SELECT * FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**:
 ```
 id | app_id                           | is_active | active_popup_type | content
-1  | com.sweetapps.pocketchord.debug | true      | emergency         | 🚨 긴급 점검...
+1  | com.sweetapps.PocketUkulele.debug | true      | emergency         | 🚨 긴급 점검...
 ```
 
 ### 2. 앱 재시작
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 3. 로그 확인
@@ -200,12 +200,12 @@ SELECT
 FROM app_policy;
 ```
 
-앱이 찾는 값: `com.sweetapps.pocketchord.debug` (35자)
+앱이 찾는 값: `com.sweetapps.PocketUkulele.debug` (35자)
 
 만약 다르면 수정:
 ```sql
 UPDATE app_policy 
-SET app_id = 'com.sweetapps.pocketchord.debug'
+SET app_id = 'com.sweetapps.PocketUkulele.debug'
 WHERE id = 1;
 ```
 

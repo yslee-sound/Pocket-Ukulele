@@ -1,14 +1,14 @@
 # Release 버전 테스트 가이드
 
 ## 개요
-Release 빌드와 동일한 Supabase 설정(`com.sweetapps.pocketchord`)을 사용하면서도 디버그 키스토어로 서명하여 테스트할 수 있는 `releaseTest` 빌드 타입이 추가되었습니다.
+Release 빌드와 동일한 Supabase 설정(`com.sweetapps.PocketUkulele`)을 사용하면서도 디버그 키스토어로 서명하여 테스트할 수 있는 `releaseTest` 빌드 타입이 추가되었습니다.
 
 ## 빌드 타입 비교
 
 | 항목 | debug | releaseTest | release |
 |------|-------|-------------|---------|
-| **SUPABASE_APP_ID** | `com.sweetapps.pocketchord.debug` | `com.sweetapps.pocketchord` | `com.sweetapps.pocketchord` |
-| **Application ID** | `com.sweetapps.pocketchord.debug` | `com.sweetapps.pocketchord.releasetest` | `com.sweetapps.pocketchord` |
+| **SUPABASE_APP_ID** | `com.sweetapps.PocketUkulele.debug` | `com.sweetapps.PocketUkulele` | `com.sweetapps.PocketUkulele` |
+| **Application ID** | `com.sweetapps.PocketUkulele.debug` | `com.sweetapps.PocketUkulele.releasetest` | `com.sweetapps.PocketUkulele` |
 | **서명** | Debug keystore | Debug keystore | Release keystore (필요) |
 | **난독화** | ❌ | ❌ | ✅ |
 | **디버깅** | ✅ | ✅ | ❌ |
@@ -42,11 +42,11 @@ INSERT INTO app_policy (
     min_supported_version,
     latest_version_code
 ) VALUES (
-    'com.sweetapps.pocketchord',  -- Release용 app_id
+    'com.sweetapps.PocketUkulele',  -- Release용 app_id
     true,                          -- 활성화 여부
     'force_update',                -- 또는 'optional_update', 'emergency', 'notice', 'none'
     '새 버전이 출시되었습니다!',   -- 팝업 메시지
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',  -- 다운로드 URL
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',  -- 다운로드 URL
     1,                             -- 최소 지원 버전 (이 버전 미만은 강제 업데이트)
     3                              -- 최신 버전 코드
 );
@@ -61,7 +61,7 @@ SET is_active = true,
     active_popup_type = 'force_update',
     min_supported_version = 3,  -- 현재 버전(2)보다 큼 → 강제 업데이트
     content = '필수 업데이트가 있습니다.\n앱을 최신 버전으로 업데이트해주세요.'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 선택적 업데이트 테스트
@@ -71,14 +71,14 @@ SET is_active = true,
     active_popup_type = 'optional_update',
     latest_version_code = 3,  -- 현재 버전(2)보다 큼
     content = '새로운 버전이 출시되었습니다.\n업데이트하시겠습니까?'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 팝업 비활성화
 ```sql
 UPDATE app_policy 
 SET is_active = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ## 테스트 방법
@@ -104,16 +104,16 @@ Run > Run 'app' (Shift+F10)
 .\gradlew.bat installReleaseTest
 
 # 빌드 + 설치 + 실행
-adb shell am force-stop com.sweetapps.pocketchord.releasetest
+adb shell am force-stop com.sweetapps.PocketUkulele.releasetest
 .\gradlew.bat installReleaseTest
-adb shell am start -n com.sweetapps.pocketchord.releasetest/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.releasetest/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 3. 로그 확인
 
 #### releaseTest 앱의 로그만 필터링
 ```bash
-adb logcat | Select-String "com.sweetapps.pocketchord.releasetest"
+adb logcat | Select-String "com.sweetapps.PocketUkulele.releasetest"
 ```
 
 #### 정책 조회 로그 확인
@@ -124,11 +124,11 @@ adb logcat -d | Select-String -Pattern "AppPolicyRepo|HomeScreen" | Select-Objec
 ### 4. Supabase APP_ID 확인
 앱 실행 시 로그에서 다음을 확인:
 ```
-D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.pocketchord, VERSION_CODE=2
-D/AppPolicyRepo: Target app_id: com.sweetapps.pocketchord
+D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.PocketUkulele, VERSION_CODE=2
+D/AppPolicyRepo: Target app_id: com.sweetapps.PocketUkulele
 ```
 
-✅ **`com.sweetapps.pocketchord`가 출력되면 성공**
+✅ **`com.sweetapps.PocketUkulele`가 출력되면 성공**
 
 ## 테스트 시나리오
 
@@ -147,7 +147,7 @@ D/HomeScreen: showUpdateDialog: false
 ```
 
 ### 시나리오 2: Debug vs ReleaseTest 동시 테스트
-1. Debug 앱 실행 (app_id: `com.sweetapps.pocketchord.debug`)
+1. Debug 앱 실행 (app_id: `com.sweetapps.PocketUkulele.debug`)
    - Debug용 Supabase 정책 적용
 2. ReleaseTest 앱 설치 및 실행 (app_id: `com.sweetapps.pocketchord`)
    - Release용 Supabase 정책 적용

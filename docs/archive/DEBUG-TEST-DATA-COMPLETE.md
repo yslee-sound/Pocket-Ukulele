@@ -15,7 +15,7 @@ Error: Failed to fetch (api.supabase.com)
 ```
 
 ### 원인
-디버그 버전(`com.sweetapps.pocketchord.debug`) 데이터가 Supabase에 없음!
+디버그 버전(`com.sweetapps.PocketUkulele.debug`) 데이터가 Supabase에 없음!
 
 ---
 
@@ -81,7 +81,7 @@ ad_policy           | 1
 
 ### emergency_policy (debug)
 ```sql
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 is_active: false
 content: '[DEBUG 테스트] ...'
 is_dismissible: true
@@ -89,7 +89,7 @@ is_dismissible: true
 
 ### update_policy (debug)
 ```sql
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 is_active: true
 target_version_code: 1
 is_force_update: false
@@ -98,7 +98,7 @@ message: '[DEBUG] 앱 업데이트'
 
 ### notice_policy (debug)
 ```sql
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 is_active: true
 title: '[DEBUG] 환영합니다! 🎉'
 notice_version: 1
@@ -106,7 +106,7 @@ notice_version: 1
 
 ### ad_policy (debug)
 ```sql
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 is_active: true
 ad_app_open_enabled: true
 ad_interstitial_enabled: true
@@ -131,8 +131,8 @@ ON CONFLICT (app_id) WHERE is_active = true DO NOTHING;
 
 ### 릴리즈 vs 디버그
 ```
-릴리즈(⭐): com.sweetapps.pocketchord (이미 있음)
-디버그(🔧): com.sweetapps.pocketchord.debug (새로 생성)
+릴리즈(⭐): com.sweetapps.PocketUkulele (이미 있음)
+디버그(🔧): com.sweetapps.PocketUkulele.debug (새로 생성)
 ```
 
 ---

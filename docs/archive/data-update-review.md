@@ -1,4 +1,4 @@
-# PocketChord 데이터 업데이트 체계 검토 보고서
+# PocketUkulele 데이터 업데이트 체계 검토 보고서
 
 ## 📅 검토일: 2025-01-01
 ## 🎯 검토 범위: 코드 시드 데이터 업데이트 메커니즘 전반
@@ -63,7 +63,7 @@
 {
   "_metadata": {
     "version": "20250101",
-    "description": "PocketChord seed data organized by root note",
+    "description": "PocketUkulele seed data organized by root note",
     "lastUpdated": "2025-01-01",
     "totalRoots": 12
   },

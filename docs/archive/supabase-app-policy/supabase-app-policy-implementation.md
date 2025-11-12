@@ -5,7 +5,7 @@
 Supabase 기반 앱 정책 관리 시스템을 Android 앱에 성공적으로 연동했습니다.
 
 **작업 일시**: 2025년 11월 8일  
-**프로젝트**: PocketChord  
+**프로젝트**: PocketUkulele  
 **문서 참조**: `docs/supabase-app-policy-hybrid.md`
 
 ---
@@ -13,7 +13,7 @@ Supabase 기반 앱 정책 관리 시스템을 Android 앱에 성공적으로 �
 ## ✅ 완료된 작업
 
 ### 1. 데이터 모델 업데이트 ✅
-**파일**: `app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AppPolicy.kt`
+**파일**: `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AppPolicy.kt`
 
 - 기존 복잡한 구조를 하이브리드 방식으로 단순화
 - `active_popup_type` ENUM 기반 설계로 변경
@@ -28,14 +28,14 @@ Supabase 기반 앱 정책 관리 시스템을 Android 앱에 성공적으로 �
   - `recommendsUpdate(currentVersionCode)`: 선택적 업데이트 권장 여부
 
 ### 2. Repository 업데이트 ✅
-**파일**: `app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AppPolicyRepository.kt`
+**파일**: `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AppPolicyRepository.kt`
 
 - RLS(Row Level Security) 정책 적용
 - `is_active = TRUE`인 정책만 자동으로 조회됨
 - 깔끔한 로깅으로 디버깅 용이성 향상
 
 ### 3. 팝업 UI 구현 ✅
-**파일**: `app/src/main/java/com/sweetapps/pocketchord/ui/dialog/AppPolicyDialogs.kt`
+**파일**: `app/src/main/java/com/sweetapps/PocketUkulele/ui/dialog/AppPolicyDialogs.kt`
 
 #### 긴급 공지 다이얼로그
 ```kotlin
@@ -72,7 +72,7 @@ NoticeDialog(policy, onDismiss)
 - ✅ 확인 버튼
 
 ### 4. MainActivity 연동 ✅
-**파일**: `app/src/main/java/com/sweetapps/pocketchord/MainActivity.kt`
+**파일**: `app/src/main/java/com/sweetapps/PocketUkulele/MainActivity.kt`
 
 - 앱 시작 시 정책 자동 조회
 - Supabase 미설정 시 안전하게 스킵
@@ -172,7 +172,7 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '서버 긴급 점검 중입니다. 15:00까지 완료 예정입니다.',
   download_url = 'https://status.example.com'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 #### 강제 업데이트 설정
@@ -181,9 +181,9 @@ UPDATE app_policy SET
   is_active = TRUE,
   active_popup_type = 'force_update',
   content = DEFAULT,  -- 기본 메시지 사용
-  download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',
+  download_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',
   min_supported_version = 5  -- 버전 5 미만은 강제 업데이트
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 #### 선택적 업데이트 설정
@@ -192,9 +192,9 @@ UPDATE app_policy SET
   is_active = TRUE,
   active_popup_type = 'optional_update',
   content = '새로운 기능이 추가되었습니다. 업데이트를 권장합니다.',
-  download_url = 'market://details?id=com.sweetapps.pocketchord',
+  download_url = 'market://details?id=com.sweetapps.PocketUkulele',
   latest_version_code = 6  -- 버전 6 미만에게 권장
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 #### 팝업 끄기
@@ -202,7 +202,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 UPDATE app_policy SET
   is_active = FALSE,
   active_popup_type = 'none'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 2. 테스트 방법
@@ -234,7 +234,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 
 ### Supabase 미설정 경고
 ```
-W/PocketChordApp: Supabase 미설정: 환경변수 SUPABASE_URL / SUPABASE_ANON_KEY 를 확인하세요
+W/PocketUkuleleApp: Supabase 미설정: 환경변수 SUPABASE_URL / SUPABASE_ANON_KEY 를 확인하세요
 W/MainActivity: Supabase 미설정: 정책 체크 스킵
 ```
 
@@ -253,7 +253,7 @@ W/MainActivity: Supabase 미설정: 정책 체크 스킵
 
 ### RLS 정책으로 인한 빈 결과
 ```
-D/AppPolicyRepo: No active policy found for app_id=com.sweetapps.pocketchord.debug (RLS may be filtering)
+D/AppPolicyRepo: No active policy found for app_id=com.sweetapps.PocketUkulele.debug (RLS may be filtering)
 ```
 
 **원인**:

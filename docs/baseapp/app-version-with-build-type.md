@@ -161,7 +161,7 @@ val versionInfo = "${BuildConfig.VERSION_NAME}.$buildType (${BuildConfig.GIT_HAS
 - [x] 문서 작성
 
 **수정 파일**:
-- `app/src/main/java/com/sweetapps/pocketchord/ui/screens/SettingsScreen.kt`
+- `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/SettingsScreen.kt`
 
 ---
 

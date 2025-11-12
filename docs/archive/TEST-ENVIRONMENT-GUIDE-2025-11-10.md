@@ -1,6 +1,6 @@
 # 테스트 환경 선택 가이드
 
-**질문**: SQL의 `WHERE app_id = 'com.sweetapps.pocketchord'`는 릴리즈 버전? Debug 버전?
+**질문**: SQL의 `WHERE app_id = 'com.sweetapps.PocketUkulele'`는 릴리즈 버전? Debug 버전?
 
 ---
 
@@ -12,7 +12,7 @@
 
 ```
 릴리즈 테스트 = 프로덕션 검증
-→ 'com.sweetapps.pocketchord' 사용 ✅
+→ 'com.sweetapps.PocketUkulele' 사용 ✅
 ```
 
 ---
@@ -22,7 +22,7 @@
 ### 옵션 A: 프로덕션(릴리즈) 테스트 ⭐ **권장**
 
 ```sql
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 ```
 
 **목적**:
@@ -45,7 +45,7 @@ WHERE app_id = 'com.sweetapps.pocketchord'
 ### 옵션 B: 개발(Debug) 테스트
 
 ```sql
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 ```
 
 **목적**:
@@ -74,7 +74,7 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug'
 
 ```sql
 -- 프로덕션 버전 사용
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 ```
 
 **시나리오**:
@@ -89,7 +89,7 @@ WHERE app_id = 'com.sweetapps.pocketchord'
 
 ```sql
 -- Debug 버전 사용
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 ```
 
 **시나리오**:
@@ -109,12 +109,12 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug'
 ### 1. 테스트 환경 선택 ⭐
 
 #### 옵션 A: 프로덕션(릴리즈) 테스트 ✅ **권장**
-app_id: 'com.sweetapps.pocketchord'
+app_id: 'com.sweetapps.PocketUkulele'
 
 #### 옵션 B: 개발(Debug) 테스트
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 
-**이 체크리스트의 기본값**: 'com.sweetapps.pocketchord' (프로덕션)
+**이 체크리스트의 기본값**: 'com.sweetapps.PocketUkulele' (프로덕션)
 
 **Debug 버전으로 테스트하려면**:
 - 모든 SQL의 WHERE 절을 변경
@@ -129,10 +129,10 @@ app_id: 'com.sweetapps.pocketchord.debug'
 Supabase SQL Editor에서:
 ```sql
 -- 찾기
-'com.sweetapps.pocketchord'
+'com.sweetapps.PocketUkulele'
 
 -- 바꾸기
-'com.sweetapps.pocketchord.debug'
+'com.sweetapps.PocketUkulele.debug'
 ```
 
 ### 방법 2: 체크리스트 복사본 만들기
@@ -163,7 +163,7 @@ docs/RELEASE-TEST-CHECKLIST-DEBUG.md
 
 ```sql
 -- 테스트 전 상태 기록
-SELECT * FROM emergency_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM emergency_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 테스트 진행...
 
@@ -187,8 +187,8 @@ SELECT * FROM emergency_policy WHERE app_id = 'com.sweetapps.pocketchord';
 ### 릴리즈 테스트는 프로덕션!
 
 ```
-✅ WHERE app_id = 'com.sweetapps.pocketchord'  (권장)
-⚠️ WHERE app_id = 'com.sweetapps.pocketchord.debug'  (개발용)
+✅ WHERE app_id = 'com.sweetapps.PocketUkulele'  (권장)
+⚠️ WHERE app_id = 'com.sweetapps.PocketUkulele.debug'  (개발용)
 ```
 
 **이유**:

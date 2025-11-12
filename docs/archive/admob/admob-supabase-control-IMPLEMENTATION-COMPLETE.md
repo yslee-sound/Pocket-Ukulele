@@ -241,7 +241,7 @@ SET
   ad_app_open_enabled = false,
   ad_interstitial_enabled = false,
   ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 3. 특정 광고만 제어
@@ -250,14 +250,14 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 ```sql
 UPDATE app_policy
 SET ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **전면 광고만 켜기**:
 ```sql
 UPDATE app_policy
 SET ad_interstitial_enabled = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 4. 빈도 제한 조정
@@ -268,7 +268,7 @@ UPDATE app_policy
 SET 
   ad_interstitial_max_per_hour = 2,
   ad_interstitial_max_per_day = 15
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **더 적극적으로 (광고 늘리기)**:
@@ -277,7 +277,7 @@ UPDATE app_policy
 SET 
   ad_interstitial_max_per_hour = 4,
   ad_interstitial_max_per_day = 30
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 5. 현재 정책 확인
@@ -291,7 +291,7 @@ SELECT
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 FROM app_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---

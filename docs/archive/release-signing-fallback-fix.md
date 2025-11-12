@@ -58,7 +58,7 @@ buildTypes {
 buildTypes {
     release {
         buildConfigField("String", "SUPABASE_APP_ID", 
-            "\"com.sweetapps.pocketchord\"")
+            "\"com.sweetapps.PocketUkulele\"")
 
         // 서명 설정: 환경변수 있으면 release, 없으면 debug (개발용)
         val hasReleaseKey = System.getenv("KEYSTORE_PATH") != null

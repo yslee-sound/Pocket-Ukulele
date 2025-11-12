@@ -47,7 +47,7 @@ SELECT 'emergency_policy' as table_name,
        CAST(is_active AS TEXT) as is_active, 
        LEFT(content, 30) as content_preview 
 FROM emergency_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 ...
 ```
@@ -327,19 +327,19 @@ SELECT 'emergency_policy' as table_name,
        CAST(is_active AS TEXT) as is_active, 
        LEFT(content, 30) as content_preview 
 FROM emergency_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 SELECT 'update_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('target:', target_version_code, ' force:', is_force_update)
 FROM update_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 SELECT 'notice_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('v', notice_version, ': ', LEFT(title, 20))
 FROM notice_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **예상 결과**:

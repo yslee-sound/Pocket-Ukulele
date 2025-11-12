@@ -10,10 +10,10 @@
 
 ### 생성된 데이터 (실제 Supabase 결과)
 
-#### Release 빌드 (com.sweetapps.pocketchord)
+#### Release 빌드 (com.sweetapps.PocketUkulele)
 | 컬럼 | 값 | 비고 |
 |------|-----|------|
-| app_id | com.sweetapps.pocketchord | ✅ Release 앱 ID |
+| app_id | com.sweetapps.PocketUkulele | ✅ Release 앱 ID |
 | is_active | **true** | ✅ 광고 정책 활성화 |
 | ad_app_open_enabled | **true** | ✅ 앱 오픈 광고 ON |
 | ad_interstitial_enabled | **true** | ✅ 전면 광고 ON |
@@ -23,7 +23,7 @@
 | created_at | 2025-11-08 13:11:47 | ✅ 생성 시간 |
 
 #### ⚠️ Debug 빌드 데이터 추가 필요!
-Debug 빌드(`com.sweetapps.pocketchord.debug`)에서도 테스트하려면 추가 SQL 실행 필요
+Debug 빌드(`com.sweetapps.PocketUkulele.debug`)에서도 테스트하려면 추가 SQL 실행 필요
 
 **실행할 파일**: `docs/ad-policy-add-debug-build.sql`
 
@@ -34,7 +34,7 @@ INSERT INTO ad_policy (
   ad_app_open_enabled, ad_interstitial_enabled, ad_banner_enabled,
   ad_interstitial_max_per_hour, ad_interstitial_max_per_day
 ) VALUES (
-  'com.sweetapps.pocketchord.debug',
+  'com.sweetapps.PocketUkulele.debug',
   true, true, true, true, 2, 15
 )
 ON CONFLICT (app_id) DO UPDATE SET
@@ -68,7 +68,7 @@ ON CONFLICT (app_id) DO UPDATE SET
 - ✅ `idx_ad_policy_is_active` (is_active)
 
 ### 4. 초기 데이터
-- ✅ PocketChord 앱 데이터 삽입 완료
+- ✅ PocketUkulele 앱 데이터 삽입 완료
 - ✅ 모든 광고 활성화 상태
 - ✅ 기본 빈도 제한 설정 (3/시간, 20/일)
 
@@ -80,7 +80,7 @@ ON CONFLICT (app_id) DO UPDATE SET
 
 ### 2. 앱 빌드 (진행 중...)
 ```bash
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 gradlew.bat assembleDebug
 ```
 
@@ -99,14 +99,14 @@ adb install app/build/outputs/apk/debug/app-debug.apk
 -- 배너 광고 끄기 테스트
 UPDATE ad_policy 
 SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 5분 이내 배너 사라지는지 확인
 
 -- 다시 켜기
 UPDATE ad_policy 
 SET ad_banner_enabled = true 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -118,12 +118,12 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 팝업 끄기
 UPDATE app_policy 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 광고는 켜기 (이미 켜져있음)
 UPDATE ad_policy 
 SET is_active = true 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **예상 결과:**
@@ -157,7 +157,7 @@ SELECT
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 현재 광고 정책 확인 (Debug)
@@ -170,7 +170,7 @@ SELECT
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 #### 모든 빌드 타입 확인
@@ -189,7 +189,7 @@ ORDER BY app_id;
 ```sql
 UPDATE ad_policy 
 SET is_active = false 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Debug 빌드에서만 테스트 (Release는 유지)
@@ -197,7 +197,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- Debug에서만 배너 끄기
 UPDATE ad_policy 
 SET ad_banner_enabled = false 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- Release는 그대로 유지됨
 ```
@@ -213,17 +213,17 @@ SET is_active = true;
 -- 배너만
 UPDATE ad_policy 
 SET ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 전면 광고만
 UPDATE ad_policy 
 SET ad_interstitial_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 앱 오픈 광고만
 UPDATE ad_policy 
 SET ad_app_open_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---

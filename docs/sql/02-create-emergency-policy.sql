@@ -61,7 +61,7 @@ INSERT INTO public.emergency_policy (
     button_text,
     is_dismissible
 ) VALUES (
-    'com.sweetapps.pocketchord',
+    'com.sweetapps.PocketUkulele',
     false,  -- 비활성화 (테스트용)
     '⚠️ [테스트] 이 앱은 더 이상 지원되지 않습니다.\n새 버전을 설치해주세요.',
     NULL,  -- 수동으로 입력 필요!
@@ -78,7 +78,7 @@ INSERT INTO public.emergency_policy (
     button_text,
     is_dismissible
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     '🚨 [DEBUG] 긴급 테스트 메시지입니다.\n이것은 디버그용 팝업입니다.',
     NULL,  -- 수동으로 입력 필요!

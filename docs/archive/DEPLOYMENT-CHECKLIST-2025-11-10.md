@@ -20,7 +20,7 @@
 ### 2. Supabase 작업
 - [ ] **Supabase Dashboard 로그인**
   - URL: https://supabase.com
-  - 프로젝트: PocketChord
+  - 프로젝트: PocketUkulele
 
 - [ ] **SQL Editor에서 테이블 생성**
   ```
@@ -31,7 +31,7 @@
 - [ ] **테이블 생성 확인**
   ```sql
   SELECT * FROM ad_policy 
-  WHERE app_id = 'com.sweetapps.pocketchord';
+  WHERE app_id = 'com.sweetapps.PocketUkulele';
   ```
   
   **예상 결과:**
@@ -61,7 +61,7 @@
 ### 3. 로컬 빌드 테스트
 - [ ] **Debug 빌드**
   ```bash
-  cd G:\Workspace\PocketChord
+  cd G:\Workspace\PocketUkulele
   gradlew assembleDebug
   ```
 
@@ -107,7 +107,7 @@
   ```sql
   UPDATE ad_policy 
   SET ad_banner_enabled = false 
-  WHERE app_id = 'com.sweetapps.pocketchord';
+  WHERE app_id = 'com.sweetapps.PocketUkulele';
   ```
 
 - [ ] **5분 이내 확인**
@@ -118,7 +118,7 @@
   ```sql
   UPDATE ad_policy 
   SET ad_banner_enabled = true 
-  WHERE app_id = 'com.sweetapps.pocketchord';
+  WHERE app_id = 'com.sweetapps.PocketUkulele';
   ```
 
 - [ ] **5분 이내 확인**
@@ -131,7 +131,7 @@
     ad_app_open_enabled = false,
     ad_interstitial_enabled = false,
     ad_banner_enabled = false
-  WHERE app_id = 'com.sweetapps.pocketchord';
+  WHERE app_id = 'com.sweetapps.PocketUkulele';
   ```
 
 - [ ] **앱 재시작 후 확인**
@@ -146,7 +146,7 @@
     ad_app_open_enabled = true,
     ad_interstitial_enabled = true,
     ad_banner_enabled = true
-  WHERE app_id = 'com.sweetapps.pocketchord';
+  WHERE app_id = 'com.sweetapps.PocketUkulele';
   ```
 
 ### 6. 독립성 테스트 (핵심!)
@@ -261,7 +261,7 @@ SELECT * FROM ad_policy;  -- RLS 무시하고 전체 확인
 ```sql
 UPDATE ad_policy 
 SET is_active = true 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 문제 3: 빌드 에러
@@ -287,10 +287,10 @@ gradlew assembleDebug
 ### Supabase 테이블 상태
 ```sql
 -- 정상 운영 상태
-SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- 예상: is_active = false (팝업 OFF)
 
-SELECT * FROM ad_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM ad_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- 예상: is_active = true (광고 ON)
 ```
 

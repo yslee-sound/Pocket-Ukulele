@@ -13,7 +13,7 @@ SELECT
     LEFT(release_notes, 30) as release_notes_preview,
     download_url
 FROM public.update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug')
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug')
 ORDER BY app_id;
 
 -- ============================================
@@ -32,8 +32,8 @@ ORDER BY app_id;
 --
 -- 예상 결과 (정상):
 -- app_id                           | is_active | target_version_code | is_force_update
--- com.sweetapps.pocketchord        | true      | 4                   | true (또는 false)
--- com.sweetapps.pocketchord.debug  | true      | 4                   | true (또는 false)
+-- com.sweetapps.PocketUkulele        | true      | 4                   | true (또는 false)
+-- com.sweetapps.PocketUkulele.debug  | true      | 4                   | true (또는 false)
 --
 -- ============================================
 
@@ -42,13 +42,13 @@ ORDER BY app_id;
 -- 2-1. is_active가 false인 경우
 UPDATE public.update_policy
 SET is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
   AND is_active = false;
 
 -- 2-2. target_version_code가 낮은 경우
 UPDATE public.update_policy
 SET target_version_code = 4
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
   AND target_version_code <= 3;
 
 -- 2-3. 전체를 확실하게 설정 (강제 업데이트)
@@ -58,7 +58,7 @@ SET is_active = true,
     is_force_update = true,
     release_notes = '• [DEBUG] 테스트 업데이트',
     download_url = 'https://play.google.com/'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 3. 결과 재확인
 SELECT
@@ -69,7 +69,7 @@ SELECT
     LEFT(release_notes, 30) as release_notes_preview,
     download_url
 FROM public.update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug')
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug')
 ORDER BY app_id;
 
 -- ============================================

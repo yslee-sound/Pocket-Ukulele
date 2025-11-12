@@ -1,4 +1,4 @@
-# PocketChord 코드 DB 구축/표현 단계별 세부 계획
+# PocketUkulele 코드 DB 구축/표현 단계별 세부 계획
 
 전체 로드맵(요약)
 1) 데이터 모델/Room 스키마 구축 + 시드 임포트
@@ -18,7 +18,7 @@
 - DAO
   - InstrumentDao, QualityDao, ChordDao, AliasDao, VoicingDao, TagDao, SearchDao
 - DB
-  - PocketChordDatabase(version=1) + 마이그레이션 템플릿 준비
+  - PocketUkuleleDatabase(version=1) + 마이그레이션 템플릿 준비
 - 시드
   - assets/chords.seed.json(.zst) 포함 → WorkManager로 최초 실행 시 import
   - Import 파이프라인: JsonReader 스트리밍 → Bulk insert(Room upsert)

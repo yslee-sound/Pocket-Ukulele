@@ -120,7 +120,7 @@ adb install -r app/build/outputs/apk/debug/app-debug.apk
 -- 모든 광고 즉시 비활성화
 UPDATE ad_policy
 SET is_active = false
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug');
 ```
 
 **예상 로그**:

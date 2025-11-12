@@ -129,7 +129,7 @@ ad_banner_enabled         | boolean   | NO
 -- 이제 오류가 발생해야 함
 UPDATE app_policy 
 SET ad_banner_enabled = NULL 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **기대 오류:**

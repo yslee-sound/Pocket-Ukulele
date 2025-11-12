@@ -49,7 +49,7 @@ COMMENT ON TABLE public.update_policy IS '앱 업데이트 정책 (강제/선택
 COMMENT ON COLUMN public.update_policy.target_version_code IS '목표 버전 코드 (현재 버전 < 목표 버전이면 업데이트 필요)';
 COMMENT ON COLUMN public.update_policy.is_force_update IS '강제 업데이트 여부 (true: 강제, false: 선택적)';
 
--- 5. 테스트 데이터 삽입 (PocketChord 앱)
+-- 5. 테스트 데이터 삽입 (PocketUkulele 앱)
 INSERT INTO public.update_policy (
     app_id,
     is_active,
@@ -58,12 +58,12 @@ INSERT INTO public.update_policy (
     release_notes,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord',
+    'com.sweetapps.PocketUkulele',
     true,
     1,  -- 현재 버전보다 낮게 설정 (업데이트 팝업 안 뜸)
     false,
     '• 성능 개선\n• 버그 수정',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord'
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele'
 );
 
 -- 테스트용 debug 데이터
@@ -75,12 +75,12 @@ INSERT INTO public.update_policy (
     release_notes,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     false,  -- 비활성화 (테스트 시 수동으로 활성화)
     999,    -- 높은 버전 (테스트용)
     false,
     '• [DEBUG] 테스트 기능 1\n• [DEBUG] 테스트 기능 2',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord.debug'
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele.debug'
 );
 
 -- 완료!

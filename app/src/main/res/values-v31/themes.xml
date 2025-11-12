@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Android 12+ 시스템 스플래시 커스터마이즈 -->
-    <style name="Theme.PocketChord" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.PocketUkulele" parent="android:Theme.Material.Light.NoActionBar">
         <!-- 배경색: 브랜드 색상(#f28090) -->
         <item name="android:windowSplashScreenBackground">#f28090</item>
         <!-- 애니메이티드 아이콘: 단색 또는 벡터 추천 (AnimatedVectorDrawable도 가능) -->

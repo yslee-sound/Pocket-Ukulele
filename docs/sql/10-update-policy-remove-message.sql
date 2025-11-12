@@ -54,6 +54,6 @@ ORDER BY ordinal_position;
 -- UPDATE update_policy
 -- SET release_notes = '• 새로운 기능\n• 버그 수정',
 --     download_url = 'https://play.google.com/store/apps/details?id=...'
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- ============================================
 

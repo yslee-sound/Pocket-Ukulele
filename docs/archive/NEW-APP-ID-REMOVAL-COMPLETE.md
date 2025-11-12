@@ -21,10 +21,10 @@ DROP COLUMN IF EXISTS new_app_id;
 #### HomeScreen.kt
 ```kotlin
 // Before
-newAppPackage = emergencyPolicy!!.newAppId ?: "com.sweetapps.pocketchord",
+newAppPackage = emergencyPolicy!!.newAppId ?: "com.sweetapps.PocketUkulele",
 
 // After
-newAppPackage = "com.sweetapps.pocketchord",  // 기본값 (redirect_url이 있으면 무시됨)
+newAppPackage = "com.sweetapps.PocketUkulele",  // 기본값 (redirect_url이 있으면 무시됨)
 ```
 
 #### EmergencyPolicy.kt
@@ -114,14 +114,14 @@ Button(
 UPDATE emergency_policy 
 SET is_active = true,
     content = '⚠️ 이 앱은 더 이상 지원되지 않습니다.\n새 버전을 설치해주세요.',
-    redirect_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord.v2',
+    redirect_url = 'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele.v2',
     is_dismissible = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **결과**: 
 - 버튼 클릭 → `redirect_url`로 이동
-- `newAppPackage`는 기본값(`com.sweetapps.pocketchord`) 사용 (무시됨)
+- `newAppPackage`는 기본값(`com.sweetapps.PocketUkulele`) 사용 (무시됨)
 
 ---
 

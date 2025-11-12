@@ -23,8 +23,8 @@ ALTER TABLE app_policy DISABLE ROW LEVEL SECURITY;
 ### 그 다음 바로 앱 재시작:
 
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 3초 후 로그 확인:
@@ -123,7 +123,7 @@ WHERE table_name = 'app_policy';
 # 1. Supabase: RLS 비활성화 실행
 
 # 2. 앱 재시작
-adb shell am force-stop com.sweetapps.pocketchord.debug && adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug && adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 
 # 3. 로그 확인 (3초 후)
 timeout /t 3 && adb logcat -d -s AppPolicyRepo:* HomeScreen:*

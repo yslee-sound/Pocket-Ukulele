@@ -27,7 +27,7 @@ Flutter의 `main.dart` 테스트 코드를 Android `MainActivity.kt`로 변환�
 
 ```sql
 INSERT INTO announcements (app_id, title, content, is_active)
-VALUES ('com.sweetapps.pocketchord', '테스트 공지', '연결 테스트입니다.', true);
+VALUES ('com.sweetapps.PocketUkulele', '테스트 공지', '연결 테스트입니다.', true);
 ```
 
 ### 2단계: 앱 실행
@@ -49,7 +49,7 @@ D/SupabaseTest: title: 테스트 공지
 D/SupabaseTest: content: 연결 테스트입니다.
 D/SupabaseTest: isActive: true
 D/SupabaseTest: createdAt: 2025-11-05T...
-D/SupabaseTest: appId: com.sweetapps.pocketchord
+D/SupabaseTest: appId: com.sweetapps.PocketUkulele
 D/SupabaseTest: ✅ Supabase 연결 성공!
 ```
 
@@ -154,8 +154,8 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ### 데이터가 조회되지 않음
 
 **원인 1: app_id 불일치**
-- Supabase 데이터의 `app_id`가 `"com.sweetapps.pocketchord"`인지 확인
-- `"pocketchord"` 같은 짧은 이름은 안 됨
+- Supabase 데이터의 `app_id`가 `"com.sweetapps.PocketUkulele"`인지 확인
+- `"PocketUkulele"` 같은 짧은 이름은 안 됨
 
 **원인 2: is_active = false**
 - Supabase에서 `is_active`가 `true`인지 확인
@@ -181,7 +181,7 @@ override fun onCreate(savedInstanceState: Bundle?) {
 
 ### 테스트 전
 - [ ] Supabase에 테스트 데이터 추가
-- [ ] app_id = `"com.sweetapps.pocketchord"` 확인
+- [ ] app_id = `"com.sweetapps.PocketUkulele"` 확인
 - [ ] is_active = `true` 확인
 
 ### 테스트 실행

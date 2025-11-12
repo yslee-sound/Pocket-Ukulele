@@ -71,7 +71,7 @@ SELECT
   active_popup_type,
   content
 FROM app_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- ad_policy는 광고만 관리
 SELECT
@@ -83,7 +83,7 @@ SELECT
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 FROM ad_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- ============================================
 -- 롤백 (문제 발생 시)

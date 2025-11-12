@@ -1,4 +1,4 @@
-# Release Signing & Play App Signing Guide - PocketChord
+# Release Signing & Play App Signing Guide - PocketUkulele
 
 최소/반복 방지를 위한 릴리즈 서명 운영 요약.
 
@@ -7,14 +7,14 @@
 |------|------|
 | KEYSTORE_PATH | 업로드 키 JKS 절대 경로 |
 | KEYSTORE_STORE_PW | Keystore 비밀번호 |
-| KEY_ALIAS | pocketchord-alias |
+| KEY_ALIAS | PocketUkulele-alias |
 | KEY_PASSWORD | 키 비밀번호 (store 비번과 동일해도 됨) |
 
 ---
 ### 1.1. Keytool 확인
 PowerShell:
 ```powershell
-& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -list -v -keystore "G:\secure\PocketChord\pocketchord-key.jks"
+& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -list -v -keystore "G:\secure\PocketUkulele\PocketUkulele-key.jks"
 ```
 
 ### 1.2. PowerShell 릴리즈 절차:
@@ -28,20 +28,20 @@ PowerShell:
 # 먼저 secure 폴더에 해당앱 폴더 생성
 
 # 키스토어 생성 (최초 1회만)
-& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -keystore "G:\secure\PocketChord\pocketchord-key.jks" -alias pocketchord-alias -keyalg RSA -keysize 4096 -sigalg SHA256withRSA -validity 36500
+& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -keystore "G:\secure\PocketUkulele\PocketUkulele-key.jks" -alias PocketUkulele-alias -keyalg RSA -keysize 4096 -sigalg SHA256withRSA -validity 36500
 
 # 드라이브 & 디렉터리 이동
 G:
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 
 # 확인
 Get-ChildItem gradlew.bat
 # 파일 목록에 gradlew.bat 보이면 OK.
 
 # 서명 환경변수 (네 값으로 넣어, 따옴표 포함)
-$env:KEYSTORE_PATH="G:/secure/PocketChord/pocketchord-key.jks"
+$env:KEYSTORE_PATH="G:/secure/PocketUkulele/PocketUkulele-key.jks"
 $env:KEYSTORE_STORE_PW="****"
-$env:KEY_ALIAS="pocketchord-alias"
+$env:KEY_ALIAS="PocketUkulele-alias"
 $env:KEY_PASSWORD="****"
 
 # 서명 리포트 재확인 (선택이지만 3초)
@@ -64,7 +64,7 @@ Could not load the value of field `dslSigningConfig` ... Class 'com.android.buil
 조치 순서(Windows PowerShell):
 ```powershell
 G:
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 
 # 1) Gradle 데몬 중지
 .\gradlew.bat --stop
@@ -164,17 +164,17 @@ keytool -list -v -keystore G:\\SecureKeys\\upload-key.jks -alias upload -storepa
 일관성 + 추적성 확보. 파일명 자체는 Play Console 동작과 무관하지만 내부 관리 표준 정의.
 
 ### 11.1 최종 릴리즈(배포용) 이름 패턴
-- AAB: `pocketchord-v<versionName>-<versionCode>.aab`
+- AAB: `PocketUkulele-v<versionName>-<versionCode>.aab`
 - mapping: `mapping-v<versionName>-<versionCode>.txt`
 
 예) versionName=1.0.0, versionCode=1 →
 ```
-pocketchord-v1.0.0-1.aab
+PocketUkulele-v1.0.0-1.aab
 mapping-v1.0.0-1.txt
 ```
 
 ### 11.2 후보/임시 빌드(Timestamp 포함)
-- AAB: `pocketchord-v<versionName>-<versionCode>-<yyyyMMdd-HHmm>.aab`
+- AAB: `PocketUkulele-v<versionName>-<versionCode>-<yyyyMMdd-HHmm>.aab`
 - mapping: `mapping-v<versionName>-<versionCode>-<yyyyMMdd-HHmm>.txt`
 
 승인된 빌드 1개만 최종 패턴으로 rename 후 보관.
@@ -185,14 +185,14 @@ mapping-v1.0.0-1.txt
 - `final.aab`, `latest.aab` : 의미 소실 / 과거 추적 불가
 
 ### 11.4 Keystore 파일
-- 운용 키: `pocketchord-key.jks` (또는 `pocketchord-upload-key.jks`)
-- 로테이션/백업: `pocketchord-key-YYYYMMDD.jks` (VCS 외부 Secure 저장소)
+- 운용 키: `PocketUkulele-key.jks` (또는 `PocketUkulele-upload-key.jks`)
+- 로테이션/백업: `PocketUkulele-key-YYYYMMDD.jks` (VCS 외부 Secure 저장소)
 - `.bak`, `.old` 는 동일 디렉터리에 두지 말고 `SecureKeysArchive/` 로 이동
 
 ### 11.5 무결성 점검(선택)
 빌드 산출물 중복 여부 확인:
 ```powershell
-Get-FileHash pocketchord-v1.0.0-1.aab -Algorithm SHA256
+Get-FileHash PocketUkulele-v1.0.0-1.aab -Algorithm SHA256
 Get-FileHash mapping-v1.0.0-1.txt -Algorithm SHA256
 ```
 같은 버전의 다른 이름 파일이 존재하면 해시 비교 후 하나만 유지.
@@ -200,13 +200,13 @@ Get-FileHash mapping-v1.0.0-1.txt -Algorithm SHA256
 ### 11.6 PowerShell Rename 예시
 ```powershell
 # AAB / mapping 표준화
-Rename-Item "app-release.aab" "pocketchord-v1.0.0-1.aab"
+Rename-Item "app-release.aab" "PocketUkulele-v1.0.0-1.aab"
 Rename-Item "mapping.txt" "mapping-v1.0.0-1.txt"
 
 # Keystore 백업 분리
 New-Item -ItemType Directory -Name "keystore-backup" -ErrorAction SilentlyContinue | Out-Null
-Move-Item "pocketchord-key.jks.old" "keystore-backup" -ErrorAction SilentlyContinue
-Move-Item "pocketchord-key.jks.bak" "keystore-backup" -ErrorAction SilentlyContinue
+Move-Item "PocketUkulele-key.jks.old" "keystore-backup" -ErrorAction SilentlyContinue
+Move-Item "PocketUkulele-key.jks.bak" "keystore-backup" -ErrorAction SilentlyContinue
 ```
 
 ### 11.7 체크리스트 (릴리즈 아카이브 저장 시)

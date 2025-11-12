@@ -69,7 +69,7 @@ ALTER COLUMN ad_banner_enabled SET NOT NULL;
 ### 프로젝트 구조 예시
 
 ```
-PocketChord/
+PocketUkulele/
 ├── docs/
 │   ├── supabase-ad-control-schema.sql          ← 문서화!
 │   ├── supabase-ad-control-add-not-null.sql    ← 문서화!

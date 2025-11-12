@@ -7,7 +7,7 @@
    - Release 빌드에 서명 자동 적용
 
 2. **a_RELEASE_SIGNING.md 문서 업데이트**
-   - PocketChord 앱에 맞게 경로 및 alias 수정
+   - PocketUkulele 앱에 맞게 경로 및 alias 수정
 
 ---
 
@@ -37,7 +37,7 @@ Alias: null
 
 ```powershell
 # PowerShell 실행
-& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -keystore "G:\secure\PocketChord\pocketchord-key.jks" -alias pocketchord-alias -keyalg RSA -keysize 4096 -sigalg SHA256withRSA -validity 36500
+& "C:\Program Files\Android\Android Studio\jbr\bin\keytool.exe" -genkeypair -v -keystore "G:\secure\PocketUkulele\PocketUkulele-key.jks" -alias PocketUkulele-alias -keyalg RSA -keysize 4096 -sigalg SHA256withRSA -validity 36500
 ```
 
 **입력 정보**:
@@ -52,9 +52,9 @@ Alias: null
 
 ```powershell
 # PowerShell에서 실행 (비밀번호는 실제 값으로 변경)
-$env:KEYSTORE_PATH="G:/secure/PocketChord/pocketchord-key.jks"
+$env:KEYSTORE_PATH="G:/secure/PocketUkulele/PocketUkulele-key.jks"
 $env:KEYSTORE_STORE_PW="your_keystore_password"
-$env:KEY_ALIAS="pocketchord-alias"
+$env:KEY_ALIAS="PocketUkulele-alias"
 $env:KEY_PASSWORD="your_key_password"
 ```
 
@@ -63,7 +63,7 @@ $env:KEY_PASSWORD="your_key_password"
 ```powershell
 # 프로젝트 디렉터리로 이동
 G:
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 
 # 서명 리포트 확인
 .\gradlew.bat :app:signingReport
@@ -73,8 +73,8 @@ cd G:\Workspace\PocketChord
 ```
 Variant: release
 Config: release
-Store: G:\secure\PocketChord\pocketchord-key.jks
-Alias: pocketchord-alias
+Store: G:\secure\PocketUkulele\PocketUkulele-key.jks
+Alias: PocketUkulele-alias
 SHA1: XX:XX:...
 SHA-256: YY:YY:...
 Valid until: ...
@@ -145,13 +145,13 @@ echo $env:KEY_ALIAS
 
 **증상**:
 ```
-java.io.FileNotFoundException: G:\secure\PocketChord\pocketchord-key.jks
+java.io.FileNotFoundException: G:\secure\PocketUkulele\PocketUkulele-key.jks
 ```
 
 **해결**:
 - 경로 확인 (백슬래시 vs 슬래시)
 - 파일 존재 여부 확인
-- PowerShell: `Test-Path "G:\secure\PocketChord\pocketchord-key.jks"`
+- PowerShell: `Test-Path "G:\secure\PocketUkulele\PocketUkulele-key.jks"`
 
 ---
 
@@ -171,7 +171,7 @@ java.io.FileNotFoundException: G:\secure\PocketChord\pocketchord-key.jks
 
 ### 빌드 후
 - [ ] AAB 크기 확인 (정상 범위)
-- [ ] 파일명 표준화 (`pocketchord-v1.0.0-1.aab`)
+- [ ] 파일명 표준화 (`PocketUkulele-v1.0.0-1.aab`)
 - [ ] mapping.txt 백업
 - [ ] 테스트 기기에서 설치 테스트
 
@@ -180,7 +180,7 @@ java.io.FileNotFoundException: G:\secure\PocketChord\pocketchord-key.jks
 ## 🔐 보안 주의사항
 
 ### 절대 Git에 커밋하지 말 것
-- ❌ `pocketchord-key.jks`
+- ❌ `PocketUkulele-key.jks`
 - ❌ 비밀번호가 포함된 파일
 - ✅ `.gitignore`에 이미 포함됨
 

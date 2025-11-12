@@ -1,6 +1,6 @@
 # Supabase App Policy (하이브리드 방식) - 운영 테이블 + 히스토리 관리
 
-본 문서는 PocketChord의 앱 정책을 **운영 테이블**과 **히스토리 테이블**로 분리하여 관리하는 하이브리드 방식을 설명합니다.
+본 문서는 PocketUkulele의 앱 정책을 **운영 테이블**과 **히스토리 테이블**로 분리하여 관리하는 하이브리드 방식을 설명합니다.
 
 ## 📚 하이브리드 방식이란?
 
@@ -61,25 +61,25 @@ UPDATE app_policy SET
   content = DEFAULT,
   download_url = 'https://play.google.com/...',
   min_supported_version = 5
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 -- ✅ 설정은 저장되지만 is_active = false이므로 사용자에게는 팝업이 표시되지 않음
 
 -- 2) 오전 10시: 검토 완료 후 활성화
 UPDATE app_policy SET
   is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 -- ✅ 이제 팝업이 사용자에게 표시됨
 
 -- 3) 오후 3시: 일시적으로 중단
 UPDATE app_policy SET
   is_active = false
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 -- ✅ 팝업 사라짐 (설정은 그대로 유지)
 
 -- 4) 오후 4시: 다시 활성화
 UPDATE app_policy SET
   is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 -- ✅ 설정 변경 없이 바로 재활성화
 ```
 
@@ -268,7 +268,7 @@ EXECUTE FUNCTION backup_policy_to_history();
 -- ==========================================
 INSERT INTO public.app_policy (app_id, is_active, active_popup_type)
 VALUES
-  ('com.sweetapps.pocketchord.debug', FALSE, 'none'),
+  ('com.sweetapps.PocketUkulele.debug', FALSE, 'none'),
   ('com.sweetapps.pocketchord', FALSE, 'none')
 ON CONFLICT (app_id) DO NOTHING;  -- 이미 있으면 건너뛰기
 ```
@@ -1723,7 +1723,7 @@ check constraint "check_min_version_with_force_update" violated
 
 **문서 버전**: 1.0  
 **최종 업데이트**: 2025-01-08  
-**작성자**: PocketChord Development Team
+**작성자**: PocketUkulele Development Team
 
 
 

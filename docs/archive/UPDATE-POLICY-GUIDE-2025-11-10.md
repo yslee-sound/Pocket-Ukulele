@@ -71,7 +71,7 @@ UPDATE update_policy
 SET target_version_code = 11,
     is_force_update = false,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **강제 업데이트 (중요 업데이트)**:
@@ -80,7 +80,7 @@ UPDATE update_policy
 SET target_version_code = 11,
     is_force_update = true,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 3: Play Store 출시
@@ -111,7 +111,7 @@ Play Store에 버전 11이 배포되었는데, 심각한 버그 발견!
 -- 즉시 강제 업데이트로 전환
 UPDATE update_policy
 SET is_force_update = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **효과**:
@@ -131,7 +131,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 업데이트 팝업 비활성화
 UPDATE update_policy
 SET is_active = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **효과**:
@@ -204,7 +204,7 @@ SET reshow_interval_hours = 24,
     reshow_interval_minutes = NULL,
     reshow_interval_seconds = NULL,
     max_later_count = 3
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 적극적 업데이트 유도 (12시간, 2회)
@@ -212,7 +212,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE update_policy
 SET reshow_interval_hours = 12,
     max_later_count = 2
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 완화 설정 (48시간, 5회)
@@ -220,7 +220,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE update_policy
 SET reshow_interval_hours = 48,
     max_later_count = 5
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -286,7 +286,7 @@ SET target_version_code = 11,
     reshow_interval_hours = 24,
     max_later_count = 3,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **특징**:
@@ -302,7 +302,7 @@ SET target_version_code = 11,
     reshow_interval_hours = 12,
     max_later_count = 2,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **특징**:
@@ -316,7 +316,7 @@ UPDATE update_policy
 SET target_version_code = 11,
     is_force_update = true,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **특징**:
@@ -332,7 +332,7 @@ SET target_version_code = 11,
     reshow_interval_hours = 48,
     max_later_count = 5,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **특징**:
@@ -364,7 +364,7 @@ SET target_version_code = 10,
     reshow_interval_seconds = 60,  -- 1분
     max_later_count = 3,
     is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **⚠️ 릴리즈 전 필수 확인**:
@@ -376,7 +376,7 @@ SELECT app_id,
        reshow_interval_seconds,
        max_later_count
 FROM update_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **기대 결과**:
@@ -398,7 +398,7 @@ SELECT app_id,
        target_version_code,
        is_force_update
 FROM update_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **확인 사항**:
@@ -411,12 +411,12 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 1. is_active 활성화
 UPDATE update_policy
 SET is_active = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 2. target_version_code 확인 및 조정
 UPDATE update_policy
 SET target_version_code = 100  -- 충분히 높은 값
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -431,7 +431,7 @@ SELECT app_id,
        reshow_interval_hours,
        max_later_count
 FROM update_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **해결**:
@@ -442,7 +442,7 @@ SET reshow_interval_hours = 24,
     reshow_interval_minutes = NULL,
     reshow_interval_seconds = NULL,
     max_later_count = 3
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---

@@ -367,12 +367,12 @@ ComponentA()  // 항상 같은 컴포넌트
 
 **남겨둔 이유:**
 - 다른 곳에서 사용 가능 (예: 로깅, 분석)
-- PocketChordApplication에서 관리
+- PocketUkuleleApplication에서 관리
 - 배너 표시 로직에서만 사용 안 함
 
 **현재 상태:**
 ```kotlin
-// PocketChordApplication에서 계속 업데이트됨
+// PocketUkuleleApplication에서 계속 업데이트됨
 fun setAppOpenAdShowing(isShowing: Boolean)
 
 // MainActivity에서 collectAsState()는 유지

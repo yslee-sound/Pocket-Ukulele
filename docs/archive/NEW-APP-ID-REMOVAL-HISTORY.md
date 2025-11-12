@@ -60,10 +60,10 @@ DROP COLUMN IF EXISTS new_app_id;
 #### HomeScreen.kt
 ```kotlin
 // Before
-newAppPackage = emergencyPolicy!!.newAppId ?: "com.sweetapps.pocketchord"
+newAppPackage = emergencyPolicy!!.newAppId ?: "com.sweetapps.PocketUkulele"
 
 // After
-newAppPackage = "com.sweetapps.pocketchord"  // 기본값
+newAppPackage = "com.sweetapps.PocketUkulele"  // 기본값
 ```
 
 #### EmergencyPolicy.kt

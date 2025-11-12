@@ -25,12 +25,12 @@ restoredForcedUpdate?.let { upd ->
 ## 해결 방법
 
 ### 코드 수정
-`app/src/main/java/com/sweetapps/pocketchord/ui/screens/HomeScreen.kt` 파일의 정책 확인 로직 수정:
+`app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/HomeScreen.kt` 파일의 정책 확인 로직 수정:
 
 ```kotlin
 if (policy == null) {
     android.util.Log.w("HomeScreen", "===== No Policy Loaded =====")
-    android.util.Log.w("HomeScreen", "No active policy row for app_id='${com.sweetapps.pocketchord.BuildConfig.SUPABASE_APP_ID}'.")
+    android.util.Log.w("HomeScreen", "No active policy row for app_id='${com.sweetapps.PocketUkulele.BuildConfig.SUPABASE_APP_ID}'.")
     android.util.Log.w("HomeScreen", "Check:")
     android.util.Log.w("HomeScreen", "  1. app_policy.app_id matches BuildConfig.SUPABASE_APP_ID")
     android.util.Log.w("HomeScreen", "  2. is_active=TRUE in Supabase")
@@ -67,8 +67,8 @@ if (policy == null) {
 
 ### 앱 실행 및 로그 확인
 ```bash
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 adb logcat -d | Select-String "HomeScreen|Clearing"
 ```
 
@@ -83,7 +83,7 @@ adb logcat -d | Select-String "HomeScreen|Clearing"
 
 ### Supabase 테이블 상태
 ```sql
-SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.pocketchord.debug';
+SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **결과**: 0 rows (또는 `is_active = false`)
 
@@ -144,11 +144,11 @@ if (policy == null) {
 ## 관련 파일
 
 ### 수정된 파일
-- `app/src/main/java/com/sweetapps/pocketchord/ui/screens/HomeScreen.kt`
+- `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/HomeScreen.kt`
 
 ### 관련 파일
-- `app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AppPolicyRepository.kt`
-- `app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AppPolicy.kt`
+- `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AppPolicyRepository.kt`
+- `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AppPolicy.kt`
 
 ## 작성 정보
 - **작성일**: 2025-11-08
@@ -160,7 +160,7 @@ if (policy == null) {
 
 ### releaseTest 빌드 타입
 Release 설정을 테스트하기 위한 `releaseTest` 빌드 타입이 추가되었습니다:
-- **SUPABASE_APP_ID**: `com.sweetapps.pocketchord` (Release와 동일)
+- **SUPABASE_APP_ID**: `com.sweetapps.PocketUkulele` (Release와 동일)
 - **서명**: Debug keystore 사용 (별도 키스토어 불필요)
 - **난독화**: 비활성화 (테스트 편의성)
 - **디버깅**: 활성화
@@ -176,7 +176,7 @@ Release 설정을 테스트하기 위한 `releaseTest` 빌드 타입이 추가�
 .\gradlew.bat installReleaseTest
 
 # 실행
-adb shell am start -n com.sweetapps.pocketchord.releasetest/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.releasetest/com.sweetapps.PocketUkulele.MainActivity
 
 # 로그 확인
 adb logcat -d | Select-String "HomeScreen|AppPolicyRepo"

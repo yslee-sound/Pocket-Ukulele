@@ -3,13 +3,13 @@
 ## 현재 상태
 **로그 분석 결과**:
 ```
-D/AppPolicyRepo: No active policy found for app_id=com.sweetapps.pocketchord.debug (RLS may be filtering)
-W/HomeScreen: No active policy row for app_id='com.sweetapps.pocketchord.debug'
+D/AppPolicyRepo: No active policy found for app_id=com.sweetapps.PocketUkulele.debug (RLS may be filtering)
+W/HomeScreen: No active policy row for app_id='com.sweetapps.PocketUkulele.debug'
 ```
 
 ✅ **Supabase 연결**: 정상  
 ✅ **앱 버전**: 2  
-✅ **app_id**: `com.sweetapps.pocketchord.debug`  
+✅ **app_id**: `com.sweetapps.PocketUkulele.debug`  
 ❌ **정책 조회**: 실패 (정책이 없거나 RLS가 차단)
 
 ---
@@ -49,7 +49,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다. 잠시 후 다시 시도해주세요.',
@@ -72,7 +72,7 @@ SET
     active_popup_type = 'emergency',
     content = '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
     download_url = 'https://example.com/status'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ---
@@ -129,25 +129,25 @@ USING (is_active = TRUE);
 
 ### Step 2: 앱 재시작
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
 adb logcat -c
-adb logcat -s HomeScreen:* AppPolicyRepo:* PocketChordApp:*
+adb logcat -s HomeScreen:* AppPolicyRepo:* PocketUkuleleApp:*
 ```
 
 다른 터미널에서:
 ```cmd
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### Step 3: 로그 확인
 **성공 시 예상 로그**:
 ```
 D/AppPolicyRepo: ===== Policy Fetch Started =====
-D/AppPolicyRepo: Target app_id: com.sweetapps.pocketchord.debug
+D/AppPolicyRepo: Target app_id: com.sweetapps.PocketUkulele.debug
 D/AppPolicyRepo: Query returned 1 rows
 D/AppPolicyRepo: ✅ Policy found:
 D/AppPolicyRepo:   - id: 1
-D/AppPolicyRepo:   - app_id: com.sweetapps.pocketchord.debug
+D/AppPolicyRepo:   - app_id: com.sweetapps.PocketUkulele.debug
 D/AppPolicyRepo:   - is_active: true
 D/AppPolicyRepo:   - active_popup_type: emergency
 D/AppPolicyRepo:   - content: 🚨 긴급 점검 안내...
@@ -170,7 +170,7 @@ D/HomeScreen: Decision: EMERGENCY popup will show
 SELECT app_id, length(app_id), is_active 
 FROM app_policy;
 
--- 예상: com.sweetapps.pocketchord.debug (35자)
+-- 예상: com.sweetapps.PocketUkulele.debug (35자)
 ```
 
 공백이나 특수문자가 있는지 확인!
@@ -182,7 +182,7 @@ FROM app_policy;
 ```sql
 UPDATE app_policy 
 SET is_active = TRUE 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 문제 3: RLS 정책이 없음
@@ -221,7 +221,7 @@ SELECT app_id, is_active FROM app_policy;
 
 -- ✅ 4. 전체 정보 확인
 SELECT * FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- ✅ 5. RLS 확인
 SELECT tablename, rowsecurity 
@@ -255,13 +255,13 @@ ALTER TABLE app_policy ENABLE ROW LEVEL SECURITY;
 
 ```cmd
 # 1. 앱 완전 종료
-adb shell am force-stop com.sweetapps.pocketchord.debug
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
 
 # 2. 로그 초기화
 adb logcat -c
 
 # 3. 로그 시작 (터미널 1)
-adb logcat -s HomeScreen:* AppPolicyRepo:* PocketChordApp:*
+adb logcat -s HomeScreen:* AppPolicyRepo:* PocketUkuleleApp:*
 
 # 4. 앱 실행 (터미널 2)
 adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity

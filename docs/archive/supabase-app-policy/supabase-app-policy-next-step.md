@@ -9,8 +9,8 @@
 안녕하세요. Supabase 기반 앱 정책 관리 시스템을 Android 앱에 연동하는 작업을 진행하려고 합니다.
 
 ### 프로젝트 정보
-- **프로젝트**: PocketChord (Android 앱)
-- **위치**: `G:\Workspace\PocketChord`
+- **프로젝트**: PocketUkulele (Android 앱)
+- **위치**: `G:\Workspace\PocketUkulele`
 - **언어**: Kotlin
 - **백엔드**: Supabase
 
@@ -49,7 +49,7 @@ Supabase에 구축된 4가지 팝업 시스템을 Android 앱에 연동하여 �
 
 ## 📄 핵심 참고 문서
 
-**문서 위치**: `G:\Workspace\PocketChord\docs\supabase-app-policy-hybrid.md`
+**문서 위치**: `G:\Workspace\PocketUkulele\docs\supabase-app-policy-hybrid.md`
 
 ### 주요 내용 요약:
 
@@ -170,7 +170,7 @@ when (policy?.activePopupType) {
 ## 🔗 추가 참고
 
 - Supabase 설정 파일 위치: 프로젝트 내 `BuildConfig` 또는 설정 파일 확인 필요
-- App ID: `com.sweetapps.pocketchord.debug` (디버그) / `com.sweetapps.pocketchord` (릴리즈)
+- App ID: `com.sweetapps.PocketUkulele.debug` (디버그) / `com.sweetapps.PocketUkulele` (릴리즈)
 
 ---
 

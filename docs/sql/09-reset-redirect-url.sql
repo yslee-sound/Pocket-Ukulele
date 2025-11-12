@@ -12,7 +12,7 @@ ORDER BY app_id;
 -- 2. redirect_url을 NULL로 초기화
 UPDATE public.emergency_policy
 SET redirect_url = NULL
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug');
 
 -- 3. 결과 확인
 SELECT app_id, redirect_url, button_text
@@ -26,6 +26,6 @@ ORDER BY app_id;
 -- 사용 시: 필요할 때 수동으로 입력하세요!
 -- UPDATE emergency_policy
 -- SET redirect_url = 'https://play.google.com/store/apps/details?id=...'
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- ============================================
 

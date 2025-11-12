@@ -71,7 +71,7 @@ ad_interstitial_max_per_hour     | NO  ✅
 ```sql
 UPDATE app_policy 
 SET ad_banner_enabled = NULL 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **예상 오류:**

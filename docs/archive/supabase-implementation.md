@@ -1,4 +1,4 @@
-# PocketChord Supabase 구현 가이드
+# PocketUkulele Supabase 구현 가이드
 
 > 실제 코드 구현, 사용법, 주요 설정을 담은 실용 가이드
 
@@ -9,7 +9,7 @@
 ## 📂 프로젝트 구조
 
 ```
-app/src/main/java/com/sweetapps/pocketchord/data/supabase/
+app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/
 ├── model/
 │   ├── Announcement.kt          (공지사항 모델)
 │   └── UpdateInfo.kt            (앱 버전 정보 모델)
@@ -53,21 +53,21 @@ USING (is_active = true);
 
 ### 2. app_id 설정 ⭐ 중요
 
-**앱 패키지명 사용**: `com.sweetapps.pocketchord`
+**앱 패키지명 사용**: `com.sweetapps.PocketUkulele`
 
 ```kotlin
 // 모델 기본값
 @SerialName("app_id")
-val appId: String = "com.sweetapps.pocketchord"
+val appId: String = "com.sweetapps.PocketUkulele"
 
 // Repository 기본값
-private val appId: String = "com.sweetapps.pocketchord"
+private val appId: String = "com.sweetapps.PocketUkulele"
 ```
 
 **Supabase 데이터 입력 시:**
 ```sql
 INSERT INTO announcements (app_id, title, content, is_active)
-VALUES ('com.sweetapps.pocketchord', '환영합니다!', '내용...', true);
+VALUES ('com.sweetapps.PocketUkulele', '환영합니다!', '내용...', true);
 ```
 
 ---
@@ -76,7 +76,7 @@ VALUES ('com.sweetapps.pocketchord', '환영합니다!', '내용...', true);
 
 ### Announcement.kt
 ```kotlin
-package com.sweetapps.pocketchord.data.supabase.model
+package com.sweetapps.PocketUkulele.data.supabase.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -90,7 +90,7 @@ data class Announcement(
     val createdAt: String? = null,
 
     @SerialName("app_id")
-    val appId: String = "com.sweetapps.pocketchord",
+    val appId: String = "com.sweetapps.PocketUkulele",
 
     @SerialName("title")
     val title: String,
@@ -105,7 +105,7 @@ data class Announcement(
 
 ### UpdateInfo.kt (AppVersion)
 ```kotlin
-package com.sweetapps.pocketchord.data.supabase.model
+package com.sweetapps.PocketUkulele.data.supabase.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -144,15 +144,15 @@ data class AppVersion(
 
 ### AnnouncementRepository.kt
 ```kotlin
-package com.sweetapps.pocketchord.data.supabase.repository
+package com.sweetapps.PocketUkulele.data.supabase.repository
 
-import com.sweetapps.pocketchord.data.supabase.model.Announcement
+import com.sweetapps.PocketUkulele.data.supabase.model.Announcement
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
 
 class AnnouncementRepository(
     private val client: SupabaseClient,
-    private val appId: String = "com.sweetapps.pocketchord"
+    private val appId: String = "com.sweetapps.PocketUkulele"
 ) {
     /**
      * 모든 활성 공지사항 조회
@@ -192,9 +192,9 @@ class AnnouncementRepository(
 
 ### UpdateInfoRepository.kt
 ```kotlin
-package com.sweetapps.pocketchord.data.supabase.repository
+package com.sweetapps.PocketUkulele.data.supabase.repository
 
-import com.sweetapps.pocketchord.data.supabase.model.AppVersion
+import com.sweetapps.PocketUkulele.data.supabase.model.AppVersion
 import io.github.jan.supabase.SupabaseClient
 import io.github.jan.supabase.postgrest.from
 
@@ -266,7 +266,7 @@ class MainActivity : ComponentActivity() {
             try {
                 val repository = AnnouncementRepository(
                     supabase,
-                    "com.sweetapps.pocketchord"
+                    "com.sweetapps.PocketUkulele"
                 )
                 
                 val result = repository.getLatestAnnouncement()
@@ -309,7 +309,7 @@ class MainActivity : ComponentActivity() {
 1. **Supabase에 테스트 데이터 추가**
    ```sql
    INSERT INTO announcements (app_id, title, content, is_active)
-   VALUES ('com.sweetapps.pocketchord', '테스트 공지', '연결 테스트입니다.', true);
+   VALUES ('com.sweetapps.PocketUkulele', '테스트 공지', '연결 테스트입니다.', true);
    ```
 
 2. **앱 실행**
@@ -328,7 +328,7 @@ class MainActivity : ComponentActivity() {
    D/SupabaseTest: content: 연결 테스트입니다.
    D/SupabaseTest: isActive: true
    D/SupabaseTest: createdAt: 2025-11-05T...
-   D/SupabaseTest: appId: com.sweetapps.pocketchord
+   D/SupabaseTest: appId: com.sweetapps.PocketUkulele
    D/SupabaseTest: ✅ Supabase 연결 성공!
    ```
    
@@ -507,7 +507,7 @@ fun AnnouncementsScreen() {
 ### 공지사항 추가
 ```sql
 INSERT INTO announcements (app_id, title, content, is_active)
-VALUES ('com.sweetapps.pocketchord', '새로운 업데이트!', '버전 2.0이 출시되었습니다.', true);
+VALUES ('com.sweetapps.PocketUkulele', '새로운 업데이트!', '버전 2.0이 출시되었습니다.', true);
 ```
 
 ### 공지사항 비활성화
@@ -528,8 +528,8 @@ VALUES (2, '2.0.0', 1, '- 새로운 기능 추가\n- 버그 수정');
 ## ⚠️ 주의사항
 
 ### 1. app_id 일관성
-- ✅ 항상 `"com.sweetapps.pocketchord"` 사용
-- ❌ `"pocketchord"` 같은 짧은 이름 사용 금지
+- ✅ 항상 `"com.sweetapps.PocketUkulele"` 사용
+- ❌ `"PocketUkulele"` 같은 짧은 이름 사용 금지
 
 ### 2. 네트워크 권한
 `AndroidManifest.xml`:
@@ -557,7 +557,7 @@ ktor-client-android = { group = "io.ktor", name = "ktor-client-android", version
 ## 🔧 트러블슈팅
 
 ### 데이터가 조회되지 않음
-1. `app_id` 값 확인: `"com.sweetapps.pocketchord"` 맞는지
+1. `app_id` 값 확인: `"com.sweetapps.PocketUkulele"` 맞는지
 2. `is_active` 값 확인: `true`인지
 3. Supabase에 실제 데이터가 있는지 확인
 

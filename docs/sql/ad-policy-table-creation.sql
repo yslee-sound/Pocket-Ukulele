@@ -46,7 +46,7 @@ INSERT INTO ad_policy (
 ) VALUES
 -- Release 빌드 (실제 운영)
 (
-  'com.sweetapps.pocketchord',
+  'com.sweetapps.PocketUkulele',
   true,    -- 광고 정책 활성화
   true,    -- 앱 오픈 광고 ON
   true,    -- 전면 광고 ON
@@ -56,7 +56,7 @@ INSERT INTO ad_policy (
 ),
 -- Debug 빌드 (개발/테스트)
 (
-  'com.sweetapps.pocketchord.debug',
+  'com.sweetapps.PocketUkulele.debug',
   true,    -- 광고 정책 활성화
   true,    -- 앱 오픈 광고 ON
   true,    -- 전면 광고 ON
@@ -91,7 +91,7 @@ SELECT
   ad_interstitial_max_per_day,
   created_at
 FROM ad_policy
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- Debug 빌드
 SELECT
@@ -104,7 +104,7 @@ SELECT
   ad_interstitial_max_per_day,
   created_at
 FROM ad_policy
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 모든 데이터 확인
 SELECT
@@ -125,22 +125,22 @@ ORDER BY app_id;
 -- 시나리오 1: 팝업 OFF + 광고 ON
 -- UPDATE app_policy
 -- SET is_active = false
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 --
 -- UPDATE ad_policy
 -- SET is_active = true
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 시나리오 2: 팝업 ON + 광고 OFF
 -- UPDATE app_policy
 -- SET is_active = true,
 --     active_popup_type = 'notice',
 --     content = '공지사항'
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 --
 -- UPDATE ad_policy
 -- SET is_active = false
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 시나리오 3: 모두 OFF (명절 이벤트)
 -- UPDATE app_policy SET is_active = false;
@@ -149,13 +149,13 @@ ORDER BY app_id;
 -- 시나리오 4: 특정 광고만 제어
 -- UPDATE ad_policy
 -- SET ad_banner_enabled = false
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 시나리오 5: 빈도 제한 조정
 -- UPDATE ad_policy
 -- SET ad_interstitial_max_per_hour = 2,
 --     ad_interstitial_max_per_day = 15
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- ============================================
 -- 롤백 (필요시)

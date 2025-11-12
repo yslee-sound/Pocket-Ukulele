@@ -8,7 +8,7 @@
 - Command: `SELECT`
 
 ✅ **데이터**: 정상
-- `app_id: com.sweetapps.pocketchord.debug`
+- `app_id: com.sweetapps.PocketUkulele.debug`
 - `is_active: TRUE`
 - `active_popup_type: emergency`
 
@@ -25,7 +25,7 @@ Supabase SQL Editor에서 실행하여 데이터가 정말 조회되는지 확�
 -- 1. anon 키로 조회 테스트 (앱이 사용하는 것과 동일)
 -- (Supabase SQL Editor는 기본적으로 service role을 사용하므로 이 테스트는 제한적)
 SELECT * FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug' 
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug' 
   AND is_active = true;
 ```
 
@@ -69,7 +69,7 @@ WHERE id = 1;
 
 ```sql
 -- 기존 데이터 삭제
-DELETE FROM app_policy WHERE app_id LIKE '%pocketchord.debug%';
+DELETE FROM app_policy WHERE app_id LIKE '%PocketUkulele.debug%';
 
 -- 새로 입력
 INSERT INTO app_policy (
@@ -79,7 +79,7 @@ INSERT INTO app_policy (
     content,
     download_url
 ) VALUES (
-    'com.sweetapps.pocketchord.debug',
+    'com.sweetapps.PocketUkulele.debug',
     TRUE,
     'emergency',
     '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
@@ -121,7 +121,7 @@ adb logcat -d -s SupabaseTest:* | findstr "SUPABASE_APP_ID"
 
 **예상**:
 ```
-D/SupabaseTest: BuildConfig.SUPABASE_APP_ID: com.sweetapps.pocketchord.debug
+D/SupabaseTest: BuildConfig.SUPABASE_APP_ID: com.sweetapps.PocketUkulele.debug
 ```
 
 ---
@@ -132,16 +132,16 @@ D/SupabaseTest: BuildConfig.SUPABASE_APP_ID: com.sweetapps.pocketchord.debug
 
 ```cmd
 # 1. 앱 삭제
-adb uninstall com.sweetapps.pocketchord.debug
+adb uninstall com.sweetapps.PocketUkulele.debug
 
 # 2. 새로 설치
-adb install G:\Workspace\PocketChord\app\build\outputs\apk\debug\app-debug.apk
+adb install G:\Workspace\PocketUkulele\app\build\outputs\apk\debug\app-debug.apk
 
 # 3. 로그 초기화
 adb logcat -c
 
 # 4. 앱 실행
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 
 # 5. 로그 확인 (5초 후)
 timeout /t 5

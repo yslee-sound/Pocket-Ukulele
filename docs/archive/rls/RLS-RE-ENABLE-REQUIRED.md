@@ -64,8 +64,8 @@ ALTER TABLE app_policy ENABLE ROW LEVEL SECURITY;
 
 ### 2단계: 앱 재시작
 ```cmd
-adb shell am force-stop com.sweetapps.pocketchord.debug
-adb shell am start -n com.sweetapps.pocketchord.debug/com.sweetapps.pocketchord.MainActivity
+adb shell am force-stop com.sweetapps.PocketUkulele.debug
+adb shell am start -n com.sweetapps.PocketUkulele.debug/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 3단계: 로그 확인
@@ -76,7 +76,7 @@ adb logcat -d -s AppPolicyRepo:* | findstr "Policy found"
 **예상 로그**:
 ```
 D/AppPolicyRepo: ✅ Policy found:
-D/AppPolicyRepo:   - app_id: com.sweetapps.pocketchord.debug
+D/AppPolicyRepo:   - app_id: com.sweetapps.PocketUkulele.debug
 D/AppPolicyRepo:   - is_active: true
 ```
 

@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PocketChord"
+rootProject.name = "PocketUkulele"
 include(":app")
  

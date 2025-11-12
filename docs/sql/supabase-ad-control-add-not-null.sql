@@ -108,7 +108,7 @@ FROM app_policy;
 -- 이제 NULL을 넣으려고 하면 에러가 발생해야 함
 -- UPDATE app_policy
 -- SET ad_banner_enabled = NULL
--- WHERE app_id = 'com.sweetapps.pocketchord';
+-- WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- → 예상 에러: null value in column "ad_banner_enabled" violates not-null constraint
 
 -- ============================================

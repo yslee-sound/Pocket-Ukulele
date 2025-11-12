@@ -43,7 +43,7 @@ if (BuildConfig.DEBUG) {  // ✅ DEBUG 빌드에서만 표시
 - [x] releaseTest 빌드 타입 제거 (불필요)
 
 **수정 파일**:
-- `app/src/main/java/com/sweetapps/pocketchord/ui/screens/SettingsScreen.kt`
+- `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/SettingsScreen.kt`
 - `app/build.gradle.kts` (releaseTest 제거)
 
 ---

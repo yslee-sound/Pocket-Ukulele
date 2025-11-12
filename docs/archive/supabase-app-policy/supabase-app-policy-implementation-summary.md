@@ -53,13 +53,13 @@
 ## 📂 변경된 파일 목록
 
 ### 수정된 파일
-1. `app/src/main/java/com/sweetapps/pocketchord/data/supabase/model/AppPolicy.kt`
-2. `app/src/main/java/com/sweetapps/pocketchord/data/supabase/repository/AppPolicyRepository.kt`
-3. `app/src/main/java/com/sweetapps/pocketchord/MainActivity.kt`
+1. `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/model/AppPolicy.kt`
+2. `app/src/main/java/com/sweetapps/PocketUkulele/data/supabase/repository/AppPolicyRepository.kt`
+3. `app/src/main/java/com/sweetapps/PocketUkulele/MainActivity.kt`
 4. `app/proguard-rules.pro`
 
 ### 새로 생성된 파일
-1. `app/src/main/java/com/sweetapps/pocketchord/ui/dialog/AppPolicyDialogs.kt`
+1. `app/src/main/java/com/sweetapps/PocketUkulele/ui/dialog/AppPolicyDialogs.kt`
 2. `docs/supabase-app-policy-implementation.md` (구현 완료 보고서)
 3. `docs/supabase-app-policy-implementation-summary.md` (이 파일)
 
@@ -79,8 +79,8 @@ SUPABASE_ANON_KEY=your-anon-key
 -- SQL Editor에서 실행 (이미 완료된 경우 스킵)
 INSERT INTO public.app_policy (app_id, is_active, active_popup_type)
 VALUES
-  ('com.sweetapps.pocketchord.debug', FALSE, 'none'),
-  ('com.sweetapps.pocketchord', FALSE, 'none')
+  ('com.sweetapps.PocketUkulele.debug', FALSE, 'none'),
+  ('com.sweetapps.PocketUkulele', FALSE, 'none')
 ON CONFLICT (app_id) DO NOTHING;
 ```
 
@@ -93,7 +93,7 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '🚨 긴급 점검 안내',
   download_url = 'https://example.com'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상 결과**: 앱 시작 시 긴급 공지 팝업 표시, X 버튼 없음
 
@@ -103,9 +103,9 @@ UPDATE app_policy SET
   is_active = TRUE,
   active_popup_type = 'force_update',
   content = DEFAULT,
-  download_url = 'market://details?id=com.sweetapps.pocketchord',
+  download_url = 'market://details?id=com.sweetapps.PocketUkulele',
   min_supported_version = 100  -- 현재 버전(2)보다 큰 값
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상 결과**: 강제 업데이트 팝업 표시, 뒤로가기 차단
 
@@ -115,9 +115,9 @@ UPDATE app_policy SET
   is_active = TRUE,
   active_popup_type = 'optional_update',
   content = '새로운 버전이 출시되었습니다',
-  download_url = 'market://details?id=com.sweetapps.pocketchord',
+  download_url = 'market://details?id=com.sweetapps.PocketUkulele',
   latest_version_code = 100  -- 현재 버전(2)보다 큰 값
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 **예상 결과**: 선택적 업데이트 팝업 표시, "나중에" 버튼 있음
 
@@ -141,12 +141,12 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 
 ### 4. 로그 확인
 ```cmd
-adb logcat | findstr "MainActivity AppPolicyRepo PocketChordApp"
+adb logcat | findstr "MainActivity AppPolicyRepo PocketUkuleleApp"
 ```
 
 **예상 로그**:
 ```
-D/PocketChordApp: Supabase configured: url set
+D/PocketUkuleleApp: Supabase configured: url set
 D/AppPolicyRepo: Policy loaded: type=force_update, active=true
 D/MainActivity: 강제 업데이트 필요: 현재=2, 최소=100
 ```
@@ -258,6 +258,6 @@ is_active = FALSE는 차단 ✅
 구현 관련 질문이나 추가 작업이 필요하면 언제든지 말씀해주세요!
 
 **작성일**: 2025-11-08  
-**프로젝트**: PocketChord  
+**프로젝트**: PocketUkulele  
 **상태**: ✅ 구현 완료
 

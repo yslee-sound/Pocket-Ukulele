@@ -1,4 +1,4 @@
-# PocketChord 업데이트 팝업 + Supabase 연동 가이드
+# PocketUkulele 업데이트 팝업 + Supabase 연동 가이드
 
 ## 개요
 - 이 문서는 Supabase의 `update_info` 테이블을 통해 Android 앱의 업데이트 팝업을 제어하는 방법, 운영 룰, 시나리오 예시를 설명합니다.
@@ -32,7 +32,7 @@ create index if not exists idx_update_info_version_code on public.update_info(ve
 필드 설명:
 - version_code: 업데이트 판단 기준(정수). 기존 앱보다 클 때만 팝업 표시.
 - version_name: 사용자에게 표시할 문자열(예: 1.0.2). 비교에는 사용하지 않음.
-- app_id: 앱 식별자. debug/release를 구분. 예) com.sweetapps.pocketchord.debug, com.sweetapps.pocketchord
+- app_id: 앱 식별자. debug/release를 구분. 예) com.sweetapps.PocketUkulele.debug, com.sweetapps.PocketUkulele
 - is_force: 강제 업데이트 여부. true면 닫기/외곽클릭/뒤로가기 모두 불가.
 - release_notes: 줄 단위로 변경사항을 작성(앱에서 bullet 리스트로 표시).
 - download_url: 스토어 상세 URL 등. 없으면 앱이 기본 스토어 링크로 이동.
@@ -88,7 +88,7 @@ revoke insert, update, delete on public.update_info from public; -- 필요 시
 create policy "Allow public read filtered"
   on public.update_info
   for select
-  using ( app_id like 'com.sweetapps.pocketchord%' );
+  using ( app_id like 'com.sweetapps.PocketUkulele%' );
 ```
 
 ### 6. 정책 점검 SQL
@@ -101,8 +101,8 @@ select * from pg_policies where tablename = 'update_info';
 
 ## 앱 환경 변수 & 식별
 - 앱은 `BuildConfig.SUPABASE_APP_ID`로 자신의 레코드만 조회합니다.
-  - Debug: com.sweetapps.pocketchord.debug
-  - Release: com.sweetapps.pocketchord
+  - Debug: com.sweetapps.PocketUkulele.debug
+  - Release: com.sweetapps.PocketUkulele
 - Supabase의 update_info 레코드 `app_id`가 빌드와 반드시 일치해야 합니다.
 
 ---
@@ -150,7 +150,7 @@ select * from pg_policies where tablename = 'update_info';
 - 방법 B) 휴대폰 설정에서 지우기(누구나 가능)
   1) 휴대폰에서 ‘설정’ 앱을 엽니다.
   2) ‘앱’(또는 ‘애플리케이션’) 메뉴로 들어갑니다.
-  3) ‘PocketChord’를 선택합니다.
+  3) ‘PocketUkulele’를 선택합니다.
   4) ‘저장공간’(또는 ‘메모리’)을 누릅니다.
   5) ‘데이터 지우기’(또는 ‘저장공간 지우기’)를 누릅니다.
      - 주의: 앱에 저장된 설정/기록이 함께 지워질 수 있어요.
@@ -161,7 +161,7 @@ select * from pg_policies where tablename = 'update_info';
   2) 아래 명령으로 앱 데이터를 지웁니다.
 
 ```bat
-adb shell pm clear com.sweetapps.pocketchord.debug
+adb shell pm clear com.sweetapps.PocketUkulele.debug
 :: 릴리즈 앱 패키지는 보통 다음과 같습니다
 adb shell pm clear com.sweetapps.pocketchord
 ```
@@ -177,7 +177,7 @@ adb shell pm clear com.sweetapps.pocketchord
 - 패키지 확인:
 
 ```bat
-:: 설치된 PocketChord 관련 패키지 확인(Windows)
+:: 설치된 PocketUkulele 관련 패키지 확인(Windows)
 adb shell pm list packages | findstr pocketchord
 ```
 

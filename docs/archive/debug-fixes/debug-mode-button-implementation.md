@@ -49,9 +49,9 @@ if (BuildConfig.APPLICATION_ID.endsWith(".debug")) {
 
 | 빌드 타입 | APPLICATION_ID | 디버그 모드 버튼 |
 |-----------|----------------|------------------|
-| **debug** | `com.sweetapps.pocketchord.debug` | ✅ **표시** |
-| **releaseTest** | `com.sweetapps.pocketchord.releasetest` | ❌ **숨김** ✅ |
-| **release** | `com.sweetapps.pocketchord` | ❌ **숨김** ✅ |
+| **debug** | `com.sweetapps.PocketUkulele.debug` | ✅ **표시** |
+| **releaseTest** | `com.sweetapps.PocketUkulele.releasetest` | ❌ **숨김** ✅ |
+| **release** | `com.sweetapps.PocketUkulele` | ❌ **숨김** ✅ |
 
 **조건**: `BuildConfig.APPLICATION_ID.endsWith(".debug")`
 - ✅ `.debug`로 끝나는 경우만 표시
@@ -166,18 +166,18 @@ if (BuildConfig.APPLICATION_ID.endsWith(".debug")) { ... }
 buildTypes {
     debug {
         applicationIdSuffix = ".debug"
-        // APPLICATION_ID = com.sweetapps.pocketchord.debug ✅
+        // APPLICATION_ID = com.sweetapps.PocketUkulele.debug ✅
     }
 
     create("releaseTest") {
         initWith(getByName("debug"))
         applicationIdSuffix = ".releasetest"
-        // APPLICATION_ID = com.sweetapps.pocketchord.releasetest ❌
+        // APPLICATION_ID = com.sweetapps.PocketUkulele.releasetest ❌
     }
 
     release {
         // applicationIdSuffix 없음
-        // APPLICATION_ID = com.sweetapps.pocketchord ❌
+        // APPLICATION_ID = com.sweetapps.PocketUkulele ❌
     }
 }
 ```
@@ -195,7 +195,7 @@ buildTypes {
 ---
 
 **작성일**: 2025-11-08  
-**수정 파일**: `app/src/main/java/com/sweetapps/pocketchord/ui/screens/SettingsScreen.kt`  
+**수정 파일**: `app/src/main/java/com/sweetapps/PocketUkulele/ui/screens/SettingsScreen.kt`  
 **상태**: ✅ **구현 완료**
 
 ## 🎉 완료!

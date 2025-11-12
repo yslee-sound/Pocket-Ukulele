@@ -8,7 +8,7 @@
 SELECT app_id, target_version_code, is_force_update, is_active,
        reshow_interval_hours, max_later_count
 FROM update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug')
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug')
 ORDER BY app_id;
 
 -- ============================================================
@@ -21,7 +21,7 @@ SET target_version_code = 10,
     reshow_interval_hours = 24,  -- 릴리즈: 24시간
     max_later_count = 3,
     release_notes = '• 성능 개선\n• 버그 수정'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- ============================================================
 -- 3. 디버그 버전 수정
@@ -33,7 +33,7 @@ SET target_version_code = 10,
     reshow_interval_hours = 1,  -- 디버그: 1시간 (테스트용)
     max_later_count = 3,
     release_notes = '• [DEBUG] Phase 2.5 테스트 업데이트'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- ============================================================
 -- 4. 재확인 (릴리즈 + 디버그 모두)
@@ -41,20 +41,20 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 SELECT app_id, target_version_code, is_force_update, is_active,
        reshow_interval_hours, max_later_count
 FROM update_policy
-WHERE app_id IN ('com.sweetapps.pocketchord', 'com.sweetapps.pocketchord.debug')
+WHERE app_id IN ('com.sweetapps.PocketUkulele', 'com.sweetapps.PocketUkulele.debug')
 ORDER BY app_id;
 
 -- ============================================================
 -- 기대 결과:
 -- ============================================================
--- 릴리즈 (com.sweetapps.pocketchord):
+-- 릴리즈 (com.sweetapps.PocketUkulele):
 --   target_version_code = 10 (NOT NULL)
 --   is_force_update = false (NOT NULL)
 --   is_active = true
 --   reshow_interval_hours = 24
 --   max_later_count = 3
 --
--- 디버그 (com.sweetapps.pocketchord.debug):
+-- 디버그 (com.sweetapps.PocketUkulele.debug):
 --   target_version_code = 10 (NOT NULL)
 --   is_force_update = false (NOT NULL)
 --   is_active = true

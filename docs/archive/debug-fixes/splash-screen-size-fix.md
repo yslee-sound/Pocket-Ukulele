@@ -57,7 +57,7 @@ app/src/main/res/
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PocketChord" parent="android:Theme.Material.Light.NoActionBar">
+    <style name="Theme.PocketUkulele" parent="android:Theme.Material.Light.NoActionBar">
         <!-- 배경색 -->
         <item name="android:windowSplashScreenBackground">#f28090</item>
         
@@ -106,9 +106,9 @@ app/src/main/res/
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.PocketChord" parent="android:Theme.Material.Light.NoActionBar" />
+    <style name="Theme.PocketUkulele" parent="android:Theme.Material.Light.NoActionBar" />
 
-    <style name="Theme.PocketChord.Launch" parent="Theme.PocketChord">
+    <style name="Theme.PocketUkulele.Launch" parent="Theme.PocketUkulele">
         <!-- windowBackground를 스플래시 배경으로 사용 -->
         <item name="android:windowBackground">@drawable/splash_background</item>
         
@@ -126,11 +126,11 @@ app/src/main/res/
 
 ```xml
 <application
-    android:theme="@style/Theme.PocketChord"
+    android:theme="@style/Theme.PocketUkulele"
     ...>
     <activity
         android:name=".MainActivity"
-        android:theme="@style/Theme.PocketChord.Launch"
+        android:theme="@style/Theme.PocketUkulele.Launch"
         ...>
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -140,7 +140,7 @@ app/src/main/res/
 </application>
 ```
 
-**중요**: MainActivity에 `Theme.PocketChord.Launch` 테마를 적용합니다.
+**중요**: MainActivity에 `Theme.PocketUkulele.Launch` 테마를 적용합니다.
 
 ### 5. MainActivity에서 테마 전환
 
@@ -150,7 +150,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         
         // 스플래시 스크린 후 일반 테마로 전환
-        setTheme(R.style.Theme_PocketChord)
+        setTheme(R.style.Theme_PocketUkulele)
         
         setContent {
             // ...
@@ -198,7 +198,7 @@ Android 11 이하 크기 = Android 12+ 크기 × 약 1.16
 ### 주의사항
 
 1. **브랜드 색상 변경**: `#f28090`를 프로젝트의 브랜드 색상으로 변경
-2. **테마 이름 변경**: `Theme.PocketChord`를 프로젝트의 테마 이름으로 변경
+2. **테마 이름 변경**: `Theme.PocketUkulele`를 프로젝트의 테마 이름으로 변경
 3. **로고 파일 이름 확인**: `@drawable/ic_splash_logo`를 실제 로고 파일명으로 변경
 4. **시스템 바 색상**: 앱의 디자인에 맞게 상태바/네비게이션바 색상 및 아이콘 명암 조정
 

@@ -9,12 +9,12 @@
 ```
 Supabase 테이블:
 ┌────────────────────────────────────────┐
-│ app_id: com.sweetapps.pocketchord      │ ← Release용 (실제 사용자)
+│ app_id: com.sweetapps.PocketUkulele      │ ← Release용 (실제 사용자)
 │ is_active: false  ← 비활성화!          │
 └────────────────────────────────────────┘
 
 ┌────────────────────────────────────────┐
-│ app_id: com.sweetapps.pocketchord.     │ ← Release Test용 (테스트)
+│ app_id: com.sweetapps.PocketUkulele.     │ ← Release Test용 (테스트)
 │         releasetest                     │
 │ is_active: true  ← 활성화!             │
 └────────────────────────────────────────┘
@@ -30,7 +30,7 @@ create("releaseTest") {
     buildConfigField(
         "String",
         "SUPABASE_APP_ID",
-        "\"com.sweetapps.pocketchord.releasetest\""  // ✅ 수정 완료!
+        "\"com.sweetapps.PocketUkulele.releasetest\""  // ✅ 수정 완료!
     )
     
     // Application ID도 다름
@@ -52,11 +52,11 @@ INSERT INTO app_policy (
     min_supported_version,
     latest_version_code
 ) VALUES (
-    'com.sweetapps.pocketchord.releasetest',  -- ✅ Release Test 전용!
+    'com.sweetapps.PocketUkulele.releasetest',  -- ✅ Release Test 전용!
     true,
     'force_update',
     '[테스트] 필수 업데이트가 있습니다.',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',
     3,
     3
 )
@@ -75,7 +75,7 @@ DO UPDATE SET
 ```sql
 UPDATE app_policy
 SET is_active = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ### 3. 재빌드 및 테스트
@@ -91,7 +91,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 .\gradlew.bat installReleaseTest
 
 # 4. 실행
-adb shell am start -n com.sweetapps.pocketchord.releasetest/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.releasetest/com.sweetapps.PocketUkulele.MainActivity
 
 # 5. 로그 확인
 adb logcat -d | Select-String "SUPABASE_APP_ID"
@@ -99,7 +99,7 @@ adb logcat -d | Select-String "SUPABASE_APP_ID"
 
 **예상 로그**:
 ```
-D/HomeScreen: SUPABASE_APP_ID=com.sweetapps.pocketchord.releasetest
+D/HomeScreen: SUPABASE_APP_ID=com.sweetapps.PocketUkulele.releasetest
 ```
 
 ## 🎯 최종 확인
@@ -108,9 +108,9 @@ D/HomeScreen: SUPABASE_APP_ID=com.sweetapps.pocketchord.releasetest
 
 | 빌드 | SUPABASE_APP_ID | 실제 사용자 영향 |
 |------|-----------------|-----------------|
-| debug | `com.sweetapps.pocketchord.debug` | ❌ 없음 |
-| **releaseTest** | `com.sweetapps.pocketchord.releasetest` | ❌ **없음!** |
-| release | `com.sweetapps.pocketchord` | ✅ 있음 |
+| debug | `com.sweetapps.PocketUkulele.debug` | ❌ 없음 |
+| **releaseTest** | `com.sweetapps.PocketUkulele.releasetest` | ❌ **없음!** |
+| release | `com.sweetapps.PocketUkulele` | ✅ 있음 |
 
 ## ⚠️ 이전 설명 수정
 

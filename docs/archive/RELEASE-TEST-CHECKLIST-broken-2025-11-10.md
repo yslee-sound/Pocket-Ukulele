@@ -1,4 +1,4 @@
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: 최종 검증
@@ -51,7 +51,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 
 #### 옵션 A: 프로덕션(릴리즈) 테스트 ✅ **권장**
 ### 시나리오 6-2: 실제 프로덕션 상태
-app_id: 'com.sweetapps.pocketchord'
+app_id: 'com.sweetapps.PocketUkulele'
 목적: 실제 사용자가 받을 릴리즈 빌드 검증
 언제: 릴리즈 전 최종 검증
 SQL 파일: docs/sql/test-scripts-release.sql ⭐
@@ -59,7 +59,7 @@ SQL 파일: docs/sql/test-scripts-release.sql ⭐
 
 #### 옵션 B: 개발(Debug) 테스트
 ```
-app_id: 'com.sweetapps.pocketchord.debug'
+app_id: 'com.sweetapps.PocketUkulele.debug'
 목적: 개발 중 빠른 테스트
 언제: 개발 단계, 빠른 검증
 SQL 파일: docs/sql/test-scripts-debug.sql ⭐
@@ -70,14 +70,14 @@ SQL 파일: docs/sql/test-scripts-debug.sql ⭐
 2. 파일 열기
 3. 필요한 SQL 복사해서 Supabase에서 실행
 
-**이 체크리스트의 기본값**: `'com.sweetapps.pocketchord'` (프로덕션)
+**이 체크리스트의 기본값**: `'com.sweetapps.PocketUkulele'` (프로덕션)
 
 
 ---
 
 ### 2. Supabase 접속
 - [ ] Supabase 대시보드 접속
-- [ ] PocketChord 프로젝트 선택
+- [ ] PocketUkulele 프로젝트 선택
 - [ ] SQL Editor 열기 준비
 
 ### 3. Android Studio 준비
@@ -103,25 +103,25 @@ SELECT 'emergency_policy' as table_name,
        CAST(is_active AS TEXT) as is_active, 
        LEFT(content, 30) as content_preview 
 FROM emergency_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 SELECT 'update_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('target:', target_version_code, ' force:', is_force_update)
 FROM update_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 SELECT 'notice_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('v', notice_version, ': ', LEFT(title, 20))
 FROM notice_policy 
-WHERE app_id = 'com.sweetapps.pocketchord'
+WHERE app_id = 'com.sweetapps.PocketUkulele'
 UNION ALL
 SELECT 'ad_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('open:', ad_app_open_enabled, ' inter:', ad_interstitial_enabled, ' banner:', ad_banner_enabled)
 FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### 🔧 디버그 버전
@@ -132,25 +132,25 @@ SELECT 'emergency_policy' as table_name,
        CAST(is_active AS TEXT) as is_active, 
        LEFT(content, 30) as content_preview 
 FROM emergency_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
 SELECT 'update_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('target:', target_version_code, ' force:', is_force_update)
 FROM update_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
 SELECT 'notice_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('v', notice_version, ': ', LEFT(title, 20))
 FROM notice_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug'
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
 SELECT 'ad_policy', 
        CAST(is_active AS TEXT), 
        CONCAT('open:', ad_app_open_enabled, ' inter:', ad_interstitial_enabled, ' banner:', ad_banner_enabled)
 FROM ad_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **결과 예시**:
@@ -189,7 +189,7 @@ UPDATE emergency_policy
 SET is_active = true,
     is_dismissible = true,
     content = '🚨 [테스트] 긴급 테스트입니다. X 버튼으로 닫을 수 있습니다.'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: 앱 실행
@@ -237,7 +237,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE emergency_policy 
 SET is_dismissible = false,
     content = '🚨 [테스트] 이 앱은 더 이상 지원되지 않습니다. 새 앱을 설치해야 합니다.'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: 앱 실행
@@ -255,7 +255,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 테스트 완료 후 비활성화
 UPDATE emergency_policy 
 SET is_active = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 - [ ] ✅ 비활성화 완료
@@ -274,7 +274,7 @@ SET is_active = true,
     is_force_update = true,
     message = '[테스트] 필수 업데이트가 있습니다',
     release_notes = '• [테스트] 중요 보안 패치\n• [테스트] 필수 기능 추가'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: 앱 실행
@@ -315,11 +315,11 @@ UPDATE update_policy
 SET is_force_update = false,  -- 선택적으로 변경
     message = '[테스트] 새로운 기능이 추가되었습니다',
     release_notes = '• [테스트] 다크 모드 추가\n• [테스트] 성능 개선\n• [테스트] UI 업데이트'
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: SharedPreferences 초기화
-- [ ] 앱 데이터 삭제 (설정 → 앱 → PocketChord → 데이터 삭제)
+- [ ] 앱 데이터 삭제 (설정 → 앱 → PocketUkulele → 데이터 삭제)
 - [ ] 또는: 앱 재설치
 
 #### Step 3: 앱 실행
@@ -347,7 +347,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 버전을 더 높게 변경
 UPDATE update_policy 
 SET target_version_code = 1000  -- 더 높은 버전
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 - [ ] 앱 재실행
@@ -367,7 +367,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 테스트 완료 후 target을 낮게
 UPDATE update_policy 
 SET target_version_code = 1
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 - [ ] ✅ 정리 완료
@@ -383,7 +383,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 현재 상태 확인
 SELECT notice_version, title, is_active 
 FROM notice_policy 
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **기록**: `notice_version = _____`
@@ -429,8 +429,8 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 ```sql
 -- content만 수정 (버전은 그대로!)
 UPDATE notice_policy 
-SET content = 'PocketChord를 이용해 주셔서 정말 감사합니다!'  -- 약간 수정
-WHERE app_id = 'com.sweetapps.pocketchord';
+SET content = 'PocketUkulele를 이용해 주셔서 정말 감사합니다!'  -- 약간 수정
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 -- notice_version은 변경하지 않음!
 ```
 
@@ -461,7 +461,7 @@ UPDATE notice_policy
 SET title = '🎉 11월 이벤트',
     content = '11월 특별 이벤트가 시작되었습니다!\n많은 참여 부탁드립니다.',
     notice_version = 2  -- 버전 증가! ⭐
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 #### Step 2: 앱 실행
@@ -495,7 +495,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 -- 원래대로 복구
 UPDATE notice_policy 
 SET title = '환영합니다! 🎉',
-    content = 'PocketChord를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
+    content = 'PocketUkulele를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
     notice_version = 1
 WHERE app_id = 'com.sweetapps.pocketchord';
 ```
@@ -850,7 +850,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE notice_policy 
 SET is_active = true,
     title = '환영합니다! 🎉',
-    content = 'PocketChord를 이용해 주셔서 감사합니다!',
+    content = 'PocketUkulele를 이용해 주셔서 감사합니다!',
     notice_version = 1
 WHERE app_id = 'com.sweetapps.pocketchord';
 ```
@@ -1049,7 +1049,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE notice_policy 
 SET is_active = true,
     title = '환영합니다! 🎉',
-    content = 'PocketChord를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
+    content = 'PocketUkulele를 이용해 주셔서 감사합니다!\n더 나은 서비스를 제공하기 위해 노력하겠습니다.',
     notice_version = 1
 WHERE app_id = 'com.sweetapps.pocketchord';
 ```
@@ -1057,7 +1057,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 ### 앱 데이터 초기화 방법
 
 **Android 기기**:
-1. 설정 → 앱 → PocketChord
+1. 설정 → 앱 → PocketUkulele
 2. 저장공간 → 데이터 삭제
 
 **에뮬레이터**:

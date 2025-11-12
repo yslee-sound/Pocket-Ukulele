@@ -6,7 +6,7 @@
 
 **Supabase 대시보드 접속**:
 1. https://supabase.com 로그인
-2. PocketChord 프로젝트 선택
+2. PocketUkulele 프로젝트 선택
 3. SQL Editor 클릭
 
 **SQL 스크립트 실행**:
@@ -45,7 +45,7 @@ FROM app_policy;
 ✅ **실행 후 확인사항**:
 - 컬럼이 추가되었는지
 - 기존 레코드에 기본값이 설정되었는지
-- `com.sweetapps.pocketchord` 레코드가 있는지
+- `com.sweetapps.PocketUkulele` 레코드가 있는지
 
 ---
 
@@ -60,7 +60,7 @@ FROM app_policy;
 
 **방법 2: 명령줄**
 ```cmd
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 gradlew assembleDebug
 gradlew installDebug
 ```
@@ -104,7 +104,7 @@ AppPolicyRepo: ❌ No policy found!
    ```sql
    UPDATE app_policy 
    SET ad_banner_enabled = false 
-   WHERE app_id = 'com.sweetapps.pocketchord';
+   WHERE app_id = 'com.sweetapps.PocketUkulele';
    ```
 4. **앱을 끄지 말고 5분 대기** (또는 캐시 만료 후)
 5. Logcat에서 변경 로그 확인:
@@ -129,7 +129,7 @@ AppPolicyRepo: ❌ No policy found!
    ```sql
    UPDATE app_policy 
    SET ad_interstitial_enabled = false 
-   WHERE app_id = 'com.sweetapps.pocketchord';
+   WHERE app_id = 'com.sweetapps.PocketUkulele';
    ```
 6. 앱 재시작 (또는 5분 대기)
 7. 전면 광고 표시 안 됨 확인 ✅
@@ -144,7 +144,7 @@ AppPolicyRepo: ❌ No policy found!
    ```sql
    UPDATE app_policy 
    SET ad_app_open_enabled = false 
-   WHERE app_id = 'com.sweetapps.pocketchord';
+   WHERE app_id = 'com.sweetapps.PocketUkulele';
    ```
 7. 백그라운드 → 복귀
 8. 광고 표시 안 됨 확인 ✅
@@ -179,7 +179,7 @@ AppPolicyRepo: ❌ No policy found!
 **해결**:
 ```sql
 -- 레코드 확인
-SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.pocketchord';
+SELECT * FROM app_policy WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 없으면 생성 (예시)
 INSERT INTO app_policy (
@@ -190,7 +190,7 @@ INSERT INTO app_policy (
   ad_interstitial_enabled,
   ad_banner_enabled
 ) VALUES (
-  'com.sweetapps.pocketchord',
+  'com.sweetapps.PocketUkulele',
   true,
   'none',
   true,
@@ -234,7 +234,7 @@ UPDATE app_policy SET
   ad_app_open_enabled = true,
   ad_interstitial_enabled = true,
   ad_banner_enabled = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **원인 2**: 캐시가 오래된 정책 사용 중
@@ -270,7 +270,7 @@ UPDATE app_policy SET
   ad_app_open_enabled = false,
   ad_interstitial_enabled = false,
   ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **반영 시간**: 최대 5분
@@ -287,13 +287,13 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE app_policy SET
   ad_interstitial_enabled = false,
   ad_banner_enabled = false
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 
 -- 이벤트 종료
 UPDATE app_policy SET
   ad_interstitial_enabled = true,
   ad_banner_enabled = true
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 ---
@@ -308,7 +308,7 @@ WHERE app_id = 'com.sweetapps.pocketchord';
 UPDATE app_policy SET
   ad_interstitial_max_per_hour = 2,
   ad_interstitial_max_per_day = 15
-WHERE app_id = 'com.sweetapps.pocketchord';
+WHERE app_id = 'com.sweetapps.PocketUkulele';
 ```
 
 **모니터링**: 평점 변화 관찰 후 조정

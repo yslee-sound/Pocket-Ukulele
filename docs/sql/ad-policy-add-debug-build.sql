@@ -15,7 +15,7 @@ INSERT INTO ad_policy (
   ad_interstitial_max_per_hour,
   ad_interstitial_max_per_day
 ) VALUES (
-  'com.sweetapps.pocketchord.debug',
+  'com.sweetapps.PocketUkulele.debug',
   true,    -- 광고 정책 활성화
   true,    -- 앱 오픈 광고 ON
   true,    -- 전면 광고 ON
@@ -49,7 +49,7 @@ ORDER BY app_id;
 -- 예상 결과
 -- ============================================
 -- 2개의 행이 반환되어야 함:
--- 1. com.sweetapps.pocketchord (Release)
--- 2. com.sweetapps.pocketchord.debug (Debug)
+-- 1. com.sweetapps.PocketUkulele (Release)
+-- 2. com.sweetapps.PocketUkulele.debug (Debug)
 -- ============================================
 

@@ -18,7 +18,7 @@
 **또는** 명령어:
 ```bash
 .\gradlew.bat installReleaseTest
-adb shell am start -n com.sweetapps.pocketchord.releasetest/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.releasetest/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ## 🎯 다음 단계
@@ -38,11 +38,11 @@ INSERT INTO app_policy (
     min_supported_version,
     latest_version_code
 ) VALUES (
-    'com.sweetapps.pocketchord.releasetest',  -- ✅ Release Test 전용!
+    'com.sweetapps.PocketUkulele.releasetest',  -- ✅ Release Test 전용!
     true,
     'force_update',
     '[테스트] 필수 업데이트가 있습니다.\n앱을 최신 버전으로 업데이트해주세요.',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',
     3,  -- 현재 버전(2)보다 큼 → 강제 업데이트 발생
     3
 )
@@ -68,11 +68,11 @@ INSERT INTO app_policy (
     min_supported_version,
     latest_version_code
 ) VALUES (
-    'com.sweetapps.pocketchord',  -- ✅ Release 전용!
+    'com.sweetapps.PocketUkulele',  -- ✅ Release 전용!
     false,  -- ⚠️ 테스트 중에는 비활성화!
     'force_update',
     '필수 업데이트가 있습니다.\n앱을 최신 버전으로 업데이트해주세요.',
-    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketchord',
+    'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele',
     3,
     3
 )
@@ -103,7 +103,7 @@ DO UPDATE SET
 .\gradlew.bat installReleaseTest
 
 # 3. 실행
-adb shell am start -n com.sweetapps.pocketchord.releasetest/com.sweetapps.pocketchord.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.releasetest/com.sweetapps.PocketUkulele.MainActivity
 ```
 
 ### 3. 로그로 SUPABASE_APP_ID 확인
@@ -115,11 +115,11 @@ adb logcat -d | Select-String "SUPABASE_APP_ID|Target app_id"
 
 **예상 로그**:
 ```
-D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.pocketchord.releasetest, VERSION_CODE=2
-D/AppPolicyRepo: Target app_id: com.sweetapps.pocketchord.releasetest
+D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.PocketUkulele.releasetest, VERSION_CODE=2
+D/AppPolicyRepo: Target app_id: com.sweetapps.PocketUkulele.releasetest
 ```
 
-✅ `com.sweetapps.pocketchord.releasetest`가 출력되면 Release Test 설정 적용 성공!
+✅ `com.sweetapps.PocketUkulele.releasetest`가 출력되면 Release Test 설정 적용 성공!
 
 ### 4. 테스트 시나리오 실행
 
@@ -170,9 +170,9 @@ W/HomeScreen: ⚠️ Clearing cached force update (no active policy)
 
 | 빌드 타입 | Application ID | SUPABASE_APP_ID | 실제 사용자 영향 | 용도 |
 |-----------|----------------|-----------------|-----------------|------|
-| **debug** | `com.sweetapps.pocketchord.debug` | `com.sweetapps.pocketchord.debug` | ❌ 없음 | 개발 및 디버그 |
-| **releaseTest** | `com.sweetapps.pocketchord.releasetest` | `com.sweetapps.pocketchord.releasetest` | ❌ 없음 | Release 설정 테스트 |
-| **release** | `com.sweetapps.pocketchord` | `com.sweetapps.pocketchord` | ✅ **있음** | 실제 배포 |
+| **debug** | `com.sweetapps.PocketUkulele.debug` | `com.sweetapps.PocketUkulele.debug` | ❌ 없음 | 개발 및 디버그 |
+| **releaseTest** | `com.sweetapps.PocketUkulele.releasetest` | `com.sweetapps.PocketUkulele.releasetest` | ❌ 없음 | Release 설정 테스트 |
+| **release** | `com.sweetapps.PocketUkulele` | `com.sweetapps.pocketchord` | ✅ **있음** | 실제 배포 |
 
 ### 🎯 Release Test의 목적
 

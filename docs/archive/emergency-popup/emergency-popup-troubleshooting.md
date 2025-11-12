@@ -27,7 +27,7 @@ LaunchedEffect(Unit) {
 ```kotlin
 // MainActivity.kt
 // 앱 정책 체크는 HomeScreen에서 처리 (중복 제거)
-val app = context.applicationContext as PocketChordApplication
+val app = context.applicationContext as PocketUkuleleApplication
 val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 ```
 
@@ -71,7 +71,7 @@ if (showEmergencyDialog && announcement?.isEmergency == true) {
 **After**:
 ```kotlin
 if (showEmergencyDialog && appPolicy != null) {
-    com.sweetapps.pocketchord.ui.dialog.EmergencyDialog(
+    com.sweetapps.PocketUkulele.ui.dialog.EmergencyDialog(
         policy = appPolicy!!,
         onDismiss = { /* X 버튼 없음 */ }
     )
@@ -87,14 +87,14 @@ if (showEmergencyDialog && appPolicy != null) {
 -- app_policy 테이블 조회
 SELECT app_id, is_active, active_popup_type, content, download_url
 FROM app_policy
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 **예상 결과**:
 ```
 app_id                              | is_active | active_popup_type | content | download_url
 ------------------------------------|-----------|-------------------|---------|-------------
-com.sweetapps.pocketchord.debug    | TRUE      | emergency         | ...     | ...
+com.sweetapps.PocketUkulele.debug    | TRUE      | emergency         | ...     | ...
 ```
 
 ### 2. 긴급 공지 활성화
@@ -104,21 +104,21 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
   download_url = 'https://status.example.com'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 3. 앱 재시작 후 로그 확인
 ```cmd
 adb logcat -c
-adb logcat -s HomeScreen:D AppPolicyRepo:D PocketChordApp:D
+adb logcat -s HomeScreen:D AppPolicyRepo:D PocketUkuleleApp:D
 ```
 
 **예상 로그**:
 ```
-D/PocketChordApp: Supabase configured: url set
-D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.pocketchord.debug, VERSION_CODE=2
+D/PocketUkuleleApp: Supabase configured: url set
+D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.PocketUkulele.debug, VERSION_CODE=2
 D/HomeScreen: Supabase configured=true
-D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.pocketchord.debug active=true type=emergency minSupported=null latest=null
+D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.PocketUkulele.debug active=true type=emergency minSupported=null latest=null
 D/HomeScreen: Decision: EMERGENCY popup will show
 ```
 
@@ -141,7 +141,7 @@ D/HomeScreen: Decision: EMERGENCY popup will show
 
 ### 테이블 설정
 - [ ] `app_policy` 테이블이 존재하는가?
-- [ ] `app_id`가 정확한가? (디버그: `com.sweetapps.pocketchord.debug`)
+- [ ] `app_id`가 정확한가? (디버그: `com.sweetapps.PocketUkulele.debug`)
 - [ ] `is_active = TRUE`인가?
 - [ ] `active_popup_type = 'emergency'`인가?
 - [ ] `content` 필드에 메시지가 있는가?
@@ -172,7 +172,7 @@ D/HomeScreen: Decision: EMERGENCY popup will show
 
 ### 정상 작동 시
 ```
-D/PocketChordApp: Supabase configured: url set
+D/PocketUkuleleApp: Supabase configured: url set
 D/HomeScreen: Supabase configured=true
 D/HomeScreen: Policy fetch success: ... type=emergency ...
 D/HomeScreen: Decision: EMERGENCY popup will show
@@ -180,14 +180,14 @@ D/HomeScreen: Decision: EMERGENCY popup will show
 
 ### Supabase 미설정
 ```
-W/PocketChordApp: Supabase 미설정: 환경변수 SUPABASE_URL / SUPABASE_ANON_KEY 를 확인하세요
+W/PocketUkuleleApp: Supabase 미설정: 환경변수 SUPABASE_URL / SUPABASE_ANON_KEY 를 확인하세요
 W/HomeScreen: Skipping network fetch (Supabase not configured)
 ```
 **해결**: `local.properties`에 설정 추가
 
 ### 정책 없음
 ```
-W/HomeScreen: No active policy row for app_id='com.sweetapps.pocketchord.debug'. 
+W/HomeScreen: No active policy row for app_id='com.sweetapps.PocketUkulele.debug'. 
 Check: (1) app_policy.app_id 값, (2) is_active=true, (3) RLS policy allowing read, (4) anon key valid.
 ```
 **해결**: Supabase에서 정책 활성화
@@ -205,7 +205,7 @@ E/HomeScreen: Policy fetch failure: Unable to resolve host
 ### 1. 캐시 초기화
 앱 데이터를 지우고 재시작:
 ```cmd
-adb shell pm clear com.sweetapps.pocketchord.debug
+adb shell pm clear com.sweetapps.PocketUkulele.debug
 ```
 
 ### 2. Supabase 직접 테스트
@@ -217,7 +217,7 @@ const client = createClient('YOUR_URL', 'YOUR_ANON_KEY')
 const { data, error } = await client
   .from('app_policy')
   .select('*')
-  .eq('app_id', 'com.sweetapps.pocketchord.debug')
+  .eq('app_id', 'com.sweetapps.PocketUkulele.debug')
   
 console.log(data, error)
 ```
@@ -260,7 +260,7 @@ SELECT * FROM app_policy;
 adb logcat -c
 
 # 2. 로그 필터링 시작
-adb logcat -s HomeScreen:D AppPolicyRepo:D PocketChordApp:D
+adb logcat -s HomeScreen:D AppPolicyRepo:D PocketUkuleleApp:D
 
 # 3. 앱 재시작 (또는 수동으로)
 adb shell am force-stop com.sweetapps.pocketchord.debug

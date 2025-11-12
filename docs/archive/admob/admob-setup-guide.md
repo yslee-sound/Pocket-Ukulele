@@ -16,8 +16,8 @@
 ### 1.2 앱 등록
 1. AdMob 대시보드에서 **"앱" > "앱 추가"** 클릭
 2. 플랫폼: **Android** 선택
-3. 앱 이름: **PocketChord** 입력
-4. 패키지명: `com.sweetapps.pocketchord` 확인
+3. 앱 이름: **PocketUkulele** 입력
+4. 패키지명: `com.sweetapps.PocketUkulele` 확인
 5. 앱 추가 완료
 
 ---
@@ -29,20 +29,20 @@ AdMob에서 3가지 광고 단위를 생성해야 합니다:
 ### 2.1 배너 광고 (Banner Ad)
 1. **"광고 단위" > "광고 단위 추가"** 클릭
 2. 광고 형식: **배너** 선택
-3. 광고 단위 이름: `PocketChord Banner`
+3. 광고 단위 이름: `PocketUkulele Banner`
 4. 생성 완료 후 **광고 단위 ID** 복사
    - 형식: `ca-app-pub-XXXXXXXXXXXXXXXX/YYYYYYYYYY`
 
 ### 2.2 전면 광고 (Interstitial Ad)
 1. **"광고 단위 추가"** 클릭
 2. 광고 형식: **전면 광고** 선택
-3. 광고 단위 이름: `PocketChord Interstitial`
+3. 광고 단위 이름: `PocketUkulele Interstitial`
 4. 생성 완료 후 **광고 단위 ID** 복사
 
 ### 2.3 앱 오픈 광고 (App Open Ad)
 1. **"광고 단위 추가"** 클릭
 2. 광고 형식: **앱 오픈 광고** 선택
-3. 광고 단위 이름: `PocketChord App Open`
+3. 광고 단위 이름: `PocketUkulele App Open`
 4. 생성 완료 후 **광고 단위 ID** 복사
 
 ---
@@ -116,7 +116,7 @@ $env:APP_OPEN_AD_UNIT_ID="ca-app-pub-XXXXXXXXXXXXXXXX/WWWWWWWWWW"
 ### 필수 확인 사항
 
 - [ ] AdMob 계정 생성 완료
-- [ ] 앱 등록 완료 (패키지명: `com.sweetapps.pocketchord`)
+- [ ] 앱 등록 완료 (패키지명: `com.sweetapps.PocketUkulele`)
 - [ ] 배너 광고 단위 생성 및 ID 복사
 - [ ] 전면 광고 단위 생성 및 ID 복사
 - [ ] 앱 오픈 광고 단위 생성 및 ID 복사
@@ -181,7 +181,7 @@ buildConfigField("String", "APP_OPEN_AD_UNIT_ID", "\"${appOpenAdId}\"")
 
 ```powershell
 # BuildConfig 내용 확인
-Get-Content "app\build\generated\source\buildConfig\release\com\sweetapps\pocketchord\BuildConfig.java" | Select-String "AD_UNIT_ID"
+Get-Content "app\build\generated\source\buildConfig\release\com\sweetapps\PocketUkulele\BuildConfig.java" | Select-String "AD_UNIT_ID"
 ```
 
 실제 광고 ID가 표시되어야 합니다 (테스트 ID가 아닌).

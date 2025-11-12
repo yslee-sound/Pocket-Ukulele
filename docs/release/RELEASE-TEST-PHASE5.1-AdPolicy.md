@@ -60,7 +60,7 @@ SELECT app_id,is_active FROM ad_policy;
 ```sql
 SELECT app_id,is_active,ad_app_open_enabled,ad_interstitial_enabled,ad_banner_enabled,
        ad_interstitial_max_per_hour,ad_interstitial_max_per_day
-FROM ad_policy WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+FROM ad_policy WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 기대: 모든 광고 ON, per_hour=2, per_day=15.
 
@@ -71,7 +71,7 @@ FROM ad_policy WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocke
 1) OFF 설정
 ```sql
 UPDATE ad_policy SET is_active=false
-WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 2) 검증
 - App Open: 백그라운드→포그라운드 복귀 시 미표시
@@ -88,7 +88,7 @@ MainActivity: 🔄 배너 광고 정책 변경: 활성화 → 비활성화
 3) 복구
 ```sql
 UPDATE ad_policy SET is_active=true
-WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 확인: 재시작 후 정상 표시
 
@@ -111,7 +111,7 @@ FROM pg_policies WHERE tablename='ad_policy';
 1) RLS 수정 여부 확인
 2) 설정 확인:
 ```sql
-SELECT * FROM ad_policy WHERE app_id IN ('com.sweetapps.pocketchord','com.sweetapps.pocketchord.debug');
+SELECT * FROM ad_policy WHERE app_id IN ('com.sweetapps.PocketUkulele','com.sweetapps.PocketUkulele.debug');
 ```
 3) 재시작 또는 3분 대기
 4) Logcat:

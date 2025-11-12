@@ -1,4 +1,4 @@
-# PocketChord: 내가 정의해야 할 항목(체크리스트 + 템플릿)
+# PocketUkulele: 내가 정의해야 할 항목(체크리스트 + 템플릿)
 
 이 문서는 코드 데이터베이스 설계/구현(see: `docs/chords-db-architecture.md`, `docs/chords-db-implementation-plan.md`)에서 제품 오너가 선결로 "정의"해야 실제 개발을 막힘없이 진행할 수 있는 결정 사항을 한 데 모은 체크리스트입니다. 각 항목은 선택지와 템플릿을 제공하며, 미정이면 추천 기본값(Recommended)을 사용해도 됩니다.
 

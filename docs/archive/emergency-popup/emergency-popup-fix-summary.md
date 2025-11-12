@@ -38,7 +38,7 @@ LaunchedEffect(Unit) {
 
 // After: 중복 제거
 // 앱 정책 체크는 HomeScreen에서 처리 (중복 제거)
-val app = context.applicationContext as PocketChordApplication
+val app = context.applicationContext as PocketUkuleleApplication
 val isShowingAppOpenAd by app.isShowingAppOpenAd.collectAsState()
 ```
 
@@ -70,7 +70,7 @@ var appPolicy by remember { mutableStateOf<AppPolicy?>(null) }  // ✅ 추가
 
 // 팝업 표시
 if (showEmergencyDialog && appPolicy != null) {
-    com.sweetapps.pocketchord.ui.dialog.EmergencyDialog(  // ✅ 새 다이얼로그
+    com.sweetapps.PocketUkulele.ui.dialog.EmergencyDialog(  // ✅ 새 다이얼로그
         policy = appPolicy!!,
         onDismiss = { /* X 버튼 없음 */ }
     )
@@ -95,7 +95,7 @@ UPDATE app_policy SET
   active_popup_type = 'emergency',
   content = '🚨 긴급 점검 안내: 서버 점검이 진행 중입니다.',
   download_url = 'https://status.example.com'
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ### 3. 앱 빌드 및 실행
@@ -108,18 +108,18 @@ adb install -r app\build\outputs\apk\debug\app-debug.apk
 
 # 로그 확인
 adb logcat -c
-adb logcat -s HomeScreen:D AppPolicyRepo:D PocketChordApp:D
+adb logcat -s HomeScreen:D AppPolicyRepo:D PocketUkuleleApp:D
 
 # 앱 실행
-adb shell am start -n com.sweetapps.pocketchord.debug/.MainActivity
+adb shell am start -n com.sweetapps.PocketUkulele.debug/.MainActivity
 ```
 
 ### 4. 예상 로그
 ```
-D/PocketChordApp: Supabase configured: url set
-D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.pocketchord.debug, VERSION_CODE=2
+D/PocketUkuleleApp: Supabase configured: url set
+D/HomeScreen: Startup: SUPABASE_APP_ID=com.sweetapps.PocketUkulele.debug, VERSION_CODE=2
 D/HomeScreen: Supabase configured=true
-D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.pocketchord.debug active=true type=emergency minSupported=null latest=null
+D/HomeScreen: Policy fetch success: id=1 appId=com.sweetapps.PocketUkulele.debug active=true type=emergency minSupported=null latest=null
 D/HomeScreen: Decision: EMERGENCY popup will show
 ```
 
@@ -139,7 +139,7 @@ D/HomeScreen: Decision: EMERGENCY popup will show
 
 #### 1. Supabase 설정 확인
 ```cmd
-adb logcat -s PocketChordApp:* -d | findstr "Supabase"
+adb logcat -s PocketUkuleleApp:* -d | findstr "Supabase"
 ```
 **예상**: `Supabase configured: url set`  
 **문제**: `Supabase 미설정` → `local.properties` 확인
@@ -162,7 +162,7 @@ adb logcat -s HomeScreen:* -d | findstr "Decision"
 ```sql
 -- Supabase SQL Editor
 SELECT * FROM app_policy 
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 
 -- 결과가 없으면 RLS 문제
 -- SQL Editor는 RLS 우회하므로 데이터가 보여야 함
@@ -176,7 +176,7 @@ FROM app_policy;
 **is_active = FALSE**인 경우:
 ```sql
 UPDATE app_policy SET is_active = TRUE
-WHERE app_id = 'com.sweetapps.pocketchord.debug';
+WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 ```
 
 ---
@@ -202,22 +202,22 @@ WHERE app_id = 'com.sweetapps.pocketchord.debug';
 ### 디버그 모드에서 즉시 확인
 1. 앱 강제 종료
    ```cmd
-   adb shell am force-stop com.sweetapps.pocketchord.debug
+   adb shell am force-stop com.sweetapps.PocketUkulele.debug
    ```
 
 2. 캐시 초기화 (선택)
    ```cmd
-   adb shell pm clear com.sweetapps.pocketchord.debug
+   adb shell pm clear com.sweetapps.PocketUkulele.debug
    ```
 
 3. 앱 재시작
    ```cmd
-   adb shell am start -n com.sweetapps.pocketchord.debug/.MainActivity
+   adb shell am start -n com.sweetapps.PocketUkulele.debug/.MainActivity
    ```
 
 ### Supabase 테스트 환경
-**디버그**: `com.sweetapps.pocketchord.debug`  
-**릴리즈**: `com.sweetapps.pocketchord`
+**디버그**: `com.sweetapps.PocketUkulele.debug`  
+**릴리즈**: `com.sweetapps.PocketUkulele`
 
 각각 별도의 `app_policy` 레코드 필요:
 ```sql
@@ -261,7 +261,7 @@ download_url 이동
 
 ## 빌드 명령어
 ```cmd
-cd G:\Workspace\PocketChord
+cd G:\Workspace\PocketUkulele
 gradlew.bat assembleDebug
 ```
 

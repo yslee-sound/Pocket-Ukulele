@@ -1,7 +1,7 @@
 # 전면광고 구현 가이드
 
 ## 개요
-PocketChord 앱에 Google AdMob 전면광고(Interstitial Ad)를 효과적으로 통합했습니다.
+PocketUkulele 앱에 Google AdMob 전면광고(Interstitial Ad)를 효과적으로 통합했습니다.
 
 ## 구현 내용
 
