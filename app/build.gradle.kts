@@ -77,7 +77,7 @@ android {
             buildConfigField(
                 "String",
                 "SUPABASE_APP_ID",
-                "\"com.sweetapps.PocketUkulele.debug\""
+                "\"com.sweetapps.pocketukulele.debug\""
             )
 
             // 빌드 타입 정보
@@ -98,7 +98,7 @@ android {
             buildConfigField(
                 "String",
                 "SUPABASE_APP_ID",
-                "\"com.sweetapps.PocketUkulele\""
+                "\"com.sweetapps.pocketukulele\""
             )
 
             // 빌드 타입 정보

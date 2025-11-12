@@ -1,13 +1,15 @@
 -- ============================================
 -- 디버그용 테스트 데이터 생성 (전체)
--- app_id: com.sweetapps.PocketUkulele.debug
+-- app_id: com.sweetapps.pocketukulele.debug
+-- ============================================
+-- 수정일: 2025-11-13 - 앱 ID 소문자로 수정 (대소문자 불일치 해결)
 -- ============================================
 
 -- 먼저 기존 디버그 데이터 삭제 (깨끗하게 시작)
-DELETE FROM public.emergency_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
-DELETE FROM public.update_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
-DELETE FROM public.notice_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
-DELETE FROM public.ad_policy WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
+DELETE FROM public.emergency_policy WHERE app_id = 'com.sweetapps.pocketukulele.debug';
+DELETE FROM public.update_policy WHERE app_id = 'com.sweetapps.pocketukulele.debug';
+DELETE FROM public.notice_policy WHERE app_id = 'com.sweetapps.pocketukulele.debug';
+DELETE FROM public.ad_policy WHERE app_id = 'com.sweetapps.pocketukulele.debug';
 
 -- 1. emergency_policy 디버그 데이터
 INSERT INTO public.emergency_policy (
@@ -16,7 +18,7 @@ INSERT INTO public.emergency_policy (
     content,
     redirect_url,
     button_text,
-    is_dismissible
+    'com.sweetapps.pocketukulele.debug',
 ) VALUES (
     'com.sweetapps.PocketUkulele.debug',
     false,
@@ -33,12 +35,12 @@ INSERT INTO public.update_policy (
     target_version_code,
     is_force_update,
     release_notes,
-    download_url
-) VALUES (
+    'com.sweetapps.pocketukulele.debug',
+    false,
     'com.sweetapps.PocketUkulele.debug',
     true,
     1,
-    false,
+    'https://play.google.com/store/apps/details?id=com.sweetapps.pocketukulele'
     '• [DEBUG] 최신 버전으로 업데이트하세요',
     'https://play.google.com/store/apps/details?id=com.sweetapps.PocketUkulele.debug'
 );
@@ -51,8 +53,8 @@ INSERT INTO public.notice_policy (
     content,
     notice_version,
     image_url,
-    action_url
-) VALUES (
+    'com.sweetapps.pocketukulele.debug',
+    false,
     'com.sweetapps.PocketUkulele.debug',
     true,
     '[DEBUG] 환영합니다! 🎉',
@@ -70,7 +72,7 @@ INSERT INTO public.ad_policy (
     ad_interstitial_enabled,
     ad_banner_enabled,
     ad_interstitial_max_per_hour,
-    ad_interstitial_max_per_day
+    'com.sweetapps.pocketukulele.debug',
 ) VALUES (
     'com.sweetapps.PocketUkulele.debug',
     true,
@@ -82,19 +84,19 @@ INSERT INTO public.ad_policy (
 );
 
 -- 5. 확인
-SELECT 'emergency_policy' as table_name, COUNT(*) as count
+WHERE app_id = 'com.sweetapps.pocketukulele.debug'
 FROM public.emergency_policy
 WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
-SELECT 'update_policy', COUNT(*)
+WHERE app_id = 'com.sweetapps.pocketukulele.debug'
 FROM public.update_policy
 WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
-SELECT 'notice_policy', COUNT(*)
+WHERE app_id = 'com.sweetapps.pocketukulele.debug'
 FROM public.notice_policy
 WHERE app_id = 'com.sweetapps.PocketUkulele.debug'
 UNION ALL
-SELECT 'ad_policy', COUNT(*)
+WHERE app_id = 'com.sweetapps.pocketukulele.debug';
 FROM public.ad_policy
 WHERE app_id = 'com.sweetapps.PocketUkulele.debug';
 

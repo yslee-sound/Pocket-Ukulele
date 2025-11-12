@@ -501,8 +501,8 @@ fun MainScreen(navController: NavHostController) {
             .background(
                 brush = Brush.verticalGradient(
                     colors = listOf(
-                        Color(0xFFD4E7F7),  // 위쪽 - 연한 하늘색
-                        Color(0xFFE8F2FA)   // 아래쪽 - 더 밝은 하늘색
+                        Color(0xFF5f866d),  // 위쪽 - 녹색 계열
+                        Color(0xFF7a9e8a)   // 아래쪽 - 더 밝은 녹색
                     )
                 )
             )
@@ -518,12 +518,12 @@ fun MainScreen(navController: NavHostController) {
 /**
  * 상단 타이틀 바
  *
- * PocketUkulele 앱 이름을 간단한 텍스트로 표시합니다.
+ * Pocket Ukulele 앱 이름을 간단한 텍스트로 표시합니다.
  */
 @Composable
 private fun TopBar() {
     Text(
-        text = "PocketUkulele",
+        text = "Pocket Ukulele",
         fontWeight = FontWeight.Bold,
         fontSize = 26.sp,
         color = Color(0xFF1F2D3D)
