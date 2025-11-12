@@ -35,6 +35,7 @@ import androidx.core.net.toUri
  * 긴급 상황 앱 전환 안내 팝업
  * 앱 스토어 출시 중지, 서비스 종료 등 긴급 상황에서 사용
  */
+@Suppress("UNUSED_PARAMETER")
 @Composable
 fun EmergencyRedirectDialog(
     title: String = "공지",
@@ -87,7 +88,7 @@ fun EmergencyRedirectDialog(
                     ) {
                         // 상단 아이콘(교체 가능 리소스)
                         Image(
-                            painter = painterResource(id = R.drawable.emergency_notice),
+                            painter = painterResource(id = com.sweetapps.pocketukulele.R.drawable.emergency_notice),
                             contentDescription = null,
                             modifier = Modifier.size(96.dp)
                         )

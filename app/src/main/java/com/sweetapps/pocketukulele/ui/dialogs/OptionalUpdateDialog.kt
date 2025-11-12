@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.sweetapps.pocketukulele.R
 
 /**
  * 업데이트 팝업 컴포넌트 (강제/선택적 통합)
@@ -110,7 +111,7 @@ fun OptionalUpdateDialog(
                         if (hasFeatures) {
                             Spacer(modifier = Modifier.height(16.dp))
                             Column(modifier = Modifier.fillMaxWidth()) {
-                                features!!.forEach { feature ->
+                                features.forEach { feature ->
                                     FeatureItem(feature)
                                     Spacer(modifier = Modifier.height(8.dp))
                                 }

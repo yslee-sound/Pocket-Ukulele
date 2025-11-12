@@ -78,7 +78,7 @@ fun NoticeDialog(
                                 .clip(shape)
                         ) {
                             Image(
-                                painter = painterResource(id = R.drawable.notice_sample),
+                                painter = painterResource(id = com.sweetapps.pocketukulele.R.drawable.notice_sample),
                                 contentDescription = null,
                                 contentScale = ContentScale.Crop,
                                 modifier = Modifier.fillMaxSize()
@@ -260,7 +260,7 @@ fun AnnouncementDialog(
                                     .clip(shape)
                             ) {
                                 Image(
-                                    painter = painterResource(id = R.drawable.notice_sample),
+                                    painter = painterResource(id = com.sweetapps.pocketukulele.R.drawable.notice_sample),
                                     contentDescription = null,
                                     contentScale = ContentScale.Crop,
                                     modifier = Modifier.fillMaxSize()
