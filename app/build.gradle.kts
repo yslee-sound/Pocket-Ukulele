@@ -17,8 +17,8 @@ android {
         applicationId = "com.sweetapps.pocketukulele"
         minSdk = 26
         targetSdk = 36
-        versionCode = 1  // 버그 수정: C#-Db 루트 매핑 문제 해결
-        versionName = "1.0.0"  // 버그 수정 버전
+        versionCode = 2  // 버그 수정: C#-Db 루트 매핑 문제 해결
+        versionName = "1.0.1"  // 버그 수정 버전
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
