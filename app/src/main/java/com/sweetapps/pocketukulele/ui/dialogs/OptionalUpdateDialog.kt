@@ -77,8 +77,7 @@ fun OptionalUpdateDialog(
                         modifier = Modifier
                             .fillMaxWidth()
                             .verticalScroll(rememberScrollState())
-                            .padding(28.dp)
-                            .padding(top = 16.dp) // X 버튼 공간
+                        // X 버튼 공간
                     ) {
                         // 상단 이미지
                         Box(

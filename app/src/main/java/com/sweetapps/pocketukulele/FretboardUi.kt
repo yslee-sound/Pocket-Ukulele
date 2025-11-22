@@ -19,14 +19,13 @@ import androidx.compose.ui.graphics.nativeCanvas
 import kotlin.math.min
 
 // ---- String index consistency helpers ----
-// Seed positions are ordered [E6, A5, D4, G3, B2, E1] = 6→1.
-// Diagram은 위(1번줄)→아래(6번줄)로 그리므로, y좌표 계산 시 이 헬퍼를 사용한다.
-private const val STRING_COUNT_FOR_Y = 6
-private fun yForSeedIndex(seedIdx: Int, stringSpacingPx: Float, invertStrings: Boolean): Float {
+// Seed positions are ordered top->bottom where index 0 corresponds to the topmost seed index.
+// yForSeedIndex now accepts a dynamic stringCount so the diagram works for 4-string ukulele or other instruments.
+private fun yForSeedIndex(seedIdx: Int, stringCount: Int, stringSpacingPx: Float, invertStrings: Boolean): Float {
     return if (invertStrings) {
         seedIdx * stringSpacingPx
     } else {
-        (STRING_COUNT_FOR_Y - 1 - seedIdx) * stringSpacingPx
+        (stringCount - 1 - seedIdx) * stringSpacingPx
     }
 }
 // -----------------------------------------
@@ -120,13 +119,33 @@ fun FretboardDiagram(
             // reserve nut width for spacing even if we don't draw the nut, so diagrams align left
             val reservedNutPx = computedNutPx
             // collect positive frets (used to compute startFret below)
-            val positiveFrets = positions.filter { it > 0 }
-            // Unified visible window based on uiParams.totalVisibleFrets and caller's preference
-            // Use caller's `firstFretIsNut` to decide how to split fractional parts; actual startFret is computed below
-            // Decide whether this chord actually starts at a nut or at a fret based on positions
-            // Decide chord starts at a fret (no nut) when the smallest positive fret is > 1.
-            val chordStartsAtFret = positiveFrets.isNotEmpty() && (positiveFrets.minOrNull() ?: Int.MAX_VALUE) > 1
-            val isNutStartPreference = !chordStartsAtFret
+            // Normalize incoming positions/fingers to ukulele 4-string view so the app always shows
+            // 4-string diagrams. If the stored CSV/list contains 6-string data we take the last 4
+            // entries (lowest-level alignment) and if it's shorter we left-pad with mutes (-1).
+            val ukuleleStringCount = 4
+            val positionsUkulele: List<Int> = run {
+                val raw = positions
+                when {
+                    raw.size == ukuleleStringCount -> raw
+                    raw.size > ukuleleStringCount -> raw.takeLast(ukuleleStringCount)
+                    else -> List(ukuleleStringCount - raw.size) { -1 } + raw
+                }
+            }
+            val fingersUkulele: List<Int> = run {
+                val rawF = fingers ?: List(positionsUkulele.size) { 0 }
+                when {
+                    rawF.size == ukuleleStringCount -> rawF
+                    rawF.size > ukuleleStringCount -> rawF.takeLast(ukuleleStringCount)
+                    else -> List(ukuleleStringCount - rawF.size) { 0 } + rawF
+                }
+            }
+            val positiveFrets = positionsUkulele.filter { it > 0 }
+             // Unified visible window based on uiParams.totalVisibleFrets and caller's preference
+             // Use caller's `firstFretIsNut` to decide how to split fractional parts; actual startFret is computed below
+             // Decide whether this chord actually starts at a nut or at a fret based on positions
+             // Decide chord starts at a fret (no nut) when the smallest positive fret is > 1.
+             val chordStartsAtFret = positiveFrets.isNotEmpty() && (positiveFrets.minOrNull() ?: Int.MAX_VALUE) > 1
+             val isNutStartPreference = !chordStartsAtFret
              val vw = uiParams.visibleWindow(isNutStartPreference)
              val baseFrets = vw.intFrets.coerceAtLeast(1) // at least 1 fret area to avoid divide-by-zero
              val leftFrac = vw.leftFrac.coerceIn(0f, 1f)
@@ -153,7 +172,7 @@ fun FretboardDiagram(
              // Use the gridAvailableWidth so both nut-start and fret-start diagrams align to the same outer boundaries
              val fretSpacingPx = gridAvailableWidth / spacingDiv
              // use provided fretCount
-            val stringCount = 6
+            val stringCount = positionsUkulele.size
              // compute fret spacing so 'fretCount' frets fit inside the available width
               // reserve vertical area at bottom for fret labels
               val contentHeightPx = (boxHpx - labelAreaPx).coerceAtLeast(0f)
@@ -265,8 +284,8 @@ fun FretboardDiagram(
                      // 1) use explicit barres when provided
                      val explicitConverted: List<Barre>? = explicitBarres?.mapNotNull { b ->
                          try {
-                             val startIdx = (6 - b.fromString).coerceIn(0, 5)
-                             val endIdx = (6 - b.toString).coerceIn(0, 5)
+                            val startIdx = (stringCount - b.fromString).coerceIn(0, stringCount - 1)
+                            val endIdx = (stringCount - b.toString).coerceIn(0, stringCount - 1)
                              Barre(b.fret, b.finger, startIdx, endIdx)
                          } catch (_: Exception) { null }
                      }
@@ -275,9 +294,9 @@ fun FretboardDiagram(
                      } else {
                      // collect indices per (fret,finger)
                      val groups = mutableMapOf<Pair<Int,Int>, MutableList<Int>>()
-                     for (i in positions.indices) {
-                         val f = positions[i]
-                         val finger = fingers?.getOrNull(i) ?: 0
+                     for (i in positionsUkulele.indices) {
+                         val f = positionsUkulele[i]
+                         val finger = fingersUkulele.getOrNull(i) ?: 0
                          if (f > 0 && finger > 0) {
                              groups.getOrPut(f to finger) { mutableListOf() }.add(i)
                          }
@@ -287,23 +306,23 @@ fun FretboardDiagram(
                          val (fret, finger) = fk
                          if (idxList.size < 2) return@forEach
                          // New rule: start at the highest-numbered string where this (fret,finger) appears
-                         // (internal index: 0=6번줄, ... ,5=1번줄) and extend toward 1번줄 until just before a muted string.
-                         val sorted = idxList.sorted() // ascending: 0..5
+                         // (internal index: 0=lowest string, ... ,stringCount-1=topmost) and extend toward 1번줄 until just before a muted string.
+                         val sorted = idxList.sorted() // ascending: 0..(stringCount-1)
                          val startIdx = sorted.first()
                          // find first mute index after startIdx, if any
-                         var stopIdxExclusive = positions.indexOfFirst { it == -1 }
+                         var stopIdxExclusive = positionsUkulele.indexOfFirst { it == -1 }
                          // if there's a mute but it is before startIdx, ignore it; we only care mutes after start
                          if (stopIdxExclusive <= startIdx) stopIdxExclusive = -1
-                         val endIdx = if (stopIdxExclusive >= 0) (stopIdxExclusive - 1).coerceAtMost(5) else 5
-                         if (endIdx - startIdx + 1 >= 2) {
-                             list.add(Barre(fret = fret, finger = finger, startIdx = startIdx, endIdx = endIdx))
-                         }
-                      }
+                        val endIdx = if (stopIdxExclusive >= 0) (stopIdxExclusive - 1).coerceAtMost(stringCount - 1) else (stringCount - 1)
+                          if (endIdx - startIdx + 1 >= 2) {
+                              list.add(Barre(fret = fret, finger = finger, startIdx = startIdx, endIdx = endIdx))
+                          }
+                       }
                      // Fallback: if no barre found yet, detect by fret only (ignore finger) and choose dominant finger
                      if (list.isEmpty()) {
                          val byFret = mutableMapOf<Int, MutableList<Int>>()
-                         for (i in positions.indices) {
-                             val f = positions[i]
+                         for (i in positionsUkulele.indices) {
+                             val f = positionsUkulele[i]
                              if (f > 0) byFret.getOrPut(f) { mutableListOf() }.add(i)
                          }
                          byFret.forEach { (fret, idxs) ->
@@ -316,7 +335,7 @@ fun FretboardDiagram(
                                  var j = i + 1
                                  while (j < sorted.size && sorted[j] == runEnd + 1) {
                                      // stop run if a muted string appears between
-                                     if (positions[runEnd + 1] == -1) break
+                                     if (positionsUkulele.getOrNull(runEnd + 1) == -1) break
                                      runEnd = sorted[j]
                                      j++
                                  }
@@ -325,7 +344,7 @@ fun FretboardDiagram(
                                      // pick majority finger on the run; default to 1 if none present
                                      val fingerCounts = mutableMapOf<Int, Int>()
                                      for (k in runStart..runEnd) {
-                                         val fn = fingers?.getOrNull(k) ?: 0
+                                         val fn = fingersUkulele.getOrNull(k) ?: 0
                                          if (fn > 0) fingerCounts[fn] = (fingerCounts[fn] ?: 0) + 1
                                      }
                                      val chosenFinger = fingerCounts.maxByOrNull { it.value }?.key ?: 1
@@ -355,31 +374,31 @@ fun FretboardDiagram(
                           // determine vertical span for the barre (y coords depend on invertStrings)
                           val startY = if (invertStrings) barre.startIdx * stringSpacingPx else (stringCount - 1 - barre.startIdx) * stringSpacingPx
                           val endY = if (invertStrings) barre.endIdx * stringSpacingPx else (stringCount - 1 - barre.endIdx) * stringSpacingPx
-                          val topY = min(startY, endY)
-                          val bottomY = maxOf(startY, endY)
-                          val centerX = cellCenterX(rel)
-                          // barre rectangle dimensions
-                          val extra = with(density) { uiParams.barreExtraVerticalMarginDp.toPx() }
-                          val minSpacingForRadius = min(fretSpacingPx, stringSpacingPx)
-                          val minRadiusPx = with(density) { 6.dp.toPx() }
-                          val markerRadius = kotlin.math.max(minSpacingForRadius * uiParams.markerRadiusFactor, minRadiusPx)
-                          val rectTop = topY - (markerRadius + extra)
-                          val rectBottom = bottomY + (markerRadius + extra)
-                          val halfWidth = fretSpacingPx * (uiParams.barreWidthFactor.coerceIn(0.2f, 0.95f) / 2f)
-                          val rectLeft = centerX - halfWidth
-                          val rectRight = centerX + halfWidth
-                           val rectHeight = (rectBottom - rectTop).coerceAtLeast(with(density) { 8.dp.toPx() })
-                           val corner = rectHeight / 2f
-                           // draw rounded rect
-                           drawRoundRect(color = Color(0xFF339CFF).copy(alpha = uiParams.barreAlpha.coerceIn(0f,1f)), topLeft = Offset(rectLeft, rectTop), size = androidx.compose.ui.geometry.Size(rectRight - rectLeft, rectHeight), cornerRadius = androidx.compose.ui.geometry.CornerRadius(corner, corner))
-                           // Do not draw a large number over the barre; keep circular finger markers per string only.
-                       }
-                  }
+                           val topY = min(startY, endY)
+                           val bottomY = maxOf(startY, endY)
+                           val centerX = cellCenterX(rel)
+                           // barre rectangle dimensions
+                           val extra = with(density) { uiParams.barreExtraVerticalMarginDp.toPx() }
+                           val minSpacingForRadius = min(fretSpacingPx, stringSpacingPx)
+                           val minRadiusPx = with(density) { 6.dp.toPx() }
+                           val markerRadius = kotlin.math.max(minSpacingForRadius * uiParams.markerRadiusFactor, minRadiusPx)
+                           val rectTop = topY - (markerRadius + extra)
+                           val rectBottom = bottomY + (markerRadius + extra)
+                           val halfWidth = fretSpacingPx * (uiParams.barreWidthFactor.coerceIn(0.2f, 0.95f) / 2f)
+                           val rectLeft = centerX - halfWidth
+                           val rectRight = centerX + halfWidth
+                            val rectHeight = (rectBottom - rectTop).coerceAtLeast(with(density) { 8.dp.toPx() })
+                            val corner = rectHeight / 2f
+                            // draw rounded rect
+                            drawRoundRect(color = Color(0xFF339CFF).copy(alpha = uiParams.barreAlpha.coerceIn(0f,1f)), topLeft = Offset(rectLeft, rectTop), size = androidx.compose.ui.geometry.Size(rectRight - rectLeft, rectHeight), cornerRadius = androidx.compose.ui.geometry.CornerRadius(corner, corner))
+                            // Do not draw a large number over the barre; keep circular finger markers per string only.
+                        }
+                   }
 
-                positions.forEachIndexed { stringIdx, fretNum ->
-                    // y 좌표는 seed 인덱스(6→1 순)에서 도출하고, invertStrings 여부에 따라 변환
-                    val y = yForSeedIndex(stringIdx, stringSpacingPx, invertStrings)
-                     when {
+                positionsUkulele.forEachIndexed { stringIdx, fretNum ->
+                     // y 좌표는 seed 인덱스(6→1 순)에서 도출하고, invertStrings 여부에 따라 변환
+                    val y = yForSeedIndex(stringIdx, stringCount, stringSpacingPx, invertStrings)
+                      when {
                         fretNum > 0 -> {
                              // skip drawing single-dot markers for strings that are part of a detected barre
                              if (stringsInBarre.contains(stringIdx)) {
@@ -394,7 +413,7 @@ fun FretboardDiagram(
                                      val minRadiusPx = with(density) { 6.dp.toPx() }
                                      val radius = kotlin.math.max(candidate, minRadiusPx)
                                      drawCircle(color = Color(0xFF339CFF), center = Offset(x, y), radius = radius)
-                                     val finger = fingers?.getOrNull(stringIdx) ?: 0
+                                     val finger = fingersUkulele.getOrNull(stringIdx) ?: 0
                                      if (finger > 0) {
                                          // draw centered text using nativeCanvas; align baseline so the visual text center equals circle center y
                                          drawContext.canvas.nativeCanvas.apply {

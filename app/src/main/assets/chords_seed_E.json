@@ -1,8 +1,8 @@
-[
-  { "name": "E", "variants": [
-    { "positions": [0,2,2,1,0,0], "fingers": [0,2,3,1,0,0], "firstFretIsNut": true },
-    { "positions": [0,7,9,9,9,7], "fingers": [0,1,3,4,2,1], "firstFretIsNut": false,
-      "barres": [ { "fret": 7, "finger": 1, "fromString": 1, "toString": 5 } ] },
+{
+  "_metadata": { "version": "20251122", "description": "Proxy to ukulele seed — root E" },
+  "_include": "chords_seed_ukulele_by_root.json",
+  "root": "E"
+}
     { "positions": [12,14,14,13,12,12], "fingers": [1,3,4,2,1,1], "firstFretIsNut": false,
       "barres": [ { "fret": 12, "finger": 1, "fromString": 1, "toString": 6 } ] }
   ] },

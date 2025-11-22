@@ -674,9 +674,18 @@ fun SectionTitle(title: String) {
 data class FretDiagramData(val name: String, val positions: List<Int>, val fingers: List<Int>? = null)
 
 // helper: parse CSV like "-1,3,2,0,1,0" into internal positions List<Int> index0=lowest string
-fun parseCsvToPositions(csv: String): List<Int> {
-    // Parse CSV into ints and return as-is. Storage order in DB/seed is 6→1 and UI expects the same.
-    return csv.split(",").mapNotNull { it.trim().toIntOrNull() }
+fun parseCsvToPositions(csv: String, stringCount: Int = 4, defaultFret: Int = -1): List<Int> {
+    // Parse CSV into ints
+    val raw = csv.split(",").mapNotNull { it.trim().toIntOrNull() }
+    if (raw.isEmpty()) return List(stringCount) { defaultFret }
+    // If already the desired length, return as-is
+    if (raw.size == stringCount) return raw
+    // If CSV contains more values (e.g., 6-string data) — keep the last `stringCount` entries which correspond
+    // to the topmost strings for ukulele conversion. This aligns DB seed ordering (6..1) to a 4-string view.
+    if (raw.size > stringCount) return raw.takeLast(stringCount)
+    // If CSV is shorter than desired, pad on the left (lowest strings) with defaultFret so index mapping stays stable.
+    val pad = List(maxOf(0, stringCount - raw.size)) { defaultFret }
+    return pad + raw
 }
 
 // helper: parse barresJson (seed/DB) into ExplicitBarre list
@@ -865,7 +874,7 @@ fun ChordListScreen(
                     val variant = pair.second
                     val chordName = cwv.chord.name
                     val positions = variant.positionsCsv.let { parseCsvToPositions(it) }
-                    val fingers = variant.fingersCsv?.let { parseCsvToPositions(it) } ?: List(6) { 0 }
+                    val fingers = variant.fingersCsv?.let { parseCsvToPositions(it) } ?: List(positions.size) { 0 }
                     // debug log
                     try {
                         Log.d("ChordDiag", "chord=${chordName} csvPositions=${variant.positionsCsv} parsedPositions=${positions} csvFingers=${variant.fingersCsv} parsedFingers=${fingers}")
@@ -963,11 +972,11 @@ fun FretboardCard(
                         .padding(start = 8.dp, top = 8.dp, end = 0.dp, bottom = 8.dp),
                      verticalAlignment = Alignment.Top
                   ) {
-                    // collect sample DB-style positions & fingers
-                    val dbPositionsForC = mapOf(1 to 0, 2 to 1, 3 to 0, 4 to 2, 5 to 3, 6 to -1)
-                    val dbFingersForC = mapOf(1 to 0, 2 to 1, 3 to 0, 4 to 2, 5 to 3, 6 to 0)
-                    val positionsForC = dbMapToInternalPositions(dbPositionsForC, stringCount = 6, defaultFret = -1)
-                    val fingersForC = dbMapToInternalPositions(dbFingersForC, stringCount = 6, defaultFret = 0)
+                    // sample for ukulele (G-C-E-A top->bottom): C major open shape -> [0,0,0,3]
+                    val dbPositionsForC = mapOf(1 to 0, 2 to 0, 3 to 0, 4 to 3)
+                    val dbFingersForC = mapOf(1 to 0, 2 to 0, 3 to 0, 4 to 3)
+                    val positionsForC = dbMapToInternalPositions(dbPositionsForC, stringCount = 4, defaultFret = -1)
+                    val fingersForC = dbMapToInternalPositions(dbFingersForC, stringCount = 4, defaultFret = 0)
 
                     // reserved space used to compute total inner width (text area + gap). Do not include Row padding here.
                     val textAreaWidth = 32.dp
@@ -992,8 +1001,8 @@ fun FretboardCard(
                                     FretboardDiagramOnly(modifier = Modifier.fillMaxSize(), uiParams = uiParams, positions = positionsForC, fingers = fingersForC, firstFretIsNut = true, fretLabelProvider = fretLabelProvider, invertStrings = false)
                                 } else {
                                     // default empty/mute positions for non-sample chords in preview
-                                    val defaultPositions = List(6) { -1 }
-                                    val defaultFingers = List(6) { 0 }
+                                    val defaultPositions = List(positionsForC.size) { -1 }
+                                    val defaultFingers = List(positionsForC.size) { 0 }
                                     FretboardDiagramOnly(modifier = Modifier.fillMaxSize(), uiParams = uiParams, positions = defaultPositions, fingers = defaultFingers, firstFretIsNut = true, invertStrings = false)
                                 }
                             }
